@@ -1,0 +1,763 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FootballManagementModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="FootballManagementModelStoreContainer">
+          <EntitySet Name="Card" EntityType="FootballManagementModel.Store.Card" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Goal" EntityType="FootballManagementModel.Store.Goal" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Match" EntityType="FootballManagementModel.Store.Match" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MatchPlayer" EntityType="FootballManagementModel.Store.MatchPlayer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MatchReferee" EntityType="FootballManagementModel.Store.MatchReferee" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Person" EntityType="FootballManagementModel.Store.Person" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Player" EntityType="FootballManagementModel.Store.Player" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Referee" EntityType="FootballManagementModel.Store.Referee" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Team" EntityType="FootballManagementModel.Store.Team" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tournament" EntityType="FootballManagementModel.Store.Tournament" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TournamentReferee" EntityType="FootballManagementModel.Store.TournamentReferee" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Card_Match" Association="FootballManagementModel.Store.FK_Card_Match">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="Card" EntitySet="Card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Card_Player" Association="FootballManagementModel.Store.FK_Card_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Card" EntitySet="Card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Goal_Match" Association="FootballManagementModel.Store.FK_Goal_Match">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="Goal" EntitySet="Goal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Goal_Player" Association="FootballManagementModel.Store.FK_Goal_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Goal" EntitySet="Goal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Team" Association="FootballManagementModel.Store.FK_Match_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Team1" Association="FootballManagementModel.Store.FK_Match_Team1">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Tournament" Association="FootballManagementModel.Store.FK_Match_Tournament">
+            <End Role="Tournament" EntitySet="Tournament" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MatchPlayer_Match" Association="FootballManagementModel.Store.FK_MatchPlayer_Match">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="MatchPlayer" EntitySet="MatchPlayer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MatchPlayer_Player" Association="FootballManagementModel.Store.FK_MatchPlayer_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="MatchPlayer" EntitySet="MatchPlayer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MatchReferee_Match" Association="FootballManagementModel.Store.FK_MatchReferee_Match">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="MatchReferee" EntitySet="MatchReferee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MatchReferee_Referee" Association="FootballManagementModel.Store.FK_MatchReferee_Referee">
+            <End Role="Referee" EntitySet="Referee" />
+            <End Role="MatchReferee" EntitySet="MatchReferee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Person" Association="FootballManagementModel.Store.FK_Player_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Player" EntitySet="Player" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Team" Association="FootballManagementModel.Store.FK_Player_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Player" EntitySet="Player" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Referee_Person" Association="FootballManagementModel.Store.FK_Referee_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Referee" EntitySet="Referee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Tournament1" Association="FootballManagementModel.Store.FK_Team_Tournament1">
+            <End Role="Tournament" EntitySet="Tournament" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TournamentReferee_Referee" Association="FootballManagementModel.Store.FK_TournamentReferee_Referee">
+            <End Role="Referee" EntitySet="Referee" />
+            <End Role="TournamentReferee" EntitySet="TournamentReferee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TournamentReferee_Tournament" Association="FootballManagementModel.Store.FK_TournamentReferee_Tournament">
+            <End Role="Tournament" EntitySet="Tournament" />
+            <End Role="TournamentReferee" EntitySet="TournamentReferee" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="isRedCard" Type="bit" Nullable="false" />
+          <Property Name="IDPlayer" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="IDMatch" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Goal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDPlayer" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+          <Property Name="IDMatch" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDLocalTeam" Type="int" />
+          <Property Name="IDVisitorTeam" Type="int" />
+          <Property Name="MatchDate" Type="date" Nullable="false" />
+          <Property Name="IDTournament" Type="int" />
+        </EntityType>
+        <EntityType Name="MatchPlayer">
+          <Key>
+            <PropertyRef Name="IDPlayer" />
+            <PropertyRef Name="IDMatch" />
+          </Key>
+          <Property Name="IDPlayer" Type="int" Nullable="false" />
+          <Property Name="IDMatch" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MatchReferee">
+          <Key>
+            <PropertyRef Name="IDReferee" />
+            <PropertyRef Name="IDMatch" />
+          </Key>
+          <Property Name="IDReferee" Type="int" Nullable="false" />
+          <Property Name="IDMatch" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Gender" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Birthday" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IsCaptain" Type="bit" Nullable="false" />
+          <Property Name="IsAuthorized" Type="bit" Nullable="false" />
+          <Property Name="IDTeam" Type="int" />
+        </EntityType>
+        <EntityType Name="Referee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Degree" Type="varchar" Nullable="false" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDTournament" Type="int" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Tournament">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TournamentReferee">
+          <Key>
+            <PropertyRef Name="IDTournament" />
+            <PropertyRef Name="IDReferee" />
+          </Key>
+          <Property Name="IDTournament" Type="int" Nullable="false" />
+          <Property Name="IDReferee" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Card_Match">
+          <End Role="Match" Type="FootballManagementModel.Store.Match" Multiplicity="1" />
+          <End Role="Card" Type="FootballManagementModel.Store.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="IDMatch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Card_Player">
+          <End Role="Player" Type="FootballManagementModel.Store.Player" Multiplicity="1" />
+          <End Role="Card" Type="FootballManagementModel.Store.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="IDPlayer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Goal_Match">
+          <End Role="Match" Type="FootballManagementModel.Store.Match" Multiplicity="1" />
+          <End Role="Goal" Type="FootballManagementModel.Store.Goal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Goal">
+              <PropertyRef Name="IDMatch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Goal_Player">
+          <End Role="Player" Type="FootballManagementModel.Store.Player" Multiplicity="1" />
+          <End Role="Goal" Type="FootballManagementModel.Store.Goal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Goal">
+              <PropertyRef Name="IDPlayer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_Team">
+          <End Role="Team" Type="FootballManagementModel.Store.Team" Multiplicity="0..1" />
+          <End Role="Match" Type="FootballManagementModel.Store.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="IDLocalTeam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_Team1">
+          <End Role="Team" Type="FootballManagementModel.Store.Team" Multiplicity="0..1" />
+          <End Role="Match" Type="FootballManagementModel.Store.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="IDVisitorTeam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_Tournament">
+          <End Role="Tournament" Type="FootballManagementModel.Store.Tournament" Multiplicity="0..1" />
+          <End Role="Match" Type="FootballManagementModel.Store.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tournament">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="IDTournament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MatchPlayer_Match">
+          <End Role="Match" Type="FootballManagementModel.Store.Match" Multiplicity="1" />
+          <End Role="MatchPlayer" Type="FootballManagementModel.Store.MatchPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchPlayer">
+              <PropertyRef Name="IDMatch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MatchPlayer_Player">
+          <End Role="Player" Type="FootballManagementModel.Store.Player" Multiplicity="1" />
+          <End Role="MatchPlayer" Type="FootballManagementModel.Store.MatchPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchPlayer">
+              <PropertyRef Name="IDPlayer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MatchReferee_Match">
+          <End Role="Match" Type="FootballManagementModel.Store.Match" Multiplicity="1" />
+          <End Role="MatchReferee" Type="FootballManagementModel.Store.MatchReferee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchReferee">
+              <PropertyRef Name="IDMatch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MatchReferee_Referee">
+          <End Role="Referee" Type="FootballManagementModel.Store.Referee" Multiplicity="1" />
+          <End Role="MatchReferee" Type="FootballManagementModel.Store.MatchReferee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Referee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchReferee">
+              <PropertyRef Name="IDReferee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_Person">
+          <End Role="Person" Type="FootballManagementModel.Store.Person" Multiplicity="1" />
+          <End Role="Player" Type="FootballManagementModel.Store.Player" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_Team">
+          <End Role="Team" Type="FootballManagementModel.Store.Team" Multiplicity="0..1" />
+          <End Role="Player" Type="FootballManagementModel.Store.Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="IDTeam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Referee_Person">
+          <End Role="Person" Type="FootballManagementModel.Store.Person" Multiplicity="1" />
+          <End Role="Referee" Type="FootballManagementModel.Store.Referee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Referee">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Tournament1">
+          <End Role="Tournament" Type="FootballManagementModel.Store.Tournament" Multiplicity="0..1" />
+          <End Role="Team" Type="FootballManagementModel.Store.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tournament">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="IDTournament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TournamentReferee_Referee">
+          <End Role="Referee" Type="FootballManagementModel.Store.Referee" Multiplicity="1" />
+          <End Role="TournamentReferee" Type="FootballManagementModel.Store.TournamentReferee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Referee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TournamentReferee">
+              <PropertyRef Name="IDReferee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TournamentReferee_Tournament">
+          <End Role="Tournament" Type="FootballManagementModel.Store.Tournament" Multiplicity="1" />
+          <End Role="TournamentReferee" Type="FootballManagementModel.Store.TournamentReferee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tournament">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TournamentReferee">
+              <PropertyRef Name="IDTournament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FootballManagementModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FootballManagementEntities" p1:LazyLoadingEnabled="false">
+          <EntitySet Name="Cards" EntityType="FootballManagementModel.Card" />
+          <EntitySet Name="Goals" EntityType="FootballManagementModel.Goal" />
+          <EntitySet Name="Matches" EntityType="FootballManagementModel.Match" />
+          <EntitySet Name="People" EntityType="FootballManagementModel.Person" />
+          <EntitySet Name="Teams" EntityType="FootballManagementModel.Team" />
+          <EntitySet Name="Tournaments" EntityType="FootballManagementModel.Tournament" />
+          <AssociationSet Name="FK_Card_Match" Association="FootballManagementModel.FK_Card_Match">
+            <End Role="Match" EntitySet="Matches" />
+            <End Role="Card" EntitySet="Cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Card_Player" Association="FootballManagementModel.FK_Card_Player">
+            <End Role="Player" EntitySet="People" />
+            <End Role="Card" EntitySet="Cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Goal_Match" Association="FootballManagementModel.FK_Goal_Match">
+            <End Role="Match" EntitySet="Matches" />
+            <End Role="Goal" EntitySet="Goals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Goal_Player" Association="FootballManagementModel.FK_Goal_Player">
+            <End Role="Player" EntitySet="People" />
+            <End Role="Goal" EntitySet="Goals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Team" Association="FootballManagementModel.FK_Match_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Team1" Association="FootballManagementModel.FK_Match_Team1">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Tournament" Association="FootballManagementModel.FK_Match_Tournament">
+            <End Role="Tournament" EntitySet="Tournaments" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Team" Association="FootballManagementModel.FK_Player_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Player" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Tournament1" Association="FootballManagementModel.FK_Team_Tournament1">
+            <End Role="Tournament" EntitySet="Tournaments" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="MatchPlayer" Association="FootballManagementModel.MatchPlayer">
+            <End Role="Match" EntitySet="Matches" />
+            <End Role="Player" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="MatchReferee" Association="FootballManagementModel.MatchReferee">
+            <End Role="Match" EntitySet="Matches" />
+            <End Role="Referee" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="TournamentReferee" Association="FootballManagementModel.TournamentReferee">
+            <End Role="Referee" EntitySet="People" />
+            <End Role="Tournament" EntitySet="Tournaments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Boolean" Name="isRedCard" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Match" Relationship="FootballManagementModel.FK_Card_Match" FromRole="Card" ToRole="Match" />
+          <NavigationProperty Name="Player" Relationship="FootballManagementModel.FK_Card_Player" FromRole="Card" ToRole="Player" />
+        </EntityType>
+        <EntityType Name="Goal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="Time" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Match" Relationship="FootballManagementModel.FK_Goal_Match" FromRole="Goal" ToRole="Match" />
+          <NavigationProperty Name="Player" Relationship="FootballManagementModel.FK_Goal_Player" FromRole="Goal" ToRole="Player" />
+        </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="MatchDate" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Cards" Relationship="FootballManagementModel.FK_Card_Match" FromRole="Match" ToRole="Card" />
+          <NavigationProperty Name="Goals" Relationship="FootballManagementModel.FK_Goal_Match" FromRole="Match" ToRole="Goal" />
+          <NavigationProperty Name="Team" Relationship="FootballManagementModel.FK_Match_Team" FromRole="Match" ToRole="Team" />
+          <NavigationProperty Name="Team1" Relationship="FootballManagementModel.FK_Match_Team1" FromRole="Match" ToRole="Team" />
+          <NavigationProperty Name="Tournament" Relationship="FootballManagementModel.FK_Match_Tournament" FromRole="Match" ToRole="Tournament" />
+          <NavigationProperty Name="Players" Relationship="FootballManagementModel.MatchPlayer" FromRole="Match" ToRole="Player" />
+          <NavigationProperty Name="Referees" Relationship="FootballManagementModel.MatchReferee" FromRole="Match" ToRole="Referee" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Birthday" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Player" BaseType="FootballManagementModel.Person">
+          <Property Type="Boolean" Name="IsCaptain" Nullable="false" />
+          <Property Type="Boolean" Name="IsAuthorized" Nullable="false" />
+          <NavigationProperty Name="Cards" Relationship="FootballManagementModel.FK_Card_Player" FromRole="Player" ToRole="Card" />
+          <NavigationProperty Name="Goals" Relationship="FootballManagementModel.FK_Goal_Player" FromRole="Player" ToRole="Goal" />
+          <NavigationProperty Name="Team" Relationship="FootballManagementModel.FK_Player_Team" FromRole="Player" ToRole="Team" />
+          <NavigationProperty Name="Matches" Relationship="FootballManagementModel.MatchPlayer" FromRole="Player" ToRole="Match" />
+        </EntityType>
+        <EntityType Name="Referee" BaseType="FootballManagementModel.Person">
+          <Property Type="String" Name="Degree" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Matches" Relationship="FootballManagementModel.MatchReferee" FromRole="Referee" ToRole="Match" />
+          <NavigationProperty Name="Tournaments" Relationship="FootballManagementModel.TournamentReferee" FromRole="Referee" ToRole="Tournament" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Matches" Relationship="FootballManagementModel.FK_Match_Team" FromRole="Team" ToRole="Match" />
+          <NavigationProperty Name="Matches1" Relationship="FootballManagementModel.FK_Match_Team1" FromRole="Team" ToRole="Match" />
+          <NavigationProperty Name="Players" Relationship="FootballManagementModel.FK_Player_Team" FromRole="Team" ToRole="Player" />
+          <NavigationProperty Name="Tournament" Relationship="FootballManagementModel.FK_Team_Tournament1" FromRole="Team" ToRole="Tournament" />
+        </EntityType>
+        <EntityType Name="Tournament">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Matches" Relationship="FootballManagementModel.FK_Match_Tournament" FromRole="Tournament" ToRole="Match" />
+          <NavigationProperty Name="Teams" Relationship="FootballManagementModel.FK_Team_Tournament1" FromRole="Tournament" ToRole="Team" />
+          <NavigationProperty Name="Referees" Relationship="FootballManagementModel.TournamentReferee" FromRole="Tournament" ToRole="Referee" />
+        </EntityType>
+        <Association Name="FK_Card_Match">
+          <End Type="FootballManagementModel.Match" Role="Match" Multiplicity="1" />
+          <End Type="FootballManagementModel.Card" Role="Card" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Card_Player">
+          <End Type="FootballManagementModel.Player" Role="Player" Multiplicity="1" />
+          <End Type="FootballManagementModel.Card" Role="Card" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Goal_Match">
+          <End Type="FootballManagementModel.Match" Role="Match" Multiplicity="1" />
+          <End Type="FootballManagementModel.Goal" Role="Goal" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Goal_Player">
+          <End Type="FootballManagementModel.Player" Role="Player" Multiplicity="1" />
+          <End Type="FootballManagementModel.Goal" Role="Goal" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Match_Team">
+          <End Type="FootballManagementModel.Team" Role="Team" Multiplicity="0..1" />
+          <End Type="FootballManagementModel.Match" Role="Match" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Match_Team1">
+          <End Type="FootballManagementModel.Team" Role="Team" Multiplicity="0..1" />
+          <End Type="FootballManagementModel.Match" Role="Match" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Match_Tournament">
+          <End Type="FootballManagementModel.Tournament" Role="Tournament" Multiplicity="0..1" />
+          <End Type="FootballManagementModel.Match" Role="Match" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Player_Team">
+          <End Type="FootballManagementModel.Team" Role="Team" Multiplicity="0..1" />
+          <End Type="FootballManagementModel.Player" Role="Player" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Team_Tournament1">
+          <End Type="FootballManagementModel.Tournament" Role="Tournament" Multiplicity="0..1" />
+          <End Type="FootballManagementModel.Team" Role="Team" Multiplicity="*" />
+        </Association>
+        <Association Name="MatchPlayer">
+          <End Type="FootballManagementModel.Match" Role="Match" Multiplicity="*" />
+          <End Type="FootballManagementModel.Player" Role="Player" Multiplicity="*" />
+        </Association>
+        <Association Name="MatchReferee">
+          <End Type="FootballManagementModel.Match" Role="Match" Multiplicity="*" />
+          <End Type="FootballManagementModel.Referee" Role="Referee" Multiplicity="*" />
+        </Association>
+        <Association Name="TournamentReferee">
+          <End Type="FootballManagementModel.Referee" Role="Referee" Multiplicity="*" />
+          <End Type="FootballManagementModel.Tournament" Role="Tournament" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FootballManagementModelStoreContainer" CdmEntityContainer="FootballManagementEntities">
+          <EntitySetMapping Name="Cards">
+            <EntityTypeMapping TypeName="FootballManagementModel.Card">
+              <MappingFragment StoreEntitySet="Card">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="isRedCard" ColumnName="isRedCard" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Goals">
+            <EntityTypeMapping TypeName="FootballManagementModel.Goal">
+              <MappingFragment StoreEntitySet="Goal">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matches">
+            <EntityTypeMapping TypeName="FootballManagementModel.Match">
+              <MappingFragment StoreEntitySet="Match">
+                <ScalarProperty Name="MatchDate" ColumnName="MatchDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="IsTypeOf(FootballManagementModel.Person)">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(FootballManagementModel.Referee)">
+              <MappingFragment StoreEntitySet="Referee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(FootballManagementModel.Player)">
+              <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsCaptain" ColumnName="IsCaptain" />
+                <ScalarProperty Name="IsAuthorized" ColumnName="IsAuthorized" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="FootballManagementModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tournaments">
+            <EntityTypeMapping TypeName="FootballManagementModel.Tournament">
+              <MappingFragment StoreEntitySet="Tournament">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_Card_Match" TypeName="FootballManagementModel.FK_Card_Match" StoreEntitySet="Card">
+            <EndProperty Name="Card">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Match">
+              <ScalarProperty Name="Id" ColumnName="IDMatch" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Goal_Match" TypeName="FootballManagementModel.FK_Goal_Match" StoreEntitySet="Goal">
+            <EndProperty Name="Goal">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Match">
+              <ScalarProperty Name="Id" ColumnName="IDMatch" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Match_Team" TypeName="FootballManagementModel.FK_Match_Team" StoreEntitySet="Match">
+            <EndProperty Name="Match">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Team">
+              <ScalarProperty Name="Id" ColumnName="IDLocalTeam" />
+            </EndProperty>
+            <Condition ColumnName="IDLocalTeam" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Match_Team1" TypeName="FootballManagementModel.FK_Match_Team1" StoreEntitySet="Match">
+            <EndProperty Name="Match">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Team">
+              <ScalarProperty Name="Id" ColumnName="IDVisitorTeam" />
+            </EndProperty>
+            <Condition ColumnName="IDVisitorTeam" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Match_Tournament" TypeName="FootballManagementModel.FK_Match_Tournament" StoreEntitySet="Match">
+            <EndProperty Name="Match">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Tournament">
+              <ScalarProperty Name="Id" ColumnName="IDTournament" />
+            </EndProperty>
+            <Condition ColumnName="IDTournament" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Team_Tournament1" TypeName="FootballManagementModel.FK_Team_Tournament1" StoreEntitySet="Team">
+            <EndProperty Name="Team">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Tournament">
+              <ScalarProperty Name="Id" ColumnName="IDTournament" />
+            </EndProperty>
+            <Condition ColumnName="IDTournament" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="MatchReferee" TypeName="FootballManagementModel.MatchReferee" StoreEntitySet="MatchReferee" >
+            <EndProperty Name="Referee">
+              <ScalarProperty Name="Id" ColumnName="IDReferee" />
+            </EndProperty>
+            <EndProperty Name="Match">
+              <ScalarProperty Name="Id" ColumnName="IDMatch" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TournamentReferee" TypeName="FootballManagementModel.TournamentReferee" StoreEntitySet="TournamentReferee" >
+            <EndProperty Name="Tournament">
+              <ScalarProperty Name="Id" ColumnName="IDTournament" />
+            </EndProperty>
+            <EndProperty Name="Referee">
+              <ScalarProperty Name="Id" ColumnName="IDReferee" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Card_Player" TypeName="FootballManagementModel.FK_Card_Player" StoreEntitySet="Card">
+            <EndProperty Name="Player">
+              <ScalarProperty Name="Id" ColumnName="IDPlayer" />
+            </EndProperty>
+            <EndProperty Name="Card">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Goal_Player" TypeName="FootballManagementModel.FK_Goal_Player" StoreEntitySet="Goal">
+            <EndProperty Name="Player">
+              <ScalarProperty Name="Id" ColumnName="IDPlayer" />
+            </EndProperty>
+            <EndProperty Name="Goal">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Player_Team" TypeName="FootballManagementModel.FK_Player_Team" StoreEntitySet="Player">
+            <EndProperty Name="Player">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Team">
+              <ScalarProperty Name="Id" ColumnName="IDTeam" />
+            </EndProperty>
+            <Condition ColumnName="IDTeam" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="MatchPlayer" TypeName="FootballManagementModel.MatchPlayer" StoreEntitySet="MatchPlayer" >
+            <EndProperty Name="Player">
+              <ScalarProperty Name="Id" ColumnName="IDPlayer" />
+            </EndProperty>
+            <EndProperty Name="Match">
+              <ScalarProperty Name="Id" ColumnName="IDMatch" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

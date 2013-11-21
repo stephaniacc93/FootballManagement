@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+  <Identity Name="e4e8f208-90dc-4108-a2b1-8374d9d7b007" Publisher="CN=Stephania Cavadas" Version="1.0.0.0" />
+  <Properties>
+    <DisplayName>Football Management</DisplayName>
+    <PublisherDisplayName>Stephania Cavadas</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.2.1</OSMinVersion>
+    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="FootballManagement.Client.App">
+      <VisualElements DisplayName="Control de Canchas de Fútbol" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="FootballManagement.Client" ForegroundText="light" BackgroundColor="#000000">
+        <DefaultTile ShowName="allLogos" />
+        <SplashScreen Image="Assets\SplashScreen.png" />
+      </VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>

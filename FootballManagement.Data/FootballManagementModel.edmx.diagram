@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d8b65cec678545ef8960e358674208be" Name="Diagram1" ZoomLevel="63">
+        <EntityTypeShape EntityType="FootballManagementModel.Card" Width="1.5" PointX="12" PointY="8" />
+        <EntityTypeShape EntityType="FootballManagementModel.Goal" Width="1.5" PointX="12" PointY="11" />
+        <EntityTypeShape EntityType="FootballManagementModel.Match" Width="1.5" PointX="9.75" PointY="7.125" />
+        <EntityTypeShape EntityType="FootballManagementModel.Person" Width="1.5" PointX="8.625" PointY="0.75" />
+        <EntityTypeShape EntityType="FootballManagementModel.Player" Width="1.5" PointX="12" PointY="5.125" />
+        <EntityTypeShape EntityType="FootballManagementModel.Referee" Width="1.5" PointX="5.25" PointY="3.25" />
+        <EntityTypeShape EntityType="FootballManagementModel.Team" Width="1.5" PointX="7.5" PointY="9.125" />
+        <EntityTypeShape EntityType="FootballManagementModel.Tournament" Width="1.5" PointX="5.25" PointY="5.625" />
+        <AssociationConnector Association="FootballManagementModel.FK_Card_Match" />
+        <AssociationConnector Association="FootballManagementModel.FK_Card_Player" />
+        <AssociationConnector Association="FootballManagementModel.FK_Goal_Match" />
+        <AssociationConnector Association="FootballManagementModel.FK_Goal_Player" />
+        <AssociationConnector Association="FootballManagementModel.FK_Match_Team" />
+        <AssociationConnector Association="FootballManagementModel.FK_Match_Team1" />
+        <AssociationConnector Association="FootballManagementModel.FK_Match_Tournament" />
+        <AssociationConnector Association="FootballManagementModel.FK_Player_Team" />
+        <AssociationConnector Association="FootballManagementModel.FK_Team_Tournament1" />
+        <AssociationConnector Association="FootballManagementModel.MatchPlayer" />
+        <AssociationConnector Association="FootballManagementModel.MatchReferee" />
+        <AssociationConnector Association="FootballManagementModel.TournamentReferee" />
+        <InheritanceConnector EntityType="FootballManagementModel.Referee" />
+        <InheritanceConnector EntityType="FootballManagementModel.Player" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

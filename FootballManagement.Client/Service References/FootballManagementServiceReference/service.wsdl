@@ -1,0 +1,724 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="FootballManagementService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Service" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IFootballManagementService_GetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetData" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetDataUsingDataContract_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetDataUsingDataContract_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_CreateCard_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCard" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_CreateCard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_UpdateCard_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCard" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_UpdateCard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_ReadCard_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadCard" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_ReadCard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_DeleteCard_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCard" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_DeleteCard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetListCard_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListCard" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetListCard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_CreateGoal_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGoal" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_CreateGoal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGoalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_UpdateGoal_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGoal" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_UpdateGoal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGoalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_ReadGoal_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadGoal" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_ReadGoal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadGoalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_DeleteGoal_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGoal" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_DeleteGoal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGoalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetListGoal_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListGoal" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetListGoal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListGoalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_CreateMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateMatch" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_CreateMatch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateMatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_UpdateMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMatch" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_UpdateMatch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_ReadMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadMatch" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_ReadMatch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadMatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_DeleteMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteMatch" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_DeleteMatch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteMatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetListMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListMatch" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetListMatch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListMatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_CreatePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePlayer" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_CreatePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_UpdatePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePlayer" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_UpdatePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_ReadPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_ReadPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadPlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_DeletePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePlayer" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_DeletePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetListPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetListPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListPlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_CreateReferee_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateReferee" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_CreateReferee_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRefereeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_UpdateReferee_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateReferee" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_UpdateReferee_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRefereeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_ReadReferee_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadReferee" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_ReadReferee_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadRefereeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_DeleteReferee_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteReferee" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_DeleteReferee_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRefereeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetListReferee_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListReferee" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetListReferee_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListRefereeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_CreateTeam_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTeam" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_CreateTeam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTeamResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_UpdateTeam_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTeam" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_UpdateTeam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTeamResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_ReadTeam_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadTeam" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_ReadTeam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadTeamResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_DeleteTeam_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTeam" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_DeleteTeam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTeamResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetListTeam_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListTeam" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetListTeam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListTeamResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_CreateTournament_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTournament" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_CreateTournament_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTournamentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_UpdateTournament_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTournament" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_UpdateTournament_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTournamentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_ReadTournament_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadTournament" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_ReadTournament_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadTournamentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_DeleteTournament_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTournament" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_DeleteTournament_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTournamentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetListTournament_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListTournament" />
+  </wsdl:message>
+  <wsdl:message name="IFootballManagementService_GetListTournament_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListTournamentResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IFootballManagementService">
+    <wsdl:operation name="GetData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/GetData" message="tns:IFootballManagementService_GetData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/GetDataResponse" message="tns:IFootballManagementService_GetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContract">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/GetDataUsingDataContract" message="tns:IFootballManagementService_GetDataUsingDataContract_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/GetDataUsingDataContractResponse" message="tns:IFootballManagementService_GetDataUsingDataContract_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/CreateCard" message="tns:IFootballManagementService_CreateCard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/CreateCardResponse" message="tns:IFootballManagementService_CreateCard_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/UpdateCard" message="tns:IFootballManagementService_UpdateCard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/UpdateCardResponse" message="tns:IFootballManagementService_UpdateCard_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadCard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/ReadCard" message="tns:IFootballManagementService_ReadCard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/ReadCardResponse" message="tns:IFootballManagementService_ReadCard_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/DeleteCard" message="tns:IFootballManagementService_DeleteCard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/DeleteCardResponse" message="tns:IFootballManagementService_DeleteCard_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListCard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/GetListCard" message="tns:IFootballManagementService_GetListCard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/GetListCardResponse" message="tns:IFootballManagementService_GetListCard_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateGoal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/CreateGoal" message="tns:IFootballManagementService_CreateGoal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/CreateGoalResponse" message="tns:IFootballManagementService_CreateGoal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGoal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/UpdateGoal" message="tns:IFootballManagementService_UpdateGoal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/UpdateGoalResponse" message="tns:IFootballManagementService_UpdateGoal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadGoal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/ReadGoal" message="tns:IFootballManagementService_ReadGoal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/ReadGoalResponse" message="tns:IFootballManagementService_ReadGoal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGoal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/DeleteGoal" message="tns:IFootballManagementService_DeleteGoal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/DeleteGoalResponse" message="tns:IFootballManagementService_DeleteGoal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListGoal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/GetListGoal" message="tns:IFootballManagementService_GetListGoal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/GetListGoalResponse" message="tns:IFootballManagementService_GetListGoal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/CreateMatch" message="tns:IFootballManagementService_CreateMatch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/CreateMatchResponse" message="tns:IFootballManagementService_CreateMatch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/UpdateMatch" message="tns:IFootballManagementService_UpdateMatch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/UpdateMatchResponse" message="tns:IFootballManagementService_UpdateMatch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/ReadMatch" message="tns:IFootballManagementService_ReadMatch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/ReadMatchResponse" message="tns:IFootballManagementService_ReadMatch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/DeleteMatch" message="tns:IFootballManagementService_DeleteMatch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/DeleteMatchResponse" message="tns:IFootballManagementService_DeleteMatch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/GetListMatch" message="tns:IFootballManagementService_GetListMatch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/GetListMatchResponse" message="tns:IFootballManagementService_GetListMatch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreatePlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/CreatePlayer" message="tns:IFootballManagementService_CreatePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/CreatePlayerResponse" message="tns:IFootballManagementService_CreatePlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/UpdatePlayer" message="tns:IFootballManagementService_UpdatePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/UpdatePlayerResponse" message="tns:IFootballManagementService_UpdatePlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/ReadPlayer" message="tns:IFootballManagementService_ReadPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/ReadPlayerResponse" message="tns:IFootballManagementService_ReadPlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/DeletePlayer" message="tns:IFootballManagementService_DeletePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/DeletePlayerResponse" message="tns:IFootballManagementService_DeletePlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/GetListPlayer" message="tns:IFootballManagementService_GetListPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/GetListPlayerResponse" message="tns:IFootballManagementService_GetListPlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateReferee">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/CreateReferee" message="tns:IFootballManagementService_CreateReferee_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/CreateRefereeResponse" message="tns:IFootballManagementService_CreateReferee_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReferee">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/UpdateReferee" message="tns:IFootballManagementService_UpdateReferee_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/UpdateRefereeResponse" message="tns:IFootballManagementService_UpdateReferee_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadReferee">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/ReadReferee" message="tns:IFootballManagementService_ReadReferee_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/ReadRefereeResponse" message="tns:IFootballManagementService_ReadReferee_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReferee">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/DeleteReferee" message="tns:IFootballManagementService_DeleteReferee_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/DeleteRefereeResponse" message="tns:IFootballManagementService_DeleteReferee_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListReferee">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/GetListReferee" message="tns:IFootballManagementService_GetListReferee_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/GetListRefereeResponse" message="tns:IFootballManagementService_GetListReferee_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTeam">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/CreateTeam" message="tns:IFootballManagementService_CreateTeam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/CreateTeamResponse" message="tns:IFootballManagementService_CreateTeam_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTeam">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/UpdateTeam" message="tns:IFootballManagementService_UpdateTeam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/UpdateTeamResponse" message="tns:IFootballManagementService_UpdateTeam_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadTeam">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/ReadTeam" message="tns:IFootballManagementService_ReadTeam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/ReadTeamResponse" message="tns:IFootballManagementService_ReadTeam_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTeam">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/DeleteTeam" message="tns:IFootballManagementService_DeleteTeam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/DeleteTeamResponse" message="tns:IFootballManagementService_DeleteTeam_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListTeam">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/GetListTeam" message="tns:IFootballManagementService_GetListTeam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/GetListTeamResponse" message="tns:IFootballManagementService_GetListTeam_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTournament">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/CreateTournament" message="tns:IFootballManagementService_CreateTournament_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/CreateTournamentResponse" message="tns:IFootballManagementService_CreateTournament_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTournament">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/UpdateTournament" message="tns:IFootballManagementService_UpdateTournament_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/UpdateTournamentResponse" message="tns:IFootballManagementService_UpdateTournament_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadTournament">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/ReadTournament" message="tns:IFootballManagementService_ReadTournament_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/ReadTournamentResponse" message="tns:IFootballManagementService_ReadTournament_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTournament">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/DeleteTournament" message="tns:IFootballManagementService_DeleteTournament_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/DeleteTournamentResponse" message="tns:IFootballManagementService_DeleteTournament_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListTournament">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFootballManagementService/GetListTournament" message="tns:IFootballManagementService_GetListTournament_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFootballManagementService/GetListTournamentResponse" message="tns:IFootballManagementService_GetListTournament_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IFootballManagementService" type="tns:IFootballManagementService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetData">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/GetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContract">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/GetDataUsingDataContract" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCard">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/CreateCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCard">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/UpdateCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadCard">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/ReadCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCard">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/DeleteCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListCard">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/GetListCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateGoal">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/CreateGoal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGoal">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/UpdateGoal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadGoal">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/ReadGoal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGoal">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/DeleteGoal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListGoal">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/GetListGoal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateMatch">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/CreateMatch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMatch">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/UpdateMatch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMatch">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/ReadMatch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMatch">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/DeleteMatch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListMatch">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/GetListMatch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePlayer">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/CreatePlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePlayer">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/UpdatePlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadPlayer">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/ReadPlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePlayer">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/DeletePlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListPlayer">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/GetListPlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateReferee">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/CreateReferee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReferee">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/UpdateReferee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadReferee">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/ReadReferee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReferee">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/DeleteReferee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListReferee">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/GetListReferee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTeam">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/CreateTeam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTeam">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/UpdateTeam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadTeam">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/ReadTeam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTeam">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/DeleteTeam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListTeam">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/GetListTeam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTournament">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/CreateTournament" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTournament">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/UpdateTournament" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadTournament">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/ReadTournament" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTournament">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/DeleteTournament" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListTournament">
+      <soap:operation soapAction="http://tempuri.org/IFootballManagementService/GetListTournament" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FootballManagementService">
+    <wsdl:port name="BasicHttpBinding_IFootballManagementService" binding="tns:BasicHttpBinding_IFootballManagementService">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/FootballManagement.Service/Service1/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
