@@ -17,9 +17,6 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    match.Players = footballmanagementEntities.People.OfType<Player>().ToList();
-                    match.Referees = footballmanagementEntities.People.OfType<Referee>().ToList();
-                    match.Tournament = footballmanagementEntities.Tournaments.FirstOrDefault();
                     footballmanagementEntities.Matches.AddObject(match);
                     footballmanagementEntities.SaveChanges();
                     response = footballmanagementEntities.Matches.Single(x => x.Id == match.Id);
@@ -76,7 +73,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    var delete = footballmanagementEntities.Matches.Include("Players").Include("Referees").Include("Tournament").Single(x => x.Id == match.Id);
+                    var delete = footballmanagementEntities.Matches.Include("Players").Include("Referees").Include("Tournament").Include("Team").Include("Team1").Single(x => x.Id == match.Id);
                     footballmanagementEntities.Matches.Attach(delete);
                     footballmanagementEntities.Matches.DeleteObject(delete);
                     footballmanagementEntities.SaveChanges();
@@ -97,7 +94,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    response = footballmanagementEntities.Matches.ToList();
+                    response = footballmanagementEntities.Matches.Include("Tournament").Include("Players").Include("Referees").Include("Team").Include("Team1").ToList();
 
                 }
             }

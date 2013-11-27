@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -15,20 +16,38 @@ using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
-namespace FootballManagement.Client.Views
+namespace FootballManagement.Client.Views.Match_Pages
 {
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class AddTournamentPage : FootballManagement.Client.Common.LayoutAwarePage
+    public sealed partial class MatchGridPage : FootballManagement.Client.Common.LayoutAwarePage
     {
+        Tournament tournament = new Tournament();
         FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
 
-        public AddTournamentPage()
+        public MatchGridPage()
         {
             this.InitializeComponent();
+            AddMatches();
         }
 
+        async public void AddMatches()
+        {
+            List<Match> matches = await _footballService.GetListMatchAsync();
+            matches = matches.Where(x => x.Tournament.Id == tournament.Id).ToList();
+            foreach (var m in matches)
+            {
+                Button b = new Button();
+                b.Background = new SolidColorBrush(Color.FromArgb(242, 242, 242, 242));
+                b.Foreground = new SolidColorBrush(Colors.Black);
+                b.Opacity = 60;
+                b.Width = 170;
+                b.Height = 170;
+                b.Content = m.Team + "VS" + m.Team1;
+                GridTournaments.Items.Add(b);
+            }
+        }
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -52,39 +71,26 @@ namespace FootballManagement.Client.Views
         {
         }
 
-        async private void BTTNaddTournament_Click(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (TXTtournamentName.Text.Length >= 1)
-            {
-                List<Tournament> torneos = await _footballService.GetListTournamentAsync();
-                if (torneos.Exists(x => x.Name == TXTtournamentName.Text) != true)
-                {
-                    Tournament newTournament = new Tournament();
-                    newTournament.Name = TXTtournamentName.Text;
-                    bool response = await _footballService.CreateTournamentAsync(newTournament);
-                    if (response == true)
-                    {
-                        this.Frame.Navigate(typeof(TournamentMenuPage));
-                    }
-                    else
-                    {
-                        LBLnotifications.Text = "Su torneo no ha sido registrado";
-                    }
-                }
-                else
-                {
-                    LBLnotifications.Text = "El nombre de este torneo ya es existente";
-                }
-            }
-            else
-            {
-                LBLnotifications.Text = "Revise la informacion que ha ingresado";
-            }
+            base.OnNavigatedTo(e);
+            tournament = e.Parameter as Tournament;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
         }
 
         private void ClickBTTNHome(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MainPage));
         }
+
+        private void ClickBTTNAdd(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AddMatchPage),tournament);
+        }
+
     }
 }

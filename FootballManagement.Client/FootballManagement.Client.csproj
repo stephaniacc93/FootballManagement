@@ -114,6 +114,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Views\Match Pages\AddMatchPage.xaml.cs">
+      <DependentUpon>AddMatchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Match Pages\MatchGridPage.xaml.cs">
+      <DependentUpon>MatchGridPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tournament Pages\AddTournamentPage.xaml.cs">
       <DependentUpon>AddTournamentPage.xaml</DependentUpon>
     </Compile>
@@ -121,6 +127,9 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Tournament Pages\EditTournamentPage.xaml.cs">
+      <DependentUpon>EditTournamentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tournament Pages\TournamentMenuPage.xaml.cs">
       <DependentUpon>TournamentMenuPage.xaml</DependentUpon>
     </Compile>
@@ -173,11 +182,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Add.png" />
+    <Content Include="Assets\Edit.png" />
+    <Content Include="Assets\Home.png" />
+    <Content Include="Assets\Info.png" />
     <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\Look.png" />
+    <Content Include="Assets\Match.png" />
+    <Content Include="Assets\Medal.png" />
+    <Content Include="Assets\Menu.png" />
+    <Content Include="Assets\Player.png" />
     <Content Include="Assets\ScreenMenu.png" />
+    <Content Include="Assets\Shield.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
+    <Content Include="Assets\Stadium.jpg" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Trash.png" />
     <Content Include="Common\ReadMe.txt" />
     <None Include="Service References\FootballManagementServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
@@ -195,6 +216,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Match Pages\AddMatchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Match Pages\MatchGridPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Tournament Pages\AddTournamentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -202,6 +231,10 @@
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Tournament Pages\EditTournamentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Tournament Pages\TournamentMenuPage.xaml">
       <SubType>Designer</SubType>

@@ -48,6 +48,7 @@ namespace FootballManagement.Commons.Entities
 
         #region Navigation Properties
     
+    [DataMember]
         public virtual Match Match
         {
             get { return _match; }
@@ -63,6 +64,7 @@ namespace FootballManagement.Commons.Entities
         }
         private Match _match;
     
+    [DataMember]
         public virtual Player Player
         {
             get { return _player; }

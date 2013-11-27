@@ -25,8 +25,8 @@ namespace FootballManagement.UnitTest
             TournamentPersistence top = new TournamentPersistence();
             Tournament tournament = top.GetList().FirstOrDefault();
 
-            match.Team = tp.GetList().First(x=> x.Id == 5);
-            match.Team1 = tp.GetList().First(x => x.Id == 5);
+            match.Team = tp.GetList().First(x=> x.Id == 11);
+            match.Team1 = tp.GetList().First(x => x.Id == 12);
             match.MatchDate = date;
             match.Tournament = tournament;
             match.Referees = rp.GetList();
@@ -81,7 +81,7 @@ namespace FootballManagement.UnitTest
             //arrange
             bool result;
             Match match = new Match();
-            match.Id = 1;
+            match.Id = 8;
 
             MatchPersistence matchPersistence = new MatchPersistence();
 

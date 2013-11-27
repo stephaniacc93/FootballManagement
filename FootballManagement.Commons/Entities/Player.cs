@@ -41,6 +41,7 @@ namespace FootballManagement.Commons.Entities
 
         #region Navigation Properties
     
+    [DataMember]
         public virtual ICollection<Card> Cards
         {
             get
@@ -73,6 +74,7 @@ namespace FootballManagement.Commons.Entities
         }
         private ICollection<Card> _cards;
     
+    [DataMember]
         public virtual ICollection<Goal> Goals
         {
             get
@@ -105,6 +107,7 @@ namespace FootballManagement.Commons.Entities
         }
         private ICollection<Goal> _goals;
     
+    [DataMember]
         public virtual Team Team
         {
             get { return _team; }
@@ -120,6 +123,7 @@ namespace FootballManagement.Commons.Entities
         }
         private Team _team;
     
+    [DataMember]
         public virtual ICollection<Match> Matches
         {
             get

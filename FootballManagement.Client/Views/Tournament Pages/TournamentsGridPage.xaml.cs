@@ -1,4 +1,5 @@
 ﻿using FootballManagement.Client.FootballManagementServiceReference;
+using FootballManagement.Client.Views.Match_Pages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
@@ -25,6 +27,8 @@ namespace FootballManagement.Client.Views.Tournament_Pages
     {
         FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
         List<Button> buttons = new List<Button>();
+        List<Tournament> tournaments;
+
         public TournamentsGridPage()
         {
             this.InitializeComponent();
@@ -34,16 +38,18 @@ namespace FootballManagement.Client.Views.Tournament_Pages
 
         async void AddGrid()
         {
-            List<Tournament> tournaments = await _footballService.GetListTournamentAsync();
+            tournaments = await _footballService.GetListTournamentAsync();
             foreach (var t in tournaments)
             {
                 Button b = new Button();
-                b.Background = new SolidColorBrush(Colors.DarkRed);
-                b.Content = t.Name;
+                b.Background = new SolidColorBrush(Color.FromArgb(242, 242, 242, 242));
+                b.Foreground = new SolidColorBrush(Colors.Black);
+                b.Opacity = 60;
                 b.Width = 170;
                 b.Height = 170;
+                b.Content = t.Name;
                 buttons.Add(b);
-                GridViewTournaments.Items.Add(b);
+                GridTournaments.Items.Add(b);
             }
         }
 
@@ -86,6 +92,84 @@ namespace FootballManagement.Client.Views.Tournament_Pages
 
         }
 
+        private void GridView_Loaded(object sender, RoutedEventArgs e)
+        {
+            GridTournaments.SelectedIndex = -1;
+            AppBar.IsOpen = false;
+        }
 
+        private void TournamentSelection(object sender, SelectionChangedEventArgs e)
+        {
+            GridTournaments.SelectionMode = ListViewSelectionMode.Single;
+
+            if (GridTournaments.SelectedItem != null)
+            {
+                AppBar.IsOpen = true;
+            }
+            else if (GridTournaments.SelectedItem == null)
+            {
+                AppBar.IsOpen = false;
+            }
+        }
+
+        private void ClickBTTNEdit(object sender, RoutedEventArgs e)
+        {
+            if (GridTournaments.SelectedItem != null)
+            {
+                Notifications.Text = "";
+                Button button = (Button)GridTournaments.SelectedItem;
+                Tournament t = tournaments.FirstOrDefault(x => x.Name == (string)button.Content);
+                this.Frame.Navigate(typeof(EditTournamentPage), t);
+            }
+            else
+                Notifications.Text = "No hay torneo por editar";
+
+        }
+
+        async private void ClickBTTNDelete(object sender, RoutedEventArgs e)
+        {
+            if (GridTournaments.SelectedItem != null)
+            {
+                Notifications.Text = "";
+                Button button = (Button)GridTournaments.SelectedItem;
+                Tournament t = tournaments.FirstOrDefault(x => x.Name == (string)button.Content);
+                bool response = await _footballService.DeleteTournamentAsync(t);
+                if (response == true)
+                {
+                    this.Frame.Navigate(typeof(TournamentsGridPage));
+                }
+            }
+            else
+                Notifications.Text = "No hay torneo por eliminar";
+
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+        }
+
+        private void ClickBTTNHome(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
+        }
+
+        private void ClickBTTNMatches(object sender, RoutedEventArgs e)
+        {
+            if (GridTournaments.SelectedItem != null)
+            {
+                Notifications.Text = "";
+                Button button = (Button)GridTournaments.SelectedItem;
+                Tournament t = tournaments.FirstOrDefault(x => x.Name == (string)button.Content);
+                this.Frame.Navigate(typeof(MatchGridPage),t);
+            }
+            else
+                Notifications.Text = "No hay torneo seleccionado";
+        }
     }
 }

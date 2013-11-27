@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="219f8fe5-edc9-4a1c-8dcd-4c817482228a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9fb876c0-f4c0-45f6-94a5-92c8a5cab6ee" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -24,11 +24,11 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/FootballManagement.Service/Service1/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="ef327d86-8225-409c-a8cd-4047dfc5e97c" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FootballManagement.Service/Service1/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="8d51b327-426f-44fc-980e-bd0539872fa1" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FootballManagement.Service/Service1/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="05322aea-4643-448a-85c7-d06d2ca716a8" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FootballManagement.Service/Service1/mex" />
-    <MetadataFile FileName="FootballManagement.Service.xsd" MetadataType="Schema" ID="6cfb6574-ceb2-4c92-aca0-7533a6f3f67b" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FootballManagement.Service/Service1/mex" />
-    <MetadataFile FileName="FootballManagement.Commons.Entities.xsd" MetadataType="Schema" ID="82b5be25-cde8-4bce-8195-562f2cc117de" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FootballManagement.Service/Service1/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="09510a78-77c6-4666-8dcd-191e14f41923" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FootballManagement.Service/Service1/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="ca9e8c54-1773-4717-9723-5434ee58c995" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FootballManagement.Service/Service1/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="66c80c97-6cf3-44c6-97f8-9aad39e3f96f" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FootballManagement.Service/Service1/mex" />
+    <MetadataFile FileName="FootballManagement.Service.xsd" MetadataType="Schema" ID="f74bbc5a-c9a3-4795-9cfa-adba2865452e" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FootballManagement.Service/Service1/mex" />
+    <MetadataFile FileName="FootballManagement.Commons.Entities.xsd" MetadataType="Schema" ID="de8fb720-e313-4349-a409-980bb9c681ba" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/FootballManagement.Service/Service1/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -20,7 +20,10 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Background="Black" Style="{StaticResource LayoutRootStyle}">
+    <Grid Style="{StaticResource LayoutRootStyle}">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="/Assets/Stadium.jpg" AlignmentY="Top" AlignmentX="Center"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="100"/>
@@ -37,8 +40,18 @@
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
 
         <StackPanel x:Name ="Tournaments" Grid.Row="2" Grid.Column ="1"  Orientation="Horizontal">
-            <Button Name ="BTTNAddTournament"  Width="180" Height="180" FontSize="18" Content="Agregar Torneo" Background="White"  Foreground="Black" Click="BTTNAddTournament_Click"/>
-            <Button Name ="BTTNTournaments"  Width="180" Height="180"  FontSize="18" Content="Ver Torneos" Background="White"  Foreground="Black" Click="BTTNTournaments_Click"/>
+            <Button Name ="BTTNAddTournament"  Width="180" Height="180" FontSize="18" Background="#f2f2f2"  Foreground="Black" Click="BTTNAddTournament_Click">
+                <StackPanel >
+                    <Image Source="/Assets/Add.png" Stretch="Fill" Width="100" Height="100"/>
+                    <TextBlock Text="Agregar Torneo" TextAlignment="Center" FontSize="20" Foreground="Black"/>
+                </StackPanel>
+            </Button>
+            <Button Name ="BTTNTournaments"  Width="180" Height="180"  FontSize="18" Background="#f2f2f2"  Foreground="Black" Click="BTTNTournaments_Click">
+                <StackPanel >
+                    <Image Source="/Assets/Look.png" Stretch="Fill" Width="100" Height="100"/>
+                    <TextBlock Text="Ver Torneos" TextAlignment="Center" FontSize="20" Foreground="Black"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
 
         <VisualStateManager.VisualStateGroups>

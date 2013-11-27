@@ -15,7 +15,7 @@ namespace FootballManagement.UnitTest
         {
             //arrange
             Team team = new Team();
-            team.Name = "Chivas";
+            team.Name = "Pumas";
             PlayerPersistence pp = new PlayerPersistence();
             team.Players = pp.GetList();
 

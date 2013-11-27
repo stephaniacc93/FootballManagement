@@ -6,31 +6,49 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Grid Background="Black">
+    
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="/Assets/Stadium.jpg" AlignmentY="Top" AlignmentX="Center"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="170"/>
+            <RowDefinition Height="230"/>
             <RowDefinition Height="500"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="270"/>
             <ColumnDefinition Width="350"/>
-            <ColumnDefinition Width="350"/>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="180"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.ColumnSpan ="6"  Grid.Row ="1" FontSize="60" TextWrapping="Wrap" Text= "    Control de Canchas de Fútbol"/>
-        <Canvas Grid.Column="1" Grid.Row="2" Height="500" Width="300">
-            <Canvas.Background>
-                <ImageBrush ImageSource="ms-appx:///Assets/ScreenMenu.png"/>
-            </Canvas.Background>
-            <Image Source="Assets/ScreenMenu.png" Stretch="Fill" Visibility="Visible" />
-        </Canvas>
-
-        <StackPanel Grid.Row="2" Grid.Column ="2"  Orientation="Vertical">
-            <Button Name ="BTTNTorneos"  Width="165" Height="165" Content="Torneos" Background="DarkRed"  Foreground="White" Click="BTTNTorneos_Click"/>
-            <Button Name ="BTTNEquipos"  Width="165" Height="165" Content="Equipos" Background="DarkRed" Foreground="White"/>
-            <Button Name ="BTTNJugadores"  Width="165" Height="165" Content="Jugadores" Background="DarkRed" Foreground="White"/>
+        <Button Name ="BTTNTorneos" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1" Width="340" Height="340" Background="#f2f2f2"  Click="BTTNTorneos_Click">
+            <StackPanel >
+                <Image Source="/Assets/Medal.png" Stretch="Fill" Width="150" Height="150"/>
+                <TextBlock Text="Torneos" TextAlignment="Center" FontSize="20" Foreground="Black"/>
+            </StackPanel>
+        </Button>
+        <StackPanel Grid.Row="2" Grid.Column ="2"  Orientation="Vertical" Grid.ColumnSpan="2">
+            <Button Name ="BTTNEquipos"  Width="170" Height="170" Background="#f2f2f2">
+                <StackPanel >
+                    <Image Source="/Assets/Shield.png" Stretch="Fill" Width="100" Height="100"/>
+                    <TextBlock Text="Equipos" TextAlignment="Center" FontSize="20" Foreground="Black"/>
+                </StackPanel>
+            </Button>
+            <Button Name ="BTTNJugadores"  Width="170" Height="170" Background="#f2f2f2">
+                <StackPanel >
+                    <Image Source="/Assets/Player.png" Stretch="Fill" Width="100" Height="100"/>
+                    <TextBlock Text="Jugadores" TextAlignment="Center" FontSize="20" Foreground="Black"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
+        <Button Name ="BTTNAbout"  Width="200" Height="340" Background="#f2f2f2" Foreground="Black" VerticalAlignment="Top" Grid.Row="2" Grid.Column="4">
+            <StackPanel >
+                <Image Source="/Assets/Info.png" Stretch="Fill" Width="100" Height="100"/>
+                <TextBlock Text="About" TextAlignment="Center" FontSize="20" Foreground="Black"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </Page>

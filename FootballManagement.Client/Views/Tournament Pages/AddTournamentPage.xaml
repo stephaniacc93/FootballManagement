@@ -21,7 +21,10 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Background="Black" Style="{StaticResource LayoutRootStyle}">
+    <Grid Style="{StaticResource LayoutRootStyle}">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="/Assets/Stadium.jpg" AlignmentY="Top" AlignmentX="Center"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="70"/>
@@ -38,17 +41,23 @@
         <!-- Back button and page title -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="400"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
         <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         <TextBlock x:Name="LBLname" Grid.Row="3" Grid.Column="1" Text="Nombre del Torneo" TextAlignment="Right" FontSize="27"/>
-        <TextBox x:Name="TXTtournamentName" Grid.Row="3" Grid.Column="3" TextAlignment="Left" FontSize="27" />
         <TextBlock x:Name="LBLnotifications" Grid.Row="1" Grid.Column="1" TextAlignment="Left" FontSize="15" Foreground="Red"/>
-        <Button x:Name="BTTNaddTournament" Grid.Row="5" Grid.Column="3" Content="Agregar Torneo" Height="70" Width="200" FontSize="18" Background="DarkRed" Click="BTTNaddTournament_Click"/>
+        <TextBox x:Name="TXTtournamentName" Grid.Row="3" Grid.Column="3" TextAlignment="Left" FontSize="27" />
+        <Button x:Name="BTTNaddTournament" Grid.Row="5" Grid.Column="3" Content="Agregar Torneo" Height="70" Foreground="Black" Width="200" FontSize="18" Background="#f2f2f2" Click="BTTNaddTournament_Click"/>
+        <Button BorderBrush="Transparent" Grid.Column="4" HorizontalAlignment="Center" BorderThickness="0" Click="ClickBTTNHome">
+            <StackPanel >
+                <Image Source="/Assets/Home.png" Stretch="Fill" Width="50" Height="50"/>
+                <TextBlock Text="Home" TextAlignment="Center" FontSize="12" Foreground="DimGray"/>
+            </StackPanel>
+        </Button>
 
     </Grid>
 
