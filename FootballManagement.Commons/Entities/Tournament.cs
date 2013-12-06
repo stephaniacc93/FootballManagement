@@ -18,18 +18,18 @@ using System.Runtime.Serialization;
 
 namespace FootballManagement.Commons.Entities
 {
-    [DataContract]
+    [DataContract(IsReference = true)]
     public partial class Tournament
     {
         #region Primitive Properties
-    [DataMember]
+    	[DataMember]
     		[Required]
     	    public virtual int Id
         {
             get;
             set;
         }
-    [DataMember]
+    	[DataMember]
     		[Required]
     	    public virtual string Name
         {
@@ -41,7 +41,7 @@ namespace FootballManagement.Commons.Entities
 
         #region Navigation Properties
     
-    [DataMember]
+    	[DataMember]
         public virtual ICollection<Match> Matches
         {
             get
@@ -74,7 +74,7 @@ namespace FootballManagement.Commons.Entities
         }
         private ICollection<Match> _matches;
     
-    [DataMember]
+    	[DataMember]
         public virtual ICollection<Team> Teams
         {
             get
@@ -107,7 +107,7 @@ namespace FootballManagement.Commons.Entities
         }
         private ICollection<Team> _teams;
     
-    [DataMember]
+    	[DataMember]
         public virtual ICollection<Referee> Referees
         {
             get

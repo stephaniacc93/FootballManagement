@@ -23,7 +23,7 @@ namespace FootballManagement.UnitTest
             DateTime date = new DateTime(2013, 11, 04);
 
             TournamentPersistence top = new TournamentPersistence();
-            Tournament tournament = top.GetList().FirstOrDefault();
+            Tournament tournament = top.GetList().First(x=> x.Name == "Copa Stephy");
 
             match.Team = tp.GetList().First(x=> x.Id == 11);
             match.Team1 = tp.GetList().First(x => x.Id == 12);

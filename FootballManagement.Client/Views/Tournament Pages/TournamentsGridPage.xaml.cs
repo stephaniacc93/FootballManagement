@@ -171,5 +171,11 @@ namespace FootballManagement.Client.Views.Tournament_Pages
             else
                 Notifications.Text = "No hay torneo seleccionado";
         }
+
+        private void SearchBoxEventsQuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
+        {
+            this.Frame.Navigate(typeof(SearchBox));
+        }
+
     }
 }

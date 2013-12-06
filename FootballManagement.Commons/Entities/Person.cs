@@ -18,32 +18,32 @@ using System.Runtime.Serialization;
 
 namespace FootballManagement.Commons.Entities
 {
-    [DataContract]
+    [DataContract(IsReference = true)]
     public partial class Person
     {
         #region Primitive Properties
-    [DataMember]
+    	[DataMember]
     		[Required]
     	    public virtual int Id
         {
             get;
             set;
         }
-    [DataMember]
+    	[DataMember]
     		[Required]
     	    public virtual string Name
         {
             get;
             set;
         }
-    [DataMember]
+    	[DataMember]
     		[Required]
     	    public virtual string Gender
         {
             get;
             set;
         }
-    [DataMember]
+    	[DataMember]
     		[Required]
     	    public virtual System.DateTime Birthday
         {

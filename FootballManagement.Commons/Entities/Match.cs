@@ -18,18 +18,18 @@ using System.Runtime.Serialization;
 
 namespace FootballManagement.Commons.Entities
 {
-    [DataContract]
+    [DataContract(IsReference = true)]
     public partial class Match
     {
         #region Primitive Properties
-    [DataMember]
+    	[DataMember]
     		[Required]
     	    public virtual int Id
         {
             get;
             set;
         }
-    [DataMember]
+    	[DataMember]
     		[Required]
     	    public virtual System.DateTime MatchDate
         {
@@ -41,7 +41,7 @@ namespace FootballManagement.Commons.Entities
 
         #region Navigation Properties
     
-    [DataMember]
+    	[DataMember]
         public virtual ICollection<Card> Cards
         {
             get
@@ -74,7 +74,7 @@ namespace FootballManagement.Commons.Entities
         }
         private ICollection<Card> _cards;
     
-    [DataMember]
+    	[DataMember]
         public virtual ICollection<Goal> Goals
         {
             get
@@ -107,7 +107,7 @@ namespace FootballManagement.Commons.Entities
         }
         private ICollection<Goal> _goals;
     
-    [DataMember]
+    	[DataMember]
         public virtual Team Team
         {
             get { return _team; }
@@ -123,7 +123,7 @@ namespace FootballManagement.Commons.Entities
         }
         private Team _team;
     
-    [DataMember]
+    	[DataMember]
         public virtual Team Team1
         {
             get { return _team1; }
@@ -139,7 +139,7 @@ namespace FootballManagement.Commons.Entities
         }
         private Team _team1;
     
-    [DataMember]
+    	[DataMember]
         public virtual Tournament Tournament
         {
             get { return _tournament; }
@@ -155,7 +155,7 @@ namespace FootballManagement.Commons.Entities
         }
         private Tournament _tournament;
     
-    [DataMember]
+    	[DataMember]
         public virtual ICollection<Player> Players
         {
             get
@@ -188,7 +188,7 @@ namespace FootballManagement.Commons.Entities
         }
         private ICollection<Player> _players;
     
-    [DataMember]
+    	[DataMember]
         public virtual ICollection<Referee> Referees
         {
             get

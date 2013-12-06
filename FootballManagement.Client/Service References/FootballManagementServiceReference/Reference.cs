@@ -62,7 +62,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Card", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Card", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities", IsReference=true)]
     public partial class Card : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.DateTime DateField;
@@ -152,7 +152,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Match", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Match", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities", IsReference=true)]
     public partial class Match : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.Collections.Generic.List<FootballManagement.Client.FootballManagementServiceReference.Card> CardsField;
@@ -302,7 +302,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Player", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Player", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities", IsReference=true)]
     public partial class Player : FootballManagement.Client.FootballManagementServiceReference.Person {
         
         private System.Collections.Generic.List<FootballManagement.Client.FootballManagementServiceReference.Card> CardsField;
@@ -398,7 +398,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Team", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Team", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities", IsReference=true)]
     public partial class Team : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int IdField;
@@ -503,7 +503,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Tournament", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Tournament", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities", IsReference=true)]
     public partial class Tournament : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int IdField;
@@ -593,7 +593,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Goal", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Goal", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities", IsReference=true)]
     public partial class Goal : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int IdField;
@@ -668,7 +668,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Referee", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Referee", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities", IsReference=true)]
     public partial class Referee : FootballManagement.Client.FootballManagementServiceReference.Person {
         
         private string DegreeField;
@@ -719,7 +719,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Person", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Person", Namespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities", IsReference=true)]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FootballManagement.Client.FootballManagementServiceReference.Referee))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FootballManagement.Client.FootballManagementServiceReference.Player))]
     public partial class Person : object, System.ComponentModel.INotifyPropertyChanged {

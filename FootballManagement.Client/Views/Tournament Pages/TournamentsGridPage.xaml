@@ -15,7 +15,7 @@
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">Torneos Existentes</x:String>
     </Page.Resources>
-
+   
     <Page.BottomAppBar>
         <AppBar x:Name="AppBar" IsOpen="False" Background="#E5FFFFFF" BorderBrush="{x:Null}" Foreground="Black">
             <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Opacity="0.5">
@@ -47,7 +47,6 @@
         * Row 1 contains the rest of the page layout
     -->
 
-
     <Grid Style="{StaticResource LayoutRootStyle}">
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="/Assets/Stadium.jpg" AlignmentY="Top" AlignmentX="Center"/>
@@ -63,23 +62,30 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="500"/>
-            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="900"/>
+            <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        
         <TextBlock x:Name="Notifications" Grid.Column="2" Grid.Row="2" Visibility="Visible" FontSize="18" Foreground="Red"/>
         <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}" Margin="36,0,0,36" Grid.RowSpan="2"/>
         <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-        <GridView x:Name="GridTournaments" Grid.Row="3" Grid.ColumnSpan="5" Padding="116,5,40,46" Loaded="GridView_Loaded" SelectionChanged="TournamentSelection"/>
-        <Button BorderBrush="Transparent" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" BorderThickness="0" Click="ClickBTTNHome">
+        <GridView x:Name="GridTournaments" Grid.Row="3" Grid.ColumnSpan="5" Padding="116,5,40,46" Loaded="GridView_Loaded" SelectionChanged="TournamentSelection" />
+        <Button BorderBrush="Transparent" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Left" BorderThickness="0" Click="ClickBTTNHome">
             <StackPanel >
                 <Image Source="/Assets/Home.png" Stretch="Fill" Width="50" Height="50"/>
-                <TextBlock Text="Home" TextAlignment="Center" FontSize="12" Foreground="DimGray"/>
+                <TextBlock Text="Home" TextAlignment="Center" FontSize="12" Foreground="White"/>
             </StackPanel>
         </Button>
-        <SearchBox x:Name="SearchBox" IsEnabled="True"/>
+        <Button BorderBrush="Transparent" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" BorderThickness="0">
+            <StackPanel >
+                <Image Source="/Assets/Search.png" Stretch="Fill" Width="50" Height="50"/>
+                <TextBlock Text="Search" TextAlignment="Center" FontSize="12" Foreground="White"/>
+            </StackPanel>
+        </Button>
     </Grid>
 
+    
     <VisualStateManager.VisualStateGroups>
 
         <!-- Visual states reflect the application's view state -->

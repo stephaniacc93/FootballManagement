@@ -55,7 +55,7 @@
         <Button BorderBrush="Transparent" Grid.Column="4" HorizontalAlignment="Center" BorderThickness="0" Click="ClickBTTNHome">
             <StackPanel >
                 <Image Source="/Assets/Home.png" Stretch="Fill" Width="50" Height="50"/>
-                <TextBlock Text="Home" TextAlignment="Center" FontSize="12" Foreground="DimGray"/>
+                <TextBlock Text="Home" TextAlignment="Center" FontSize="12" Foreground="White"/>
             </StackPanel>
         </Button>
 

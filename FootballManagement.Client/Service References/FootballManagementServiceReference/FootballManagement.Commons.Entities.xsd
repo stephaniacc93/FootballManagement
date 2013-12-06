@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="Card">
     <xs:sequence>
       <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
@@ -8,6 +9,8 @@
       <xs:element minOccurs="0" name="Player" nillable="true" type="tns:Player" />
       <xs:element minOccurs="0" name="isRedCard" type="xs:boolean" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Card" nillable="true" type="tns:Card" />
   <xs:complexType name="Match">
@@ -22,6 +25,8 @@
       <xs:element minOccurs="0" name="Team1" nillable="true" type="tns:Team" />
       <xs:element minOccurs="0" name="Tournament" nillable="true" type="tns:Tournament" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Match" nillable="true" type="tns:Match" />
   <xs:complexType name="ArrayOfCard">
@@ -43,6 +48,8 @@
       <xs:element minOccurs="0" name="Player" nillable="true" type="tns:Player" />
       <xs:element minOccurs="0" name="Time" type="xs:dateTime" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Goal" nillable="true" type="tns:Goal" />
   <xs:complexType name="Player">
@@ -67,6 +74,8 @@
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Person" nillable="true" type="tns:Person" />
   <xs:complexType name="ArrayOfMatch">
@@ -84,6 +93,8 @@
       <xs:element minOccurs="0" name="Players" nillable="true" type="tns:ArrayOfPlayer" />
       <xs:element minOccurs="0" name="Tournament" nillable="true" type="tns:Tournament" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Team" nillable="true" type="tns:Team" />
   <xs:complexType name="ArrayOfPlayer">
@@ -100,6 +111,8 @@
       <xs:element minOccurs="0" name="Referees" nillable="true" type="tns:ArrayOfReferee" />
       <xs:element minOccurs="0" name="Teams" nillable="true" type="tns:ArrayOfTeam" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Tournament" nillable="true" type="tns:Tournament" />
   <xs:complexType name="ArrayOfReferee">

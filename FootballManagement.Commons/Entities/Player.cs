@@ -18,18 +18,18 @@ using System.Runtime.Serialization;
 
 namespace FootballManagement.Commons.Entities
 {
-    [DataContract]
+    [DataContract(IsReference = true)]
     public partial class Player : Person
     {
         #region Primitive Properties
-    [DataMember]
+    	[DataMember]
     		[Required]
     	    public virtual bool IsCaptain
         {
             get;
             set;
         }
-    [DataMember]
+    	[DataMember]
     		[Required]
     	    public virtual bool IsAuthorized
         {
@@ -41,7 +41,7 @@ namespace FootballManagement.Commons.Entities
 
         #region Navigation Properties
     
-    [DataMember]
+    	[DataMember]
         public virtual ICollection<Card> Cards
         {
             get
@@ -74,7 +74,7 @@ namespace FootballManagement.Commons.Entities
         }
         private ICollection<Card> _cards;
     
-    [DataMember]
+    	[DataMember]
         public virtual ICollection<Goal> Goals
         {
             get
@@ -107,7 +107,7 @@ namespace FootballManagement.Commons.Entities
         }
         private ICollection<Goal> _goals;
     
-    [DataMember]
+    	[DataMember]
         public virtual Team Team
         {
             get { return _team; }
@@ -123,7 +123,7 @@ namespace FootballManagement.Commons.Entities
         }
         private Team _team;
     
-    [DataMember]
+    	[DataMember]
         public virtual ICollection<Match> Matches
         {
             get

@@ -18,18 +18,18 @@ using System.Runtime.Serialization;
 
 namespace FootballManagement.Commons.Entities
 {
-    [DataContract]
+    [DataContract(IsReference = true)]
     public partial class Goal
     {
         #region Primitive Properties
-    [DataMember]
+    	[DataMember]
     		[Required]
     	    public virtual int Id
         {
             get;
             set;
         }
-    [DataMember]
+    	[DataMember]
     		[Required]
     	    public virtual System.DateTime Time
         {
@@ -41,7 +41,7 @@ namespace FootballManagement.Commons.Entities
 
         #region Navigation Properties
     
-    [DataMember]
+    	[DataMember]
         public virtual Match Match
         {
             get { return _match; }
@@ -57,7 +57,7 @@ namespace FootballManagement.Commons.Entities
         }
         private Match _match;
     
-    [DataMember]
+    	[DataMember]
         public virtual Player Player
         {
             get { return _player; }

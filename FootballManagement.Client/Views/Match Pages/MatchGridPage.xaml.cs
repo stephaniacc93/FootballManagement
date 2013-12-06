@@ -24,6 +24,7 @@ namespace FootballManagement.Client.Views.Match_Pages
     public sealed partial class MatchGridPage : FootballManagement.Client.Common.LayoutAwarePage
     {
         Tournament tournament = new Tournament();
+        List<Match> matches = new List<Match>();
         FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
 
         public MatchGridPage()
@@ -34,19 +35,10 @@ namespace FootballManagement.Client.Views.Match_Pages
 
         async public void AddMatches()
         {
-            List<Match> matches = await _footballService.GetListMatchAsync();
+            matches = await _footballService.GetListMatchAsync();
             matches = matches.Where(x => x.Tournament.Id == tournament.Id).ToList();
-            foreach (var m in matches)
-            {
-                Button b = new Button();
-                b.Background = new SolidColorBrush(Color.FromArgb(242, 242, 242, 242));
-                b.Foreground = new SolidColorBrush(Colors.Black);
-                b.Opacity = 60;
-                b.Width = 170;
-                b.Height = 170;
-                b.Content = m.Team + "VS" + m.Team1;
-                GridTournaments.Items.Add(b);
-            }
+            GridTournaments.ItemsSource = matches;
+
         }
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
@@ -90,6 +82,42 @@ namespace FootballManagement.Client.Views.Match_Pages
         private void ClickBTTNAdd(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(AddMatchPage),tournament);
+        }
+
+        private void ClickBTTNDelete(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void ClickBTTNEdit(object sender, RoutedEventArgs e)
+        {
+            if (GridTournaments.SelectedItem != null)
+            {
+                Notifications.Text = "";
+                Match t = matches.FirstOrDefault(x => x == GridTournaments.SelectedItem);
+            }
+            else
+                Notifications.Text = "No hay torneo por editar";
+
+        }
+
+        private void GridView_Loaded(object sender, RoutedEventArgs e)
+        {
+            GridTournaments.SelectedIndex = -1;
+            AppBar.IsOpen = false;
+        }
+
+        private void MatchSelection(object sender, SelectionChangedEventArgs e)
+        {
+            GridTournaments.SelectionMode = ListViewSelectionMode.Single;
+
+            if (GridTournaments.SelectedItem != null)
+            {
+                AppBar.IsOpen = true;
+            }
+            else if (GridTournaments.SelectedItem == null)
+            {
+                AppBar.IsOpen = false;
+            }
         }
 
     }
