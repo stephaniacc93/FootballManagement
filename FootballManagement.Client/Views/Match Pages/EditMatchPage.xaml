@@ -10,6 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+   
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">Editar Partido</x:String>
@@ -20,6 +21,7 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
+    
     <Grid>
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="/Assets/Stadium.jpg" AlignmentY="Top" AlignmentX="Center"/>
@@ -41,6 +43,7 @@
                 <RowDefinition Height="10"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="200"/>
                 <RowDefinition Height="10"/>
                 <RowDefinition Height="50"/>
@@ -55,7 +58,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="400"/>
-                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="400"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -78,17 +81,50 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBlock x:Name="LBLMatchDate" Grid.Row="8" Grid.Column="1" Text="Dia del Partido" TextAlignment="Right" FontSize="27"/>
+            <TextBlock x:Name="LBLMatchDate" Grid.Row="8" Grid.Column="1" Text="Dia del Partido" TextAlignment="Right" VerticalAlignment="Center" FontSize="27"/>
             <DatePicker x:Name="DatePickerMatch" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="8"/>
-            <TextBlock x:Name="LBLReferee" Grid.Row="10" Grid.Column="1" Text="Referees" TextAlignment="Right" FontSize="27"/>
-            <ListBox x:Name="GVReferee" Background="#f2f2f2" Grid.Column="3" Grid.Row="10" SelectionMode="Multiple" ItemsSource="{Binding}" SelectedItem="{Binding}" HorizontalContentAlignment="Stretch">
+            <TimePicker x:Name="TimePickerMatch" Grid.Column="5" Grid.Row="8" Width="300"/>
+            <StackPanel Grid.Row="10" Grid.Column="1" Orientation="Horizontal" Width="320">
+                <TextBlock x:Name="LBLReferee" Text=" Arbitros" TextAlignment="Left" VerticalAlignment="Bottom" FontSize="27" Width="230"/>
+                <Button x:Name="AddReferee" Content="Agregar" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="DarkRed" BorderBrush="Transparent"/>
+            </StackPanel>
+            <ListBox x:Name="GVReferee" Background="#f2f2f2" Width="320" Grid.Column="1" Grid.Row="11" ItemsSource="{Binding}" Tag="{Binding}" HorizontalContentAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight">
+                            <TextBlock Tag="{Binding Id}" Text="{Binding Name}" HorizontalAlignment="Left" Foreground="Black" Width="265" />
+                            <Button x:Name="DeleteItemB" BorderBrush="Transparent" BorderThickness="0" Click="BTTNDeleteReferee" Tag="{Binding Id}">
+                                <StackPanel >
+                                    <Image Source="/Assets/TinyX.png" Stretch="Fill" Width="15" Height="15"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Grid.Row="10" Grid.Column="3" Orientation="Horizontal">
+                <TextBlock x:Name="LBLGoals" Text="      Goles" TextAlignment="Left" VerticalAlignment="Bottom" FontSize="27" Width="270"/>
+                <Button x:Name="AddGoals" Content="Agregar" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="DarkRed" BorderBrush="Transparent"/>
+            </StackPanel>
+            <ListBox x:Name="GVGoles" Background="#f2f2f2" Width="320" Grid.Column="3" Grid.Row="11" SelectionMode="Multiple" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Tag="{Binding Id}" Text="{Binding Name}" Foreground="Black"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button x:Name="BTTNeditMatch" Click="BTTNeditMatch_Click" Grid.Row="12" Grid.Column="3" BorderBrush="Transparent" Content="Editar Partido" Height="70" Foreground="Black" Width="200" FontSize="18" Background="#f2f2f2"/>
+            <StackPanel Grid.Row="10" Grid.Column="5" Orientation="Horizontal">
+                <TextBlock x:Name="LBLCards" Text="      Tarjetas" TextAlignment="Left" VerticalAlignment="Bottom" FontSize="27" Width="270"/>
+                <Button x:Name="AddCard" Content="Agregar" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="DarkRed" BorderBrush="Transparent"/>
+            </StackPanel>
+            <ListBox x:Name="GVTarjetas" Background="#f2f2f2" Width="320" Grid.Column="5" Grid.Row="11" SelectionMode="Multiple" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Tag="{Binding Id}" Text="{Binding Name}" Foreground="Black"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button x:Name="BTTNeditMatch" Click="BTTNeditMatch_Click" Grid.Row="13" Grid.Column="3" BorderBrush="Transparent" Content="Editar Partido" Height="70" Foreground="Black" Width="200" FontSize="18" Background="#f2f2f2" HorizontalAlignment="Center"/>
         </Grid>
     </Grid>
 </Page>

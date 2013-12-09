@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI;
+using Windows.UI.Xaml.Media.Imaging;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -26,6 +28,7 @@ namespace FootballManagement.Client.Views.Match_Pages
     {
         FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
         Match match = new Match();
+        List<Referee> referees = new List<Referee>();
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -70,13 +73,13 @@ namespace FootballManagement.Client.Views.Match_Pages
         async public void load()
         {
             List<Team> teams = await _footballService.GetListTeamAsync();
-            List<Referee> referees = await _footballService.GetListRefereeAsync();
-            //teams = teams.Where(x => x.Tournament == match.Tournament).ToList();
+            referees = await _footballService.GetListRefereeAsync();
+            //teams = teams.Where(x => x.Tournament == match.Tournament).ToList();  
+            referees = referees.Where(x => match.Referees.Any(y => x.Id == y.Id)).ToList();
 
             CBMatchTeamHome.DataContext = teams;
             CBMatchTeamVisitor.DataContext = teams;
             GVReferee.DataContext = referees;
-            GVReferee.SelectedItem = match.Referees;
             int teamHomeIndex = 0;
             int teamVisitorIndex = 0;
             Team home = await _footballService.ReadTeamAsync(match.Team.Id);
@@ -97,12 +100,8 @@ namespace FootballManagement.Client.Views.Match_Pages
 
             CBMatchTeamHome.SelectedIndex = teamHomeIndex;
             CBMatchTeamVisitor.SelectedIndex = teamVisitorIndex;
-            DatePickerMatch.Date = match.MatchDate;
-
-            for (int i = 0; i < match.Referees.Count; i++)
-            {
-                GVReferee.SelectedItems.Add(GVReferee.Items[i]);
-            }
+            DatePickerMatch.Date = match.MatchDate.Date;
+            TimePickerMatch.Time = match.MatchDate.TimeOfDay;
         }
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also
@@ -140,12 +139,7 @@ namespace FootballManagement.Client.Views.Match_Pages
         {
             match.Team = (Team)CBMatchTeamHome.SelectionBoxItem;
             match.Team1 = (Team)CBMatchTeamVisitor.SelectionBoxItem;
-            match.MatchDate = DatePickerMatch.Date.ToLocalTime().DateTime;
-            List<Referee> referees = new List<Referee>();
-            foreach (var r in GVReferee.SelectedItems)
-            {
-                referees.Add((Referee)r);
-            }
+            match.MatchDate = (DatePickerMatch.Date + TimePickerMatch.Time).DateTime;
             match.Referees = referees;
 
             if (match.Referees.Count != 0 && match.Team != null && match.Team1 != null && match.MatchDate != null)
@@ -177,6 +171,36 @@ namespace FootballManagement.Client.Views.Match_Pages
 
 
             #endregion
+        }
+
+        async private void BTTNDeleteReferee(object sender, RoutedEventArgs e)
+        {
+            List<Referee> refereeNumber = (List<Referee>)GVReferee.Tag;
+            Referee x = refereeNumber.First();
+            Referee r = await _footballService.ReadRefereeAsync(x.Id);
+            foreach (var a in referees)
+            {
+                if(a.Id == r.Id)
+                {
+                    referees.Remove(a);
+                    if (referees.Count == 0)
+                        break;
+                }
+            }
+            GVReferee.ItemsSource = null;
+            GVReferee.ItemsSource = referees;
+            StackPanel s = new StackPanel();
+            TextBlock t = new TextBlock() { TextWrapping = TextWrapping.Wrap };
+            //fill in some lebrowski ipsum
+            t.Text = "This Chinaman who peed on my rug, I can't go give him a bill so what the fuck are you talking about? Please see him, Jeffrey. He's a good man. And thorough. Well sure, look at it! Young trophy wife, I mean, in the parlance of our times, owes money all over town, including to known pornographers— and that's cool, that's cool. DO YOU SEE WHAT HAPPENS, LARRY?\r\rI don't like you sucking around bothering our citizens, Lebowski. Yeah? What do you think happens when you get divorced? You turn in your library card? Get a new driver's license? Stop being Jewish? Do you have any kalhua? If the plan gets too complex something always goes wrong. If there's one thing I learned in Nam—. \"My son can't hold a job, my daughter's married to a fuckin' loser, and I got a rash on my ass so bad I can't hardly siddown. But you know me. I can't complain.\".";
+            t.Margin = new Thickness(4);
+
+            s.Children.Add(new ToggleSwitch() { Header = "useless switch" });
+            s.Children.Add(t);
+
+            //now create the flyout
+            Flyout f = new Flyout();
+
         }
     }
 }

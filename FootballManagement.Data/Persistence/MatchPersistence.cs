@@ -61,6 +61,7 @@ namespace FootballManagement.Data.Persistence
                     d.Tournament = footballmanagementEntities.Tournaments.First(x => x.Id == match.Tournament.Id);
                     d.Team = footballmanagementEntities.Teams.First(x => x.Id == match.Team.Id);
                     d.Team1 = footballmanagementEntities.Teams.First(x => x.Id == match.Team1.Id);
+                    d.MatchDate = match.MatchDate;
                     d.Referees = footballmanagementEntities.People.OfType<Referee>().AsEnumerable().Where(x => match.Referees.Any(y => x.Id == y.Id)).ToList();
                     footballmanagementEntities.SaveChanges();
                     return d;

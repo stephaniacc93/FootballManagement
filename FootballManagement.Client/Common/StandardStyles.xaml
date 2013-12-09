@@ -38,8 +38,8 @@
     <SolidColorBrush x:Key="ListBoxBorderThemeBrush" Color="Transparent" />
     <SolidColorBrush x:Key="ListBoxDisabledForegroundThemeBrush" Color="#66FFFFFF" />
     <SolidColorBrush x:Key="ListBoxFocusBackgroundThemeBrush" Color="#FFFFFFFF" />
-    <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="#D0D0D0"/>
-    <SolidColorBrush x:Key="ListBoxItemSelectedPointerOverBackgroundThemeBrush" Color="#D0D0D0"/>
+    <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="#CCFFFFFF"/>
+    <SolidColorBrush x:Key="ListBoxItemSelectedPointerOverBackgroundThemeBrush" Color="#CCFFFFFF"/>
     <SolidColorBrush x:Key="ListBoxForegroundThemeBrush" Color="#FF000000" />
 
     <SolidColorBrush x:Key="ComboBoxItemSelectedBackgroundThemeBrush" Color="#D0D0D0"/>

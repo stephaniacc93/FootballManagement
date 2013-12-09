@@ -215,6 +215,7 @@
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\Stadium.jpg" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\TinyX.png" />
     <Content Include="Assets\Trash.png" />
     <Content Include="Common\ReadMe.txt" />
     <None Include="Service References\FootballManagementServiceReference\Reference.svcmap">
