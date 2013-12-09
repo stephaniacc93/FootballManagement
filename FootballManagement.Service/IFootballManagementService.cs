@@ -23,13 +23,14 @@ namespace FootballManagement.Service
         bool CreateCard(Card card);
 
         [OperationContract]
-        bool UpdateCard(Card card);
+        Card UpdateCard(Card card);
 
         [OperationContract]
         Card ReadCard(int ID);
 
         [OperationContract]
         bool DeleteCard(Card card);
+
 
         [OperationContract]
         List<Card> GetListCard();
@@ -39,7 +40,7 @@ namespace FootballManagement.Service
         bool CreateGoal(Goal goal);
 
         [OperationContract]
-        bool UpdateGoal(Goal goal);
+        Goal UpdateGoal(Goal goal);
 
         [OperationContract]
         Goal ReadGoal(int ID);
@@ -55,7 +56,7 @@ namespace FootballManagement.Service
         bool CreateMatch(Match match);
 
         [OperationContract]
-        bool UpdateMatch(Match match);
+        Match UpdateMatch(Match match);
 
         [OperationContract]
         Match ReadMatch(int ID);
@@ -71,7 +72,7 @@ namespace FootballManagement.Service
         bool CreatePlayer(Player player);
 
         [OperationContract]
-        bool UpdatePlayer(Player player);
+        Player UpdatePlayer(Player player);
 
         [OperationContract]
         Player ReadPlayer(int ID);
@@ -87,7 +88,7 @@ namespace FootballManagement.Service
         bool CreateReferee(Referee referee);
 
         [OperationContract]
-        bool UpdateReferee(Referee referee);
+        Referee UpdateReferee(Referee referee);
 
         [OperationContract]
         Referee ReadReferee(int ID);
@@ -103,7 +104,7 @@ namespace FootballManagement.Service
         bool CreateTeam(Team team);
 
         [OperationContract]
-        bool UpdateTeam(Team team);
+        Team UpdateTeam(Team team);
 
         [OperationContract]
         Team ReadTeam(int ID);
@@ -119,7 +120,7 @@ namespace FootballManagement.Service
         bool CreateTournament(Tournament tournament);
 
         [OperationContract]
-        bool UpdateTournament(Tournament tournament);
+        Tournament UpdateTournament(Tournament tournament);
 
         [OperationContract]
         Tournament ReadTournament(int ID);

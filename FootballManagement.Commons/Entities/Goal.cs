@@ -45,15 +45,7 @@ namespace FootballManagement.Commons.Entities
         public virtual Match Match
         {
             get { return _match; }
-            set
-            {
-                if (!ReferenceEquals(_match, value))
-                {
-                    var previousValue = _match;
-                    _match = value;
-                    FixupMatch(previousValue);
-                }
-            }
+            set { _match = value; }
         }
         private Match _match;
     
@@ -61,53 +53,9 @@ namespace FootballManagement.Commons.Entities
         public virtual Player Player
         {
             get { return _player; }
-            set
-            {
-                if (!ReferenceEquals(_player, value))
-                {
-                    var previousValue = _player;
-                    _player = value;
-                    FixupPlayer(previousValue);
-                }
-            }
+            set { _player = value; }
         }
         private Player _player;
-
-        #endregion
-
-        #region Association Fixup
-    
-        private void FixupMatch(Match previousValue)
-        {
-            if (previousValue != null && previousValue.Goals.Contains(this))
-            {
-                previousValue.Goals.Remove(this);
-            }
-    
-            if (Match != null)
-            {
-                if (!Match.Goals.Contains(this))
-                {
-                    Match.Goals.Add(this);
-                }
-            }
-        }
-    
-        private void FixupPlayer(Player previousValue)
-        {
-            if (previousValue != null && previousValue.Goals.Contains(this))
-            {
-                previousValue.Goals.Remove(this);
-            }
-    
-            if (Player != null)
-            {
-                if (!Player.Goals.Contains(this))
-                {
-                    Player.Goals.Add(this);
-                }
-            }
-        }
 
         #endregion
 

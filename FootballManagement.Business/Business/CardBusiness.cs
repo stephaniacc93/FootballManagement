@@ -41,13 +41,13 @@ namespace FootballManagement.Business.Business
             return response;
         }
 
-        public bool UpdateCard(Card card)
+        public Card UpdateCard(Card card)
         {
-            bool response = false;
+            Card response = new Card();
             try
             {
                 CardPersistence cardPersistence = new CardPersistence();
-                cardPersistence.Update(card);
+                response = cardPersistence.Update(card);
             }
             catch (Exception e)
             {

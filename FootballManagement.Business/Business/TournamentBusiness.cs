@@ -41,13 +41,13 @@ namespace FootballManagement.Business.Business
             return response;
         }
 
-        public bool UpdateTournament(Tournament tournament)
+        public Tournament UpdateTournament(Tournament tournament)
         {
-            bool response = false;
+            Tournament response = new Tournament();
             try
             {
                 TournamentPersistence tournamentPersistence = new TournamentPersistence();
-                tournamentPersistence.Update(tournament);
+                response = tournamentPersistence.Update(tournament);
             }
             catch (Exception e)
             {

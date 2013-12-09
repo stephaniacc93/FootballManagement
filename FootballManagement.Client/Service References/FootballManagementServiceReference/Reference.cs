@@ -808,7 +808,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
         System.Threading.Tasks.Task<bool> CreateCardAsync(FootballManagement.Client.FootballManagementServiceReference.Card card);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFootballManagementService/UpdateCard", ReplyAction="http://tempuri.org/IFootballManagementService/UpdateCardResponse")]
-        System.Threading.Tasks.Task<bool> UpdateCardAsync(FootballManagement.Client.FootballManagementServiceReference.Card card);
+        System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Card> UpdateCardAsync(FootballManagement.Client.FootballManagementServiceReference.Card card);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFootballManagementService/ReadCard", ReplyAction="http://tempuri.org/IFootballManagementService/ReadCardResponse")]
         System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Card> ReadCardAsync(int ID);
@@ -823,7 +823,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
         System.Threading.Tasks.Task<bool> CreateGoalAsync(FootballManagement.Client.FootballManagementServiceReference.Goal goal);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFootballManagementService/UpdateGoal", ReplyAction="http://tempuri.org/IFootballManagementService/UpdateGoalResponse")]
-        System.Threading.Tasks.Task<bool> UpdateGoalAsync(FootballManagement.Client.FootballManagementServiceReference.Goal goal);
+        System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Goal> UpdateGoalAsync(FootballManagement.Client.FootballManagementServiceReference.Goal goal);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFootballManagementService/ReadGoal", ReplyAction="http://tempuri.org/IFootballManagementService/ReadGoalResponse")]
         System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Goal> ReadGoalAsync(int ID);
@@ -838,7 +838,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
         System.Threading.Tasks.Task<bool> CreateMatchAsync(FootballManagement.Client.FootballManagementServiceReference.Match match);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFootballManagementService/UpdateMatch", ReplyAction="http://tempuri.org/IFootballManagementService/UpdateMatchResponse")]
-        System.Threading.Tasks.Task<bool> UpdateMatchAsync(FootballManagement.Client.FootballManagementServiceReference.Match match);
+        System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Match> UpdateMatchAsync(FootballManagement.Client.FootballManagementServiceReference.Match match);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFootballManagementService/ReadMatch", ReplyAction="http://tempuri.org/IFootballManagementService/ReadMatchResponse")]
         System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Match> ReadMatchAsync(int ID);
@@ -853,7 +853,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
         System.Threading.Tasks.Task<bool> CreatePlayerAsync(FootballManagement.Client.FootballManagementServiceReference.Player player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFootballManagementService/UpdatePlayer", ReplyAction="http://tempuri.org/IFootballManagementService/UpdatePlayerResponse")]
-        System.Threading.Tasks.Task<bool> UpdatePlayerAsync(FootballManagement.Client.FootballManagementServiceReference.Player player);
+        System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Player> UpdatePlayerAsync(FootballManagement.Client.FootballManagementServiceReference.Player player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFootballManagementService/ReadPlayer", ReplyAction="http://tempuri.org/IFootballManagementService/ReadPlayerResponse")]
         System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Player> ReadPlayerAsync(int ID);
@@ -868,7 +868,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
         System.Threading.Tasks.Task<bool> CreateRefereeAsync(FootballManagement.Client.FootballManagementServiceReference.Referee referee);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFootballManagementService/UpdateReferee", ReplyAction="http://tempuri.org/IFootballManagementService/UpdateRefereeResponse")]
-        System.Threading.Tasks.Task<bool> UpdateRefereeAsync(FootballManagement.Client.FootballManagementServiceReference.Referee referee);
+        System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Referee> UpdateRefereeAsync(FootballManagement.Client.FootballManagementServiceReference.Referee referee);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFootballManagementService/ReadReferee", ReplyAction="http://tempuri.org/IFootballManagementService/ReadRefereeResponse")]
         System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Referee> ReadRefereeAsync(int ID);
@@ -883,7 +883,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
         System.Threading.Tasks.Task<bool> CreateTeamAsync(FootballManagement.Client.FootballManagementServiceReference.Team team);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFootballManagementService/UpdateTeam", ReplyAction="http://tempuri.org/IFootballManagementService/UpdateTeamResponse")]
-        System.Threading.Tasks.Task<bool> UpdateTeamAsync(FootballManagement.Client.FootballManagementServiceReference.Team team);
+        System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Team> UpdateTeamAsync(FootballManagement.Client.FootballManagementServiceReference.Team team);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFootballManagementService/ReadTeam", ReplyAction="http://tempuri.org/IFootballManagementService/ReadTeamResponse")]
         System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Team> ReadTeamAsync(int ID);
@@ -898,7 +898,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
         System.Threading.Tasks.Task<bool> CreateTournamentAsync(FootballManagement.Client.FootballManagementServiceReference.Tournament tournament);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFootballManagementService/UpdateTournament", ReplyAction="http://tempuri.org/IFootballManagementService/UpdateTournamentResponse")]
-        System.Threading.Tasks.Task<bool> UpdateTournamentAsync(FootballManagement.Client.FootballManagementServiceReference.Tournament tournament);
+        System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Tournament> UpdateTournamentAsync(FootballManagement.Client.FootballManagementServiceReference.Tournament tournament);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFootballManagementService/ReadTournament", ReplyAction="http://tempuri.org/IFootballManagementService/ReadTournamentResponse")]
         System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Tournament> ReadTournamentAsync(int ID);
@@ -965,7 +965,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
             return base.Channel.CreateCardAsync(card);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateCardAsync(FootballManagement.Client.FootballManagementServiceReference.Card card) {
+        public System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Card> UpdateCardAsync(FootballManagement.Client.FootballManagementServiceReference.Card card) {
             return base.Channel.UpdateCardAsync(card);
         }
         
@@ -985,7 +985,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
             return base.Channel.CreateGoalAsync(goal);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateGoalAsync(FootballManagement.Client.FootballManagementServiceReference.Goal goal) {
+        public System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Goal> UpdateGoalAsync(FootballManagement.Client.FootballManagementServiceReference.Goal goal) {
             return base.Channel.UpdateGoalAsync(goal);
         }
         
@@ -1005,7 +1005,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
             return base.Channel.CreateMatchAsync(match);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateMatchAsync(FootballManagement.Client.FootballManagementServiceReference.Match match) {
+        public System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Match> UpdateMatchAsync(FootballManagement.Client.FootballManagementServiceReference.Match match) {
             return base.Channel.UpdateMatchAsync(match);
         }
         
@@ -1025,7 +1025,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
             return base.Channel.CreatePlayerAsync(player);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdatePlayerAsync(FootballManagement.Client.FootballManagementServiceReference.Player player) {
+        public System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Player> UpdatePlayerAsync(FootballManagement.Client.FootballManagementServiceReference.Player player) {
             return base.Channel.UpdatePlayerAsync(player);
         }
         
@@ -1045,7 +1045,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
             return base.Channel.CreateRefereeAsync(referee);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateRefereeAsync(FootballManagement.Client.FootballManagementServiceReference.Referee referee) {
+        public System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Referee> UpdateRefereeAsync(FootballManagement.Client.FootballManagementServiceReference.Referee referee) {
             return base.Channel.UpdateRefereeAsync(referee);
         }
         
@@ -1065,7 +1065,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
             return base.Channel.CreateTeamAsync(team);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateTeamAsync(FootballManagement.Client.FootballManagementServiceReference.Team team) {
+        public System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Team> UpdateTeamAsync(FootballManagement.Client.FootballManagementServiceReference.Team team) {
             return base.Channel.UpdateTeamAsync(team);
         }
         
@@ -1085,7 +1085,7 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
             return base.Channel.CreateTournamentAsync(tournament);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateTournamentAsync(FootballManagement.Client.FootballManagementServiceReference.Tournament tournament) {
+        public System.Threading.Tasks.Task<FootballManagement.Client.FootballManagementServiceReference.Tournament> UpdateTournamentAsync(FootballManagement.Client.FootballManagementServiceReference.Tournament tournament) {
             return base.Channel.UpdateTournamentAsync(tournament);
         }
         

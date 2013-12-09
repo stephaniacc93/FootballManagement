@@ -54,7 +54,7 @@
   <xs:element name="UpdateCardResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateCardResult" type="xs:boolean" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="UpdateCardResult" nillable="true" type="q5:Card" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -68,14 +68,14 @@
   <xs:element name="ReadCardResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="ReadCardResult" nillable="true" type="q5:Card" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="ReadCardResult" nillable="true" type="q6:Card" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteCard">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="card" nillable="true" type="q6:Card" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="card" nillable="true" type="q7:Card" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -94,14 +94,14 @@
   <xs:element name="GetListCardResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="GetListCardResult" nillable="true" type="q7:ArrayOfCard" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="GetListCardResult" nillable="true" type="q8:ArrayOfCard" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateGoal">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="goal" nillable="true" type="q8:Goal" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="goal" nillable="true" type="q9:Goal" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -115,14 +115,14 @@
   <xs:element name="UpdateGoal">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="goal" nillable="true" type="q9:Goal" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="goal" nillable="true" type="q10:Goal" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateGoalResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateGoalResult" type="xs:boolean" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="UpdateGoalResult" nillable="true" type="q11:Goal" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -136,14 +136,14 @@
   <xs:element name="ReadGoalResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="ReadGoalResult" nillable="true" type="q10:Goal" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="ReadGoalResult" nillable="true" type="q12:Goal" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteGoal">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="goal" nillable="true" type="q11:Goal" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="goal" nillable="true" type="q13:Goal" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -162,14 +162,14 @@
   <xs:element name="GetListGoalResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="GetListGoalResult" nillable="true" type="q12:ArrayOfGoal" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="GetListGoalResult" nillable="true" type="q14:ArrayOfGoal" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateMatch">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="match" nillable="true" type="q13:Match" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="match" nillable="true" type="q15:Match" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -183,14 +183,14 @@
   <xs:element name="UpdateMatch">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="match" nillable="true" type="q14:Match" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="match" nillable="true" type="q16:Match" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateMatchResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateMatchResult" type="xs:boolean" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="UpdateMatchResult" nillable="true" type="q17:Match" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -204,14 +204,14 @@
   <xs:element name="ReadMatchResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="ReadMatchResult" nillable="true" type="q15:Match" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="ReadMatchResult" nillable="true" type="q18:Match" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteMatch">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="match" nillable="true" type="q16:Match" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="match" nillable="true" type="q19:Match" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -230,14 +230,14 @@
   <xs:element name="GetListMatchResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="GetListMatchResult" nillable="true" type="q17:ArrayOfMatch" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="GetListMatchResult" nillable="true" type="q20:ArrayOfMatch" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreatePlayer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="player" nillable="true" type="q18:Player" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="player" nillable="true" type="q21:Player" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -251,14 +251,14 @@
   <xs:element name="UpdatePlayer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="player" nillable="true" type="q19:Player" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="player" nillable="true" type="q22:Player" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdatePlayerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UpdatePlayerResult" type="xs:boolean" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="UpdatePlayerResult" nillable="true" type="q23:Player" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -272,14 +272,14 @@
   <xs:element name="ReadPlayerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="ReadPlayerResult" nillable="true" type="q20:Player" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="ReadPlayerResult" nillable="true" type="q24:Player" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeletePlayer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="player" nillable="true" type="q21:Player" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="player" nillable="true" type="q25:Player" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -298,14 +298,14 @@
   <xs:element name="GetListPlayerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="GetListPlayerResult" nillable="true" type="q22:ArrayOfPlayer" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="GetListPlayerResult" nillable="true" type="q26:ArrayOfPlayer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateReferee">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="referee" nillable="true" type="q23:Referee" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="referee" nillable="true" type="q27:Referee" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -319,14 +319,14 @@
   <xs:element name="UpdateReferee">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="referee" nillable="true" type="q24:Referee" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="referee" nillable="true" type="q28:Referee" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateRefereeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateRefereeResult" type="xs:boolean" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="UpdateRefereeResult" nillable="true" type="q29:Referee" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -340,14 +340,14 @@
   <xs:element name="ReadRefereeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="ReadRefereeResult" nillable="true" type="q25:Referee" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="ReadRefereeResult" nillable="true" type="q30:Referee" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteReferee">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="referee" nillable="true" type="q26:Referee" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="referee" nillable="true" type="q31:Referee" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -366,14 +366,14 @@
   <xs:element name="GetListRefereeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="GetListRefereeResult" nillable="true" type="q27:ArrayOfReferee" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="GetListRefereeResult" nillable="true" type="q32:ArrayOfReferee" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateTeam">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="team" nillable="true" type="q28:Team" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="team" nillable="true" type="q33:Team" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -387,14 +387,14 @@
   <xs:element name="UpdateTeam">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="team" nillable="true" type="q29:Team" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="team" nillable="true" type="q34:Team" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateTeamResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateTeamResult" type="xs:boolean" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="UpdateTeamResult" nillable="true" type="q35:Team" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -408,14 +408,14 @@
   <xs:element name="ReadTeamResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="ReadTeamResult" nillable="true" type="q30:Team" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="ReadTeamResult" nillable="true" type="q36:Team" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteTeam">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="team" nillable="true" type="q31:Team" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="team" nillable="true" type="q37:Team" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -434,14 +434,14 @@
   <xs:element name="GetListTeamResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="GetListTeamResult" nillable="true" type="q32:ArrayOfTeam" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="GetListTeamResult" nillable="true" type="q38:ArrayOfTeam" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateTournament">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="tournament" nillable="true" type="q33:Tournament" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="tournament" nillable="true" type="q39:Tournament" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -455,14 +455,14 @@
   <xs:element name="UpdateTournament">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="tournament" nillable="true" type="q34:Tournament" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="tournament" nillable="true" type="q40:Tournament" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateTournamentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateTournamentResult" type="xs:boolean" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="UpdateTournamentResult" nillable="true" type="q41:Tournament" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -476,14 +476,14 @@
   <xs:element name="ReadTournamentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="ReadTournamentResult" nillable="true" type="q35:Tournament" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="ReadTournamentResult" nillable="true" type="q42:Tournament" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteTournament">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="tournament" nillable="true" type="q36:Tournament" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="tournament" nillable="true" type="q43:Tournament" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -502,7 +502,7 @@
   <xs:element name="GetListTournamentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="GetListTournamentResult" nillable="true" type="q37:ArrayOfTournament" />
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/FootballManagement.Commons.Entities" minOccurs="0" name="GetListTournamentResult" nillable="true" type="q44:ArrayOfTournament" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

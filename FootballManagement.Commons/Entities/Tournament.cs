@@ -42,176 +42,58 @@ namespace FootballManagement.Commons.Entities
         #region Navigation Properties
     
     	[DataMember]
-        public virtual ICollection<Match> Matches
+        public virtual List<Match> Matches
         {
             get
             {
                 if (_matches == null)
                 {
-                    var newCollection = new FixupCollection<Match>();
-                    newCollection.CollectionChanged += FixupMatches;
-                    _matches = newCollection;
+                    _matches = new List<Match>();
                 }
                 return _matches;
             }
             set
             {
-                if (!ReferenceEquals(_matches, value))
-                {
-                    var previousValue = _matches as FixupCollection<Match>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupMatches;
-                    }
-                    _matches = value;
-                    var newValue = value as FixupCollection<Match>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupMatches;
-                    }
-                }
+                _matches = value;
             }
         }
-        private ICollection<Match> _matches;
+        private List<Match> _matches;
     
     	[DataMember]
-        public virtual ICollection<Team> Teams
+        public virtual List<Team> Teams
         {
             get
             {
                 if (_teams == null)
                 {
-                    var newCollection = new FixupCollection<Team>();
-                    newCollection.CollectionChanged += FixupTeams;
-                    _teams = newCollection;
+                    _teams = new List<Team>();
                 }
                 return _teams;
             }
             set
             {
-                if (!ReferenceEquals(_teams, value))
-                {
-                    var previousValue = _teams as FixupCollection<Team>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupTeams;
-                    }
-                    _teams = value;
-                    var newValue = value as FixupCollection<Team>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupTeams;
-                    }
-                }
+                _teams = value;
             }
         }
-        private ICollection<Team> _teams;
+        private List<Team> _teams;
     
     	[DataMember]
-        public virtual ICollection<Referee> Referees
+        public virtual List<Referee> Referees
         {
             get
             {
                 if (_referees == null)
                 {
-                    var newCollection = new FixupCollection<Referee>();
-                    newCollection.CollectionChanged += FixupReferees;
-                    _referees = newCollection;
+                    _referees = new List<Referee>();
                 }
                 return _referees;
             }
             set
             {
-                if (!ReferenceEquals(_referees, value))
-                {
-                    var previousValue = _referees as FixupCollection<Referee>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupReferees;
-                    }
-                    _referees = value;
-                    var newValue = value as FixupCollection<Referee>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupReferees;
-                    }
-                }
+                _referees = value;
             }
         }
-        private ICollection<Referee> _referees;
-
-        #endregion
-
-        #region Association Fixup
-    
-        private void FixupMatches(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (Match item in e.NewItems)
-                {
-                    item.Tournament = this;
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (Match item in e.OldItems)
-                {
-                    if (ReferenceEquals(item.Tournament, this))
-                    {
-                        item.Tournament = null;
-                    }
-                }
-            }
-        }
-    
-        private void FixupTeams(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (Team item in e.NewItems)
-                {
-                    item.Tournament = this;
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (Team item in e.OldItems)
-                {
-                    if (ReferenceEquals(item.Tournament, this))
-                    {
-                        item.Tournament = null;
-                    }
-                }
-            }
-        }
-    
-        private void FixupReferees(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (Referee item in e.NewItems)
-                {
-                    if (!item.Tournaments.Contains(this))
-                    {
-                        item.Tournaments.Add(this);
-                    }
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (Referee item in e.OldItems)
-                {
-                    if (item.Tournaments.Contains(this))
-                    {
-                        item.Tournaments.Remove(this);
-                    }
-                }
-            }
-        }
+        private List<Referee> _referees;
 
         #endregion
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FootballManagement.Data.Persistence
 {
-    public class MatchPersistence :IPersistence<Match>
+    public class MatchPersistence : IPersistence<Match>
     {
         public Match Create(Match match)
         {
@@ -17,6 +17,10 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
+                    match.Tournament = footballmanagementEntities.Tournaments.First(x => x.Id == match.Tournament.Id);
+                    match.Team = footballmanagementEntities.Teams.First(x => x.Id == match.Team.Id);
+                    match.Team1 = footballmanagementEntities.Teams.First(x => x.Id == match.Team1.Id);
+                    match.Referees = footballmanagementEntities.People.OfType<Referee>().AsEnumerable().Where(x => match.Referees.Any(y => x.Id == y.Id)).ToList();
                     footballmanagementEntities.Matches.AddObject(match);
                     footballmanagementEntities.SaveChanges();
                     response = footballmanagementEntities.Matches.Single(x => x.Id == match.Id);
@@ -53,11 +57,13 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    var d = new Match { Id = match.Id };
-                    footballmanagementEntities.Matches.Attach(d);
-                    footballmanagementEntities.Matches.ApplyCurrentValues(match);
+                    var d = footballmanagementEntities.Matches.Include("Players").Include("Referees").Include("Team").Include("Team1").Include("Tournament").FirstOrDefault(x => x.Id == match.Id);
+                    d.Tournament = footballmanagementEntities.Tournaments.First(x => x.Id == match.Tournament.Id);
+                    d.Team = footballmanagementEntities.Teams.First(x => x.Id == match.Team.Id);
+                    d.Team1 = footballmanagementEntities.Teams.First(x => x.Id == match.Team1.Id);
+                    d.Referees = footballmanagementEntities.People.OfType<Referee>().AsEnumerable().Where(x => match.Referees.Any(y => x.Id == y.Id)).ToList();
                     footballmanagementEntities.SaveChanges();
-                    return match;
+                    return d;
                 }
             }
             catch (Exception e)
@@ -94,7 +100,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    response = footballmanagementEntities.Matches.Include("Tournament").Include("Players").Include("Referees").Include("Team").Include("Team1").ToList();
+                    response = footballmanagementEntities.Matches.Include("Players").Include("Referees").Include("Team").Include("Team1").Include("Tournament").ToList();
 
                 }
             }

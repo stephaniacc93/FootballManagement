@@ -47,9 +47,9 @@ namespace FootballManagement.Service
             return response;
         }
 
-        public bool UpdateCard(Card card)
+        public Card UpdateCard(Card card)
         {
-            bool response = false;
+            Card response = new Card();
             try
             {
                 CardBusiness cardBusiness = new CardBusiness();
@@ -127,9 +127,9 @@ namespace FootballManagement.Service
             return response;
         }
 
-        public bool UpdateGoal(Goal goal)
+        public Goal UpdateGoal(Goal goal)
         {
-            bool response = false;
+            Goal response = new Goal();
             try
             {
                 GoalBusiness goalBusiness = new GoalBusiness();
@@ -211,9 +211,9 @@ namespace FootballManagement.Service
             return response;
         }
 
-        public bool UpdateMatch(Match match)
+        public Match UpdateMatch(Match match)
         {
-            bool response = false;
+            Match response = new Match();
             try
             {
                 MatchBusiness matchBusiness = new MatchBusiness();
@@ -295,9 +295,9 @@ namespace FootballManagement.Service
             return response;
         }
 
-        public bool UpdatePlayer(Player player)
+        public Player UpdatePlayer(Player player)
         {
-            bool response = false;
+            Player response = new Player();
             try
             {
                 PlayerBusiness playerBusiness = new PlayerBusiness();
@@ -379,9 +379,9 @@ namespace FootballManagement.Service
             return response;
         }
 
-        public bool UpdateReferee(Referee referee)
+        public Referee UpdateReferee(Referee referee)
         {
-            bool response = false;
+            Referee response = new Referee();
             try
             {
                 RefereeBusiness refereeBusiness = new RefereeBusiness();
@@ -463,9 +463,9 @@ namespace FootballManagement.Service
             return response;
         }
 
-        public bool UpdateTeam(Team team)
+        public Team UpdateTeam(Team team)
         {
-            bool response = false;
+            Team response = new Team();
             try
             {
                 TeamBusiness teamBusiness = new TeamBusiness();
@@ -547,9 +547,9 @@ namespace FootballManagement.Service
             return response;
         }
 
-        public bool UpdateTournament(Tournament tournament)
+        public Tournament UpdateTournament(Tournament tournament)
         {
-            bool response = false;
+            Tournament response = new Tournament();
             try
             {
                 TournamentBusiness tournamentBusiness = new TournamentBusiness();

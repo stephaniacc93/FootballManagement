@@ -35,124 +35,40 @@ namespace FootballManagement.Commons.Entities
         #region Navigation Properties
     
     	[DataMember]
-        public virtual ICollection<Match> Matches
+        public virtual List<Match> Matches
         {
             get
             {
                 if (_matches == null)
                 {
-                    var newCollection = new FixupCollection<Match>();
-                    newCollection.CollectionChanged += FixupMatches;
-                    _matches = newCollection;
+                    _matches = new List<Match>();
                 }
                 return _matches;
             }
             set
             {
-                if (!ReferenceEquals(_matches, value))
-                {
-                    var previousValue = _matches as FixupCollection<Match>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupMatches;
-                    }
-                    _matches = value;
-                    var newValue = value as FixupCollection<Match>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupMatches;
-                    }
-                }
+                _matches = value;
             }
         }
-        private ICollection<Match> _matches;
+        private List<Match> _matches;
     
     	[DataMember]
-        public virtual ICollection<Tournament> Tournaments
+        public virtual List<Tournament> Tournaments
         {
             get
             {
                 if (_tournaments == null)
                 {
-                    var newCollection = new FixupCollection<Tournament>();
-                    newCollection.CollectionChanged += FixupTournaments;
-                    _tournaments = newCollection;
+                    _tournaments = new List<Tournament>();
                 }
                 return _tournaments;
             }
             set
             {
-                if (!ReferenceEquals(_tournaments, value))
-                {
-                    var previousValue = _tournaments as FixupCollection<Tournament>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupTournaments;
-                    }
-                    _tournaments = value;
-                    var newValue = value as FixupCollection<Tournament>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupTournaments;
-                    }
-                }
+                _tournaments = value;
             }
         }
-        private ICollection<Tournament> _tournaments;
-
-        #endregion
-
-        #region Association Fixup
-    
-        private void FixupMatches(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (Match item in e.NewItems)
-                {
-                    if (!item.Referees.Contains(this))
-                    {
-                        item.Referees.Add(this);
-                    }
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (Match item in e.OldItems)
-                {
-                    if (item.Referees.Contains(this))
-                    {
-                        item.Referees.Remove(this);
-                    }
-                }
-            }
-        }
-    
-        private void FixupTournaments(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (Tournament item in e.NewItems)
-                {
-                    if (!item.Referees.Contains(this))
-                    {
-                        item.Referees.Add(this);
-                    }
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (Tournament item in e.OldItems)
-                {
-                    if (item.Referees.Contains(this))
-                    {
-                        item.Referees.Remove(this);
-                    }
-                }
-            }
-        }
+        private List<Tournament> _tournaments;
 
         #endregion
 

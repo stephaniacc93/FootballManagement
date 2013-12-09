@@ -133,10 +133,19 @@ namespace FootballManagement.Client.Views.Tournament_Pages
                 Notifications.Text = "";
                 Button button = (Button)GridTournaments.SelectedItem;
                 Tournament t = tournaments.FirstOrDefault(x => x.Name == (string)button.Content);
-                bool response = await _footballService.DeleteTournamentAsync(t);
-                if (response == true)
+                List<Match> matches = await _footballService.GetListMatchAsync();
+                matches = matches.Where(x => x.Tournament.Id == t.Id).ToList();
+                if (matches.Count() == 0)
                 {
-                    this.Frame.Navigate(typeof(TournamentsGridPage));
+                    bool response = await _footballService.DeleteTournamentAsync(t);
+                    if (response == true)
+                    {
+                        this.Frame.Navigate(typeof(TournamentsGridPage));
+                    }
+                }
+                else
+                {
+                    Notifications.Text = "No se puede eliminar torneo, hay partidos en el";
                 }
             }
             else
@@ -166,7 +175,7 @@ namespace FootballManagement.Client.Views.Tournament_Pages
                 Notifications.Text = "";
                 Button button = (Button)GridTournaments.SelectedItem;
                 Tournament t = tournaments.FirstOrDefault(x => x.Name == (string)button.Content);
-                this.Frame.Navigate(typeof(MatchGridPage),t);
+                this.Frame.Navigate(typeof(MatchGridPage), t);
             }
             else
                 Notifications.Text = "No hay torneo seleccionado";

@@ -42,205 +42,66 @@ namespace FootballManagement.Commons.Entities
         #region Navigation Properties
     
     	[DataMember]
-        public virtual ICollection<Match> Matches
+        public virtual List<Match> Matches
         {
             get
             {
                 if (_matches == null)
                 {
-                    var newCollection = new FixupCollection<Match>();
-                    newCollection.CollectionChanged += FixupMatches;
-                    _matches = newCollection;
+                    _matches = new List<Match>();
                 }
                 return _matches;
             }
             set
             {
-                if (!ReferenceEquals(_matches, value))
-                {
-                    var previousValue = _matches as FixupCollection<Match>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupMatches;
-                    }
-                    _matches = value;
-                    var newValue = value as FixupCollection<Match>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupMatches;
-                    }
-                }
+                _matches = value;
             }
         }
-        private ICollection<Match> _matches;
+        private List<Match> _matches;
     
     	[DataMember]
-        public virtual ICollection<Match> Matches1
+        public virtual List<Match> Matches1
         {
             get
             {
                 if (_matches1 == null)
                 {
-                    var newCollection = new FixupCollection<Match>();
-                    newCollection.CollectionChanged += FixupMatches1;
-                    _matches1 = newCollection;
+                    _matches1 = new List<Match>();
                 }
                 return _matches1;
             }
             set
             {
-                if (!ReferenceEquals(_matches1, value))
-                {
-                    var previousValue = _matches1 as FixupCollection<Match>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupMatches1;
-                    }
-                    _matches1 = value;
-                    var newValue = value as FixupCollection<Match>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupMatches1;
-                    }
-                }
+                _matches1 = value;
             }
         }
-        private ICollection<Match> _matches1;
+        private List<Match> _matches1;
     
     	[DataMember]
-        public virtual ICollection<Player> Players
+        public virtual List<Player> Players
         {
             get
             {
                 if (_players == null)
                 {
-                    var newCollection = new FixupCollection<Player>();
-                    newCollection.CollectionChanged += FixupPlayers;
-                    _players = newCollection;
+                    _players = new List<Player>();
                 }
                 return _players;
             }
             set
             {
-                if (!ReferenceEquals(_players, value))
-                {
-                    var previousValue = _players as FixupCollection<Player>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupPlayers;
-                    }
-                    _players = value;
-                    var newValue = value as FixupCollection<Player>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupPlayers;
-                    }
-                }
+                _players = value;
             }
         }
-        private ICollection<Player> _players;
+        private List<Player> _players;
     
     	[DataMember]
         public virtual Tournament Tournament
         {
             get { return _tournament; }
-            set
-            {
-                if (!ReferenceEquals(_tournament, value))
-                {
-                    var previousValue = _tournament;
-                    _tournament = value;
-                    FixupTournament(previousValue);
-                }
-            }
+            set { _tournament = value; }
         }
         private Tournament _tournament;
-
-        #endregion
-
-        #region Association Fixup
-    
-        private void FixupTournament(Tournament previousValue)
-        {
-            if (previousValue != null && previousValue.Teams.Contains(this))
-            {
-                previousValue.Teams.Remove(this);
-            }
-    
-            if (Tournament != null)
-            {
-                if (!Tournament.Teams.Contains(this))
-                {
-                    Tournament.Teams.Add(this);
-                }
-            }
-        }
-    
-        private void FixupMatches(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (Match item in e.NewItems)
-                {
-                    item.Team = this;
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (Match item in e.OldItems)
-                {
-                    if (ReferenceEquals(item.Team, this))
-                    {
-                        item.Team = null;
-                    }
-                }
-            }
-        }
-    
-        private void FixupMatches1(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (Match item in e.NewItems)
-                {
-                    item.Team1 = this;
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (Match item in e.OldItems)
-                {
-                    if (ReferenceEquals(item.Team1, this))
-                    {
-                        item.Team1 = null;
-                    }
-                }
-            }
-        }
-    
-        private void FixupPlayers(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (Player item in e.NewItems)
-                {
-                    item.Team = this;
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (Player item in e.OldItems)
-                {
-                    if (ReferenceEquals(item.Team, this))
-                    {
-                        item.Team = null;
-                    }
-                }
-            }
-        }
 
         #endregion
 

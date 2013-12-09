@@ -25,19 +25,31 @@
             <x:String x:Key="BackButtonGlyph">&#xE071;</x:String>
             <x:String x:Key="BackButtonSnappedGlyph">&#xE0C4;</x:String>
         </ResourceDictionary>
-
-        
     </ResourceDictionary.ThemeDictionaries>
 
+    
     <!-- overrides -->
     <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBackgroundThemeBrush" Color="#00FFFFFF" />
     <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBorderThemeBrush" Color="#80FFFFFF" />
-    <SolidColorBrush x:Key="ListViewItemSelectedBackgroundThemeBrush" Color="#40FFFFFF" />
+    <SolidColorBrush x:Key="ListViewItemSelectedBackgroundThemeBrush" Color="#000033"/>
+    <SolidColorBrush x:Key="ListViewItemPointerOverBackgroundThemeBrush" Color="#000033"/>
 
+    <SolidColorBrush x:Key="ListBoxBackgroundThemeBrush" Color="#CCFFFFFF" />
+    <SolidColorBrush x:Key="ListBoxBorderThemeBrush" Color="Transparent" />
+    <SolidColorBrush x:Key="ListBoxDisabledForegroundThemeBrush" Color="#66FFFFFF" />
+    <SolidColorBrush x:Key="ListBoxFocusBackgroundThemeBrush" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="#D0D0D0"/>
+    <SolidColorBrush x:Key="ListBoxItemSelectedPointerOverBackgroundThemeBrush" Color="#D0D0D0"/>
+    <SolidColorBrush x:Key="ListBoxForegroundThemeBrush" Color="#FF000000" />
+
+    <SolidColorBrush x:Key="ComboBoxItemSelectedBackgroundThemeBrush" Color="#D0D0D0"/>
+    <SolidColorBrush x:Key="ComboBoxItemSelectedPointerOverBackgroundThemeBrush" Color="#D0D0D0"/>
+    
     <x:String x:Key="ChevronGlyph">&#xE26B;</x:String>
 
     <!-- RichTextBlock styles -->
-
+    
+    
     <Style x:Key="BasicRichTextStyle" TargetType="RichTextBlock">
         <Setter Property="Foreground" Value="{StaticResource ApplicationForegroundThemeBrush}"/>
         <Setter Property="FontSize" Value="{StaticResource ControlContentThemeFontSize}"/>
@@ -149,6 +161,7 @@
         </Setter>
     </Style>
 
+    
     <!-- Button styles -->
     
     <!--
@@ -1823,6 +1836,7 @@
 
     <!-- Page layout roots typically use entrance animations and a theme-appropriate background color -->
 
+
     <Style x:Key="LayoutRootStyle" TargetType="Panel">
         <Setter Property="Background" Value="{StaticResource ApplicationPageBackgroundThemeBrush}"/>
         <Setter Property="ChildrenTransitions">
@@ -1833,4 +1847,5 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
 </ResourceDictionary>

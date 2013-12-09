@@ -124,6 +124,9 @@
     <Compile Include="Views\Match Pages\AddMatchPage.xaml.cs">
       <DependentUpon>AddMatchPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Match Pages\EditMatchPage.xaml.cs">
+      <DependentUpon>EditMatchPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Match Pages\MatchGridPage.xaml.cs">
       <DependentUpon>MatchGridPage.xaml</DependentUpon>
     </Compile>
@@ -231,6 +234,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Match Pages\AddMatchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Match Pages\EditMatchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

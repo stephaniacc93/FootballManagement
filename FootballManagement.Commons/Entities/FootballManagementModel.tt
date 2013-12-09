@@ -212,7 +212,7 @@ foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e =>
         {
 #>
 	[DataMember]
-    <#=PropertyVirtualModifier(Accessibility.ForReadOnlyProperty(navProperty))#> ICollection<<#=code.Escape(navProperty.ToEndMember.GetEntityType())#>> <#=code.Escape(navProperty)#>
+    <#=PropertyVirtualModifier(Accessibility.ForReadOnlyProperty(navProperty))#> List<<#=code.Escape(navProperty.ToEndMember.GetEntityType())#>> <#=code.Escape(navProperty)#>
     {
         get
         {
@@ -222,9 +222,7 @@ foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e =>
                 if (inverse != null || ((AssociationType)navProperty.RelationshipType).IsForeignKey)
                 {
 #>
-                var newCollection = new FixupCollection<<#=code.Escape(navProperty.ToEndMember.GetEntityType())#>>();
-                newCollection.CollectionChanged += Fixup<#=navProperty.Name#>;
-                <#=code.FieldName(navProperty)#> = newCollection;
+                <#=code.FieldName(navProperty)#> = new List<<#=code.Escape(navProperty.ToEndMember.GetEntityType())#>>();
 <#
                 }
                 else
@@ -239,36 +237,10 @@ foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e =>
         }
         set
         {
-<#
-            if (inverse != null || ((AssociationType)navProperty.RelationshipType).IsForeignKey)
-            {
-#>
-            if (!ReferenceEquals(<#=code.FieldName(navProperty)#>, value))
-            {
-                var previousValue = <#=code.FieldName(navProperty)#> as FixupCollection<<#=code.Escape(navProperty.ToEndMember.GetEntityType())#>>;
-                if (previousValue != null)
-                {
-                    previousValue.CollectionChanged -= Fixup<#=navProperty.Name#>;
-                }
-                <#=code.FieldName(navProperty)#> = value;
-                var newValue = value as FixupCollection<<#=code.Escape(navProperty.ToEndMember.GetEntityType())#>>;
-                if (newValue != null)
-                {
-                    newValue.CollectionChanged += Fixup<#=navProperty.Name#>;
-                }
-            }
-<#
-            }
-            else
-            {
-#>
             <#=code.FieldName(navProperty)#> = value;
-<#
-            }
-#>
         }
     }
-    private ICollection<<#=code.Escape(navProperty.ToEndMember.GetEntityType())#>> <#=code.FieldName(navProperty)#>;
+    private List<<#=code.Escape(navProperty.ToEndMember.GetEntityType())#>> <#=code.FieldName(navProperty)#>;
 <#
         }
         else
@@ -282,15 +254,7 @@ foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e =>
             {
 #>
         <#=code.SpaceAfter(Accessibility.ForGetter(navProperty))#>get { return <#=code.FieldName(navProperty)#>; }
-        <#=code.SpaceAfter(Accessibility.ForSetter(navProperty))#>set
-        {
-            if (!ReferenceEquals(<#=code.FieldName(navProperty)#>, value))
-            {
-                var previousValue = <#=code.FieldName(navProperty)#>;
-                <#=code.FieldName(navProperty)#> = value;
-                Fixup<#=navProperty.Name#>(previousValue);
-            }
-        }
+        <#=code.SpaceAfter(Accessibility.ForSetter(navProperty))#>set { <#=code.FieldName(navProperty)#> = value; }
     }
     private <#=code.Escape(navProperty.ToEndMember.GetEntityType())#> <#=code.FieldName(navProperty)#>;
 <#
@@ -305,337 +269,6 @@ foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e =>
             }
         }
     }
-    region.End();
-
-    region.Begin("Association Fixup");
-
-    if (entityHasNullableFKs)
-    {
-#>
-
-    private bool _settingFK = false;
-<#
-    }
-    foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(np => np.DeclaringType == entity))
-    {
-        NavigationProperty inverse = ef.Inverse(navProperty);
-
-        if (inverse != null && !IsReadWriteAccessibleProperty(inverse))
-        {
-            inverse = null;
-        }
-
-        if ( (inverse != null || ((AssociationType)navProperty.RelationshipType).IsForeignKey) &&
-             (navProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many) )
-        {
-            var skipKeysArgument = (navProperty.GetDependentProperties().Where(p=>ef.IsNullable(p)).Any() && navProperty.GetDependentProperties().Count() > 1)
-                ? ", bool skipKeys = false"
-                : String.Empty;
-#>
-
-    private void Fixup<#=navProperty.Name#>(<#=code.Escape(navProperty.ToEndMember.GetEntityType())#> previousValue<#= skipKeysArgument #>)
-    {
-<#
-        if (inverse != null)
-        {
-            if (inverse.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
-            {
-#>
-        if (previousValue != null && previousValue.<#=code.Escape(inverse)#>.Contains(this))
-        {
-            previousValue.<#=code.Escape(inverse)#>.Remove(this);
-        }
-<#
-            }
-            else
-            {
-#>
-        if (previousValue != null && ReferenceEquals(previousValue.<#=code.Escape(inverse)#>, this))
-        {
-            previousValue.<#=code.Escape(inverse)#> = null;
-        }
-<#
-            }
-
-            if (inverse.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
-            {
-#>
-
-        if (<#=code.Escape(navProperty)#> != null)
-        {
-            if (!<#=code.Escape(navProperty)#>.<#=code.Escape(inverse)#>.Contains(this))
-            {
-                <#=code.Escape(navProperty)#>.<#=code.Escape(inverse)#>.Add(this);
-            }
-<#
-                foreach (var dependentProperty in navProperty.GetDependentProperties())
-                {
-                    EdmProperty principalProperty = ef.GetCorrespondingPrincipalProperty(navProperty, dependentProperty);
-                    if (((PrimitiveType)principalProperty.TypeUsage.EdmType).PrimitiveTypeKind == PrimitiveTypeKind.Binary)
-                    {
-#>
-            if (!StructuralComparisons.StructuralEqualityComparer.Equals(<#=code.Escape(dependentProperty)#>, <#=code.Escape(navProperty)#>.<#=code.Escape(principalProperty)#>))
-<#
-                    }
-                    else
-                    {
-#>
-            if (<#=code.Escape(dependentProperty)#> != <#=code.Escape(navProperty)#>.<#=code.Escape(principalProperty)#>)
-<#
-                    }
-#>
-            {
-                <#=code.Escape(dependentProperty)#> = <#=code.Escape(navProperty)#>.<#=code.Escape(principalProperty)#>;
-            }
-<#
-                }
-#>
-        }
-<#
-                if (navProperty.GetDependentProperties().Where(p=>ef.IsNullable(p)).Any())
-                {
-                    if (navProperty.GetDependentProperties().Count() > 1)
-                    {
-#>
-        else if (!_settingFK && !skipKeys)
-<#
-                    }
-                    else
-                    {
-#>
-        else if (!_settingFK)
-<#
-                    }
-#>
-        {
-<#
-                    foreach (var dependentProperty in navProperty.GetDependentProperties().Where(p => ef.IsNullable(p)))
-                    {
-#>
-            <#=code.Escape(dependentProperty)#> = null;
-<#
-                    }
-#>
-        }
-<#
-                }
-            }
-            else
-            {
-#>
-
-        if (<#=code.Escape(navProperty)#> != null)
-        {
-            <#=code.Escape(navProperty)#>.<#=code.Escape(inverse)#> = this;
-<#
-                foreach (var dependentProperty in navProperty.GetDependentProperties())
-                {
-                    EdmProperty principalProperty = ef.GetCorrespondingPrincipalProperty(navProperty, dependentProperty);
-                    if (((PrimitiveType)principalProperty.TypeUsage.EdmType).PrimitiveTypeKind == PrimitiveTypeKind.Binary)
-                    {
-#>
-            if (!StructuralComparisons.StructuralEqualityComparer.Equals(<#=code.Escape(dependentProperty)#>, <#=code.Escape(navProperty)#>.<#=code.Escape(principalProperty)#>))
-<#
-                    }
-                    else
-                    {
-#>
-            if (<#=code.Escape(dependentProperty)#> != <#=code.Escape(navProperty)#>.<#=code.Escape(principalProperty)#>)
-<#
-                    }
-#>
-            {
-                <#=code.Escape(dependentProperty)#> = <#=code.Escape(navProperty)#>.<#=code.Escape(principalProperty)#>;
-            }
-<#
-                }
-#>
-        }
-<#
-            }
-        }
-        else
-        {
-            if (navProperty.GetDependentProperties().Any())
-            {
-#>
-        if (<#=code.Escape(navProperty)#> != null)
-        {
-<#
-                foreach (var dependentProperty in navProperty.GetDependentProperties())
-                {
-                    EdmProperty principalProperty = ef.GetCorrespondingPrincipalProperty(navProperty, dependentProperty);
-                    if (((PrimitiveType)principalProperty.TypeUsage.EdmType).PrimitiveTypeKind == PrimitiveTypeKind.Binary)
-                    {
-#>
-            if (!StructuralComparisons.StructuralEqualityComparer.Equals(<#=code.Escape(dependentProperty)#>, <#=code.Escape(navProperty)#>.<#=code.Escape(principalProperty)#>))
-<#
-                    }
-                    else
-                    {
-#>
-            if (<#=code.Escape(dependentProperty)#> != <#=code.Escape(navProperty)#>.<#=code.Escape(principalProperty)#>)
-<#
-                    }
-#>
-            {
-                <#=code.Escape(dependentProperty)#> = <#=code.Escape(navProperty)#>.<#=code.Escape(principalProperty)#>;
-            }
-<#
-                }
-#>
-        }
-<#
-                if (navProperty.GetDependentProperties().Where(p => ef.IsNullable(p)).Any())
-                {
-                    if (navProperty.GetDependentProperties().Count() > 1)
-                    {
-#>
-        else if (!_settingFK && !skipKeys)
-<#
-                    }
-                    else
-                    {
-#>
-        else if (!_settingFK)
-<#
-                    }
-#>
-        {
-<#
-                    foreach (var dependentProperty in navProperty.GetDependentProperties().Where(p => ef.IsNullable(p)))
-                    {
-#>
-            <#=code.Escape(dependentProperty)#> = null;
-<#
-                    }
-#>
-        }
-<#
-                }
-            }
-            else if (((AssociationType)navProperty.RelationshipType).IsForeignKey)
-            {
-#>
-        if (<#=code.Escape(navProperty)#> != null)
-        {
-<#
-                foreach (var fromProperty in ef.GetPrincipalProperties(navProperty))
-                {
-#>
-            <#=code.Escape(navProperty)#>.<#=code.Escape(ef.GetCorrespondingDependentProperty(navProperty, fromProperty))#> = <#=code.Escape(fromProperty)#>;
-<#
-                }
-#>
-        }
-<#
-            }
-        }
-#>
-    }
-<#
-        }
-    }
-
-    foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(np => np.DeclaringType == entity))
-    {
-        NavigationProperty inverse = ef.Inverse(navProperty);
-
-        if (inverse != null && !IsReadWriteAccessibleProperty(inverse))
-        {
-            inverse = null;
-        }
-
-        if ( (inverse != null || ((AssociationType)navProperty.RelationshipType).IsForeignKey) &&
-             (navProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many) )
-        {
-#>
-
-    private void Fixup<#=navProperty.Name#>(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (e.NewItems != null)
-        {
-            foreach (<#=code.Escape(navProperty.ToEndMember.GetEntityType())#> item in e.NewItems)
-            {
-<#
-                if (inverse != null)
-                {
-                    if (inverse.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
-                    {
-#>
-                item.<#=code.Escape(inverse)#> = this;
-<#
-                    }
-                    else
-                    {
-#>
-                if (!item.<#=code.Escape(inverse)#>.Contains(this))
-                {
-                    item.<#=code.Escape(inverse)#>.Add(this);
-                }
-<#
-                    }
-                }
-                else if (((AssociationType)navProperty.RelationshipType).IsForeignKey)
-                {
-                    foreach (var fromProperty in ef.GetPrincipalProperties(navProperty))
-                    {
-#>
-                item.<#=code.Escape(ef.GetCorrespondingDependentProperty(navProperty, fromProperty))#> = <#=code.Escape(fromProperty)#>;
-<#
-                    }
-                }
-#>
-            }
-        }
-
-        if (e.OldItems != null)
-        {
-            foreach (<#=code.Escape(navProperty.ToEndMember.GetEntityType())#> item in e.OldItems)
-            {
-<#
-                if (inverse != null)
-                {
-                    if (inverse.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
-                    {
-#>
-                if (ReferenceEquals(item.<#=code.Escape(inverse)#>, this))
-                {
-                    item.<#=code.Escape(inverse)#> = null;
-                }
-<#
-                    }
-                    else
-                    {
-#>
-                if (item.<#=code.Escape(inverse)#>.Contains(this))
-                {
-                    item.<#=code.Escape(inverse)#>.Remove(this);
-                }
-<#
-                    }
-                }
-                else if (((AssociationType)navProperty.RelationshipType).IsForeignKey)
-                {
-                    foreach (var fromProperty in ef.GetPrincipalProperties(navProperty))
-                    {
-                        var p = ef.GetCorrespondingDependentProperty(navProperty, fromProperty);
-                        if (ef.IsNullable(p.TypeUsage))
-                        {
-#>
-                item.<#=code.Escape(p)#> = null;
-<#
-                        }
-                    }
-                }
-;#>
-            }
-        }
-    }
-<#
-        }
-    }
-
     region.End();
 #>
 }
@@ -781,24 +414,7 @@ string PropertyVirtualModifier(string accessibility)
 void WriteCustomObservableCollection()
 {
 #>
-// An System.Collections.ObjectModel.ObservableCollection that raises
-// individual item removal notifications on clear and prevents adding duplicates.
-public class FixupCollection<T> : ObservableCollection<T>
-{
-    protected override void ClearItems()
-    {
-		new List<T>(this).ForEach(t => Remove(t));
 
-    }
-
-    protected override void InsertItem(int index, T item)
-    {
-        if (!this.Contains(item))
-        {
-            base.InsertItem(index, item);
-        }
-    }
-}
 <#+
 }
 

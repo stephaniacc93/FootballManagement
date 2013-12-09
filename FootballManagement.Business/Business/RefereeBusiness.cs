@@ -41,13 +41,13 @@ namespace FootballManagement.Business.Business
             return response;
         }
 
-        public bool UpdateReferee(Referee referee)
+        public Referee UpdateReferee(Referee referee)
         {
-            bool response = false;
+            Referee response = new Referee();
             try
             {
                 RefereePersistence refereePersistence = new RefereePersistence();
-                refereePersistence.Update(referee);
+                response = refereePersistence.Update(referee);
             }
             catch (Exception e)
             {

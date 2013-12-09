@@ -41,13 +41,13 @@ namespace FootballManagement.Business.Business
             return response;
         }
 
-        public bool UpdateGoal(Goal goal)
+        public Goal UpdateGoal(Goal goal)
         {
-            bool response = false;
+            Goal response = new Goal();
             try
             {
                 GoalPersistence goalPersistence = new GoalPersistence();
-                goalPersistence.Update(goal);
+                response = goalPersistence.Update(goal);
             }
             catch (Exception e)
             {

@@ -81,11 +81,23 @@ namespace FootballManagement.Client.Views.Match_Pages
 
         private void ClickBTTNAdd(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AddMatchPage),tournament);
+            this.Frame.Navigate(typeof(AddMatchPage), tournament);
         }
 
-        private void ClickBTTNDelete(object sender, RoutedEventArgs e)
+        async private void ClickBTTNDelete(object sender, RoutedEventArgs e)
         {
+            if (GridTournaments.SelectedItem != null)
+            {
+                Notifications.Text = "";
+                Match m = matches.FirstOrDefault(x => x == GridTournaments.SelectedItem);
+                bool response = await _footballService.DeleteMatchAsync(m);
+                if (response == true)
+                    this.Frame.Navigate(typeof(MatchGridPage), tournament);
+                else
+                    Notifications.Text = "Partido no se pudo eliminar";
+            }
+            else
+                Notifications.Text = "No hay partido por eliminar";
         }
 
         private void ClickBTTNEdit(object sender, RoutedEventArgs e)
@@ -93,11 +105,11 @@ namespace FootballManagement.Client.Views.Match_Pages
             if (GridTournaments.SelectedItem != null)
             {
                 Notifications.Text = "";
-                Match t = matches.FirstOrDefault(x => x == GridTournaments.SelectedItem);
+                Match m = matches.FirstOrDefault(x => x == GridTournaments.SelectedItem);
+                this.Frame.Navigate(typeof(EditMatchPage), m);
             }
             else
-                Notifications.Text = "No hay torneo por editar";
-
+                Notifications.Text = "No hay partido por editar";
         }
 
         private void GridView_Loaded(object sender, RoutedEventArgs e)
