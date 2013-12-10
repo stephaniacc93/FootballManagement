@@ -83,7 +83,7 @@ namespace FootballManagement.Client.Views.Match_Pages
         async private void ClickBTTNAdd(object sender, RoutedEventArgs e)
         {
             teams = await _footballService.GetListTeamAsync();
-            teams = teams.Where(x=> x.Tournament == tournament).ToList();
+            teams = teams.Where(x=> x.Tournament.Id == tournament.Id).ToList();
             if(teams.Count!= 0)
                 this.Frame.Navigate(typeof(AddMatchPage), tournament);
             else

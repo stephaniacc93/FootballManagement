@@ -17,15 +17,15 @@ using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
-namespace FootballManagement.Client.Views.Team_Pages
+namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Referee_Pages
 {
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class AddTeamPage : Page
+    public sealed partial class EditRefereePage : Page
     {
         FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
-        List<Tournament> tournaments = new List<Tournament>();
+        Referee referee = new Referee();
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
@@ -47,10 +47,9 @@ namespace FootballManagement.Client.Views.Team_Pages
         }
 
 
-        public AddTeamPage()
+        public EditRefereePage()
         {
             this.InitializeComponent();
-            onLoad();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
@@ -58,8 +57,7 @@ namespace FootballManagement.Client.Views.Team_Pages
 
         async public void onLoad()
         {
-            tournaments = await _footballService.GetListTournamentAsync();
-            CBtournaments.ItemsSource = tournaments;
+
         }
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also
@@ -88,58 +86,28 @@ namespace FootballManagement.Client.Views.Team_Pages
         {
         }
 
-        #region NavigationHelper registration
-
-        /// The methods provided in this section are simply used to allow
-        /// NavigationHelper to respond to the page's navigation methods.
-        /// 
-        /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
-        /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
-        /// in addition to page state preserved during an earlier session.
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            navigationHelper.OnNavigatedTo(e);
+            base.OnNavigatedTo(e);
+            referee = e.Parameter as Referee;
+            TXTrefereeName.Text = referee.Name;
+            TXTdegree.Text = referee.Degree;
+            DatePickerBirthday.Date = referee.Birthday.Date;
+            if (referee.Gender == "Masculino")
+                CBgender.SelectedItem = Men;
+            else
+                CBgender.SelectedItem = Women;
+
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            navigationHelper.OnNavigatedFrom(e);
+            base.OnNavigatedFrom(e);
         }
 
-        #endregion
-
-        async private void BTTNaddTeam_Click(object sender, RoutedEventArgs e)
+        private void BTTNeditReferee_Click(object sender, RoutedEventArgs e)
         {
-            if (TXTteamName.Text.Length >= 1 && CBtournaments.SelectedItem != null)
-            {
-                List<Team> teams = await _footballService.GetListTeamAsync();
-                if (teams.Exists(x => x.Name == TXTteamName.Text) != true)
-                {
-                    Team newTeam = new Team();
-                    newTeam.Name = TXTteamName.Text;
-                    newTeam.Tournament = (Tournament)CBtournaments.SelectedItem;
-                    bool response = await _footballService.CreateTeamAsync(newTeam);
-                    if (response == true)
-                    {
-                        this.Frame.Navigate(typeof(TeamGridPage));
-                    }
-                    else
-                    {
-                        LBLnotifications.Text = "Su equipo no ha sido registrado";
-                    }
-                }
-                else
-                {
-                    LBLnotifications.Text = "El nombre de este equipo ya es existente";
-                }
-            }
-            else
-            {
-                LBLnotifications.Text = "Revise la informacion que ha ingresado";
-            }
+
         }
     }
 }

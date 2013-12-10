@@ -23,7 +23,6 @@ namespace FootballManagement.Client.Views
     public sealed partial class AddTournamentPage : FootballManagement.Client.Common.LayoutAwarePage
     {
         FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
-
         public AddTournamentPage()
         {
             this.InitializeComponent();

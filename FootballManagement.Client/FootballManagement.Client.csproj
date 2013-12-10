@@ -130,6 +130,27 @@
     <Compile Include="Views\Match Pages\MatchGridPage.xaml.cs">
       <DependentUpon>MatchGridPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Referee and Player Pages\MenuPageRP.xaml.cs">
+      <DependentUpon>MenuPageRP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Referee and Player Pages\Player Pages\AddPlayerPage.xaml.cs">
+      <DependentUpon>AddPlayerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Referee and Player Pages\Player Pages\EditPlayerPage.xaml.cs">
+      <DependentUpon>EditPlayerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Referee and Player Pages\Player Pages\PlayerGridPage.xaml.cs">
+      <DependentUpon>PlayerGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Referee and Player Pages\Referee Pages\AddRefereePage.xaml.cs">
+      <DependentUpon>AddRefereePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Referee and Player Pages\Referee Pages\EditRefereePage.xaml.cs">
+      <DependentUpon>EditRefereePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Referee and Player Pages\Referee Pages\RefereeGridPage.xaml.cs">
+      <DependentUpon>RefereeGridPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Team Pages\AddTeamPage.xaml.cs">
       <DependentUpon>AddTeamPage.xaml</DependentUpon>
     </Compile>
@@ -252,6 +273,34 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Match Pages\MatchGridPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Referee and Player Pages\MenuPageRP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Referee and Player Pages\Player Pages\AddPlayerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Referee and Player Pages\Player Pages\EditPlayerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Referee and Player Pages\Player Pages\PlayerGridPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Referee and Player Pages\Referee Pages\AddRefereePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Referee and Player Pages\Referee Pages\EditRefereePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Referee and Player Pages\Referee Pages\RefereeGridPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

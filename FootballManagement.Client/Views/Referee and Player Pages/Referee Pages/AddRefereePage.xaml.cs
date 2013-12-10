@@ -17,15 +17,14 @@ using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
-namespace FootballManagement.Client.Views.Team_Pages
+namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Referee_Pages
 {
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class AddTeamPage : Page
+    public sealed partial class AddRefereePage : Page
     {
         FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
-        List<Tournament> tournaments = new List<Tournament>();
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
@@ -47,20 +46,14 @@ namespace FootballManagement.Client.Views.Team_Pages
         }
 
 
-        public AddTeamPage()
+        public AddRefereePage()
         {
             this.InitializeComponent();
-            onLoad();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
         }
 
-        async public void onLoad()
-        {
-            tournaments = await _footballService.GetListTournamentAsync();
-            CBtournaments.ItemsSource = tournaments;
-        }
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -111,29 +104,37 @@ namespace FootballManagement.Client.Views.Team_Pages
 
         #endregion
 
-        async private void BTTNaddTeam_Click(object sender, RoutedEventArgs e)
+        private void ClickBTTNHome(object sender, RoutedEventArgs e)
         {
-            if (TXTteamName.Text.Length >= 1 && CBtournaments.SelectedItem != null)
+            this.Frame.Navigate(typeof(MainPage));
+        }
+
+        async private void BTTNaddReferee_Click(object sender, RoutedEventArgs e)
+        {
+            if (TXTrefereeName.Text.Length >= 1)
             {
-                List<Team> teams = await _footballService.GetListTeamAsync();
-                if (teams.Exists(x => x.Name == TXTteamName.Text) != true)
+                List<Referee> referees = await _footballService.GetListRefereeAsync();
+                if (referees.Exists(x => x.Name == TXTrefereeName.Text) != true)
                 {
-                    Team newTeam = new Team();
-                    newTeam.Name = TXTteamName.Text;
-                    newTeam.Tournament = (Tournament)CBtournaments.SelectedItem;
-                    bool response = await _footballService.CreateTeamAsync(newTeam);
+                    Referee newReferee = new Referee();
+                    ComboBoxItem cbItem = (ComboBoxItem) CBgender.SelectedItem;
+                    newReferee.Name = TXTrefereeName.Text;
+                    newReferee.Gender = cbItem.Content.ToString();
+                    newReferee.Degree = TXTdegree.Text;
+                    newReferee.Birthday = DatePickerBirthday.Date.DateTime;
+                    bool response = await _footballService.CreateRefereeAsync(newReferee);
                     if (response == true)
                     {
-                        this.Frame.Navigate(typeof(TeamGridPage));
+                        this.Frame.Navigate(typeof(RefereeGridPage));
                     }
                     else
                     {
-                        LBLnotifications.Text = "Su equipo no ha sido registrado";
+                        LBLnotifications.Text = "Su arbitro no ha sido registrado";
                     }
                 }
                 else
                 {
-                    LBLnotifications.Text = "El nombre de este equipo ya es existente";
+                    LBLnotifications.Text = "El nombre de este arbitro ya es existente";
                 }
             }
             else

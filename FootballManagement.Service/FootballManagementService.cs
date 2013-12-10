@@ -6,10 +6,12 @@ using System.ServiceModel;
 using System.Text;
 using FootballManagement.Commons.Entities;
 using FootballManagement.Business.Business;
+using System.ServiceModel.Activation;
 
 namespace FootballManagement.Service
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class FootballManagementService : IFootballManagementService
     {
         public string GetData(int value)

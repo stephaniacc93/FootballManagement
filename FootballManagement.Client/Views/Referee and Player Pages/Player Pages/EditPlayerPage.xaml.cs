@@ -17,15 +17,15 @@ using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
-namespace FootballManagement.Client.Views.Team_Pages
+namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
 {
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class AddTeamPage : Page
+    public sealed partial class EditPlayerPage : Page
     {
         FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
-        List<Tournament> tournaments = new List<Tournament>();
+        Player player = new Player();
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
@@ -47,7 +47,7 @@ namespace FootballManagement.Client.Views.Team_Pages
         }
 
 
-        public AddTeamPage()
+        public EditPlayerPage()
         {
             this.InitializeComponent();
             onLoad();
@@ -56,11 +56,6 @@ namespace FootballManagement.Client.Views.Team_Pages
             this.navigationHelper.SaveState += navigationHelper_SaveState;
         }
 
-        async public void onLoad()
-        {
-            tournaments = await _footballService.GetListTournamentAsync();
-            CBtournaments.ItemsSource = tournaments;
-        }
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -76,6 +71,11 @@ namespace FootballManagement.Client.Views.Team_Pages
         {
         }
 
+        async public void onLoad()
+        {
+            CBteam.DataContext = await _footballService.GetListTeamAsync();
+
+        }
         /// <summary>
         /// Preserves state associated with this page in case the application is suspended or the
         /// page is discarded from the navigation cache.  Values must conform to the serialization
@@ -88,58 +88,89 @@ namespace FootballManagement.Client.Views.Team_Pages
         {
         }
 
-        #region NavigationHelper registration
 
-        /// The methods provided in this section are simply used to allow
-        /// NavigationHelper to respond to the page's navigation methods.
-        /// 
-        /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
-        /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
-        /// in addition to page state preserved during an earlier session.
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void Home(object sender, RoutedEventArgs e)
         {
-            navigationHelper.OnNavigatedTo(e);
+            this.Frame.Navigate(typeof(MainPage));
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        async private void EditPlayer_Click(object sender, RoutedEventArgs e)
         {
-            navigationHelper.OnNavigatedFrom(e);
-        }
-
-        #endregion
-
-        async private void BTTNaddTeam_Click(object sender, RoutedEventArgs e)
-        {
-            if (TXTteamName.Text.Length >= 1 && CBtournaments.SelectedItem != null)
+            if (TXTplayerName.Text.Length >= 1)
             {
-                List<Team> teams = await _footballService.GetListTeamAsync();
-                if (teams.Exists(x => x.Name == TXTteamName.Text) != true)
+                Player p = new Player();
+                p.Name = TXTplayerName.Text;
+                p.Id = player.Id;
+                ComboBoxItem cbItem = (ComboBoxItem)CBgender.SelectedItem;
+                p.Gender = cbItem.Content.ToString();
+                p.IsAuthorized = true;
+                if (CBcaptain.IsEnabled == true)
+                    p.IsCaptain = (bool)CBcaptain.IsChecked;
+                else
+                    p.IsCaptain = false;
+
+                p.Birthday = DatePickerBirthday.Date.DateTime;
+                p.Team = (Team)CBteam.SelectedItem;
+                Player response = await _footballService.UpdatePlayerAsync(p);
+                if (response.Id != 0)
                 {
-                    Team newTeam = new Team();
-                    newTeam.Name = TXTteamName.Text;
-                    newTeam.Tournament = (Tournament)CBtournaments.SelectedItem;
-                    bool response = await _footballService.CreateTeamAsync(newTeam);
-                    if (response == true)
-                    {
-                        this.Frame.Navigate(typeof(TeamGridPage));
-                    }
-                    else
-                    {
-                        LBLnotifications.Text = "Su equipo no ha sido registrado";
-                    }
+                    this.Frame.Navigate(typeof(PlayerGridPage));
                 }
                 else
                 {
-                    LBLnotifications.Text = "El nombre de este equipo ya es existente";
+                    LBLnotifications.Text = "Su jugador no ha sido registrado";
                 }
             }
             else
             {
                 LBLnotifications.Text = "Revise la informacion que ha ingresado";
             }
+        }
+
+        async private void CBteam_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<Player> players = await _footballService.GetListPlayerAsync();
+            Team t = (Team)CBteam.SelectedItem;
+            List<Player> capitans = players.Where(x => x.IsCaptain == true).ToList();
+            bool response = capitans.Any(x => x.Team.Id == t.Id);
+            if (response == true)
+                CBcaptain.IsEnabled = false;
+            if (player.IsCaptain == true)
+                CBcaptain.IsEnabled = true;
+            else
+                CBcaptain.IsEnabled = true;
+        }
+
+        async protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            player = e.Parameter as Player;
+            TXTplayerName.Text = player.Name;
+            DatePickerBirthday.Date = player.Birthday.Date;
+            if (player.Gender == "Masculino")
+                CBgender.SelectedItem = Men;
+            else
+                CBgender.SelectedItem = Women;
+            List<Team> teams = await _footballService.GetListTeamAsync();
+            for (int i = 0; i <teams.Count(); i++)
+            {
+                if(teams.ElementAt(i).Id == player.Team.Id)
+                {
+                    CBteam.SelectedIndex = i;
+                    break;
+                }
+            }
+            if(player.IsCaptain == true)
+            {
+                CBcaptain.IsChecked = true;
+                CBcaptain.IsEnabled = true;
+            }
+
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
         }
     }
 }

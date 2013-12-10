@@ -37,10 +37,10 @@
                     <TextBlock Text="Equipos" TextAlignment="Center" FontSize="20" Foreground="Black"/>
                 </StackPanel>
             </Button>
-            <Button Name ="BTTNJugadores"  Width="180" Height="180" Background="#f2f2f2">
+            <Button Name ="BTTNJugadoresReferees"  Width="180" Height="180" Background="#f2f2f2" Click="BTTNRefPlay">
                 <StackPanel >
                     <Image Source="/Assets/Player.png" Stretch="Fill" Width="100" Height="100"/>
-                    <TextBlock Text="Referees" TextAlignment="Center" FontSize="20" Foreground="Black"/>
+                    <TextBlock Text="Arbitros" TextAlignment="Center" FontSize="20" Foreground="Black"/>
                     <TextBlock Text="y Jugadores" TextAlignment="Center" FontSize="20" Foreground="Black"/>
                 </StackPanel>
             </Button>

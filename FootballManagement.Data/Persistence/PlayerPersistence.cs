@@ -17,6 +17,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
+                    player.Team = footballmanagementEntities.Teams.First(x => x.Id == player.Team.Id);
                     footballmanagementEntities.People.AddObject(player);
                     footballmanagementEntities.SaveChanges();
                     response = footballmanagementEntities.People.OfType<Player>().Single(x => x.Id == player.Id);
@@ -93,7 +94,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    response = footballmanagementEntities.People.OfType<Player>().ToList();
+                    response = footballmanagementEntities.People.Include("Team").OfType<Player>().ToList();
 
                 }
             }

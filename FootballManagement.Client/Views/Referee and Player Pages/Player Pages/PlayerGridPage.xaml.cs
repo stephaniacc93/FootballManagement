@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -17,15 +18,15 @@ using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
-namespace FootballManagement.Client.Views.Team_Pages
+namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
 {
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class AddTeamPage : Page
+    public sealed partial class PlayerGridPage : Page
     {
         FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
-        List<Tournament> tournaments = new List<Tournament>();
+        List<Player> players = new List<Player>();
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
@@ -47,7 +48,7 @@ namespace FootballManagement.Client.Views.Team_Pages
         }
 
 
-        public AddTeamPage()
+        public PlayerGridPage()
         {
             this.InitializeComponent();
             onLoad();
@@ -58,9 +59,20 @@ namespace FootballManagement.Client.Views.Team_Pages
 
         async public void onLoad()
         {
-            tournaments = await _footballService.GetListTournamentAsync();
-            CBtournaments.ItemsSource = tournaments;
+            players = await _footballService.GetListPlayerAsync();
+            foreach (var p in players)
+            {
+                Button b = new Button();
+                b.Background = new SolidColorBrush(Color.FromArgb(242, 242, 242, 242));
+                b.Foreground = new SolidColorBrush(Colors.Black);
+                b.Opacity = 60;
+                b.Width = 170;
+                b.Height = 170;
+                b.Content = p.Name;
+                GridPlayers.Items.Add(b);
+            }
         }
+
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -88,58 +100,74 @@ namespace FootballManagement.Client.Views.Team_Pages
         {
         }
 
-        #region NavigationHelper registration
-
-        /// The methods provided in this section are simply used to allow
-        /// NavigationHelper to respond to the page's navigation methods.
-        /// 
-        /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
-        /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
-        /// in addition to page state preserved during an earlier session.
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void ClickBTTNHome(object sender, RoutedEventArgs e)
         {
-            navigationHelper.OnNavigatedTo(e);
+            this.Frame.Navigate(typeof(MainPage));
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        private void RefereeSelection(object sender, SelectionChangedEventArgs e)
         {
-            navigationHelper.OnNavigatedFrom(e);
-        }
-
-        #endregion
-
-        async private void BTTNaddTeam_Click(object sender, RoutedEventArgs e)
-        {
-            if (TXTteamName.Text.Length >= 1 && CBtournaments.SelectedItem != null)
+            GridPlayers.SelectionMode = ListViewSelectionMode.Single;
+            if (GridPlayers.SelectedItem != null)
             {
-                List<Team> teams = await _footballService.GetListTeamAsync();
-                if (teams.Exists(x => x.Name == TXTteamName.Text) != true)
+                AppBar.IsOpen = true;
+            }
+            else if (GridPlayers.SelectedItem == null)
+            {
+                AppBar.IsOpen = false;
+            }
+        }
+
+        private void GridView_Loaded(object sender, RoutedEventArgs e)
+        {
+            GridPlayers.SelectedIndex = -1;
+            AppBar.IsOpen = false;
+        }
+
+        async private void ClickBTTNDelete(object sender, RoutedEventArgs e)
+        {
+            if (GridPlayers.SelectedItem != null)
+            {
+                Notifications.Text = "";
+                Button button = (Button)GridPlayers.SelectedItem;
+                Player p = players.FirstOrDefault(x => x.Name == (string)button.Content);
+                if (p.Team == null)
                 {
-                    Team newTeam = new Team();
-                    newTeam.Name = TXTteamName.Text;
-                    newTeam.Tournament = (Tournament)CBtournaments.SelectedItem;
-                    bool response = await _footballService.CreateTeamAsync(newTeam);
+                    bool response = await _footballService.DeletePlayerAsync(p);
                     if (response == true)
                     {
-                        this.Frame.Navigate(typeof(TeamGridPage));
-                    }
-                    else
-                    {
-                        LBLnotifications.Text = "Su equipo no ha sido registrado";
+                        this.Frame.Navigate(typeof(PlayerGridPage));
                     }
                 }
                 else
                 {
-                    LBLnotifications.Text = "El nombre de este equipo ya es existente";
+                    Notifications.Text = "No se puede eliminar jugador, hay torneos dependientes a el";
                 }
             }
             else
+                Notifications.Text = "No hay jugador por eliminar";
+        }
+
+        private void ClickBTTNEdit(object sender, RoutedEventArgs e)
+        {
+            if (GridPlayers.SelectedItem != null)
             {
-                LBLnotifications.Text = "Revise la informacion que ha ingresado";
+                Notifications.Text = "";
+                Button button = (Button)GridPlayers.SelectedItem;
+                Player p = players.FirstOrDefault(x => x.Name == (string)button.Content);
+                this.Frame.Navigate(typeof(EditPlayerPage), p);
             }
+            else
+                Notifications.Text = "No hay jugador por editar";
+        }
+
+        async private void BTTNAddPlayer(object sender, RoutedEventArgs e)
+        {
+            List<Team> teams = await _footballService.GetListTeamAsync();
+            if (teams.Count() != 0)
+                this.Frame.Navigate(typeof(AddPlayerPage));
+            else
+                Notifications.Text = "No hay equipos disponibles";
         }
     }
 }

@@ -77,12 +77,6 @@
                 <TextBlock Text="Home" TextAlignment="Center" FontSize="12" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button BorderBrush="Transparent" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" BorderThickness="0">
-            <StackPanel >
-                <Image Source="/Assets/Search.png" Stretch="Fill" Width="50" Height="50"/>
-                <TextBlock Text="Search" TextAlignment="Center" FontSize="12" Foreground="White"/>
-            </StackPanel>
-        </Button>
     </Grid>
 
     
