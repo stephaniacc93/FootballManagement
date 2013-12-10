@@ -130,6 +130,15 @@
     <Compile Include="Views\Match Pages\MatchGridPage.xaml.cs">
       <DependentUpon>MatchGridPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Team Pages\AddTeamPage.xaml.cs">
+      <DependentUpon>AddTeamPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Team Pages\EditTeamPage.xaml.cs">
+      <DependentUpon>EditTeamPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Team Pages\TeamGridPage.xaml.cs">
+      <DependentUpon>TeamGridPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tournament Pages\AddTournamentPage.xaml.cs">
       <DependentUpon>AddTournamentPage.xaml</DependentUpon>
     </Compile>
@@ -239,10 +248,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Match Pages\EditMatchPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Match Pages\MatchGridPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Match Pages\MatchGridPage.xaml">
+    <Page Include="Views\Team Pages\AddTeamPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Team Pages\EditTeamPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Team Pages\TeamGridPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

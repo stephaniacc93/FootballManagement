@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using FootballManagement.Client.FootballManagementServiceReference;
+using FootballManagement.Client.Views.Team_Pages;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -42,6 +43,11 @@ namespace FootballManagement.Client
         private void BTTNTorneos_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(TournamentMenuPage));
+        }
+
+        private void BTTNTeams_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(TeamGridPage));
         }
     }
 }

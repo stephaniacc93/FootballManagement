@@ -74,7 +74,7 @@ namespace FootballManagement.Client.Views.Match_Pages
         {
             List<Team> teams = await _footballService.GetListTeamAsync();
             referees = await _footballService.GetListRefereeAsync();
-            //teams = teams.Where(x => x.Tournament == match.Tournament).ToList();  
+            teams = teams.Where(x => x.Tournament == match.Tournament).ToList();  
             referees = referees.Where(x => match.Referees.Any(y => x.Id == y.Id)).ToList();
 
             CBMatchTeamHome.DataContext = teams;

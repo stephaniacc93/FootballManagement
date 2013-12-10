@@ -25,6 +25,7 @@ namespace FootballManagement.Client.Views.Match_Pages
     {
         Tournament tournament = new Tournament();
         List<Match> matches = new List<Match>();
+        List<Team> teams = new List<Team>();
         FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
 
         public MatchGridPage()
@@ -79,9 +80,14 @@ namespace FootballManagement.Client.Views.Match_Pages
             this.Frame.Navigate(typeof(MainPage));
         }
 
-        private void ClickBTTNAdd(object sender, RoutedEventArgs e)
+        async private void ClickBTTNAdd(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AddMatchPage), tournament);
+            teams = await _footballService.GetListTeamAsync();
+            teams = teams.Where(x=> x.Tournament == tournament).ToList();
+            if(teams.Count!= 0)
+                this.Frame.Navigate(typeof(AddMatchPage), tournament);
+            else
+                Notifications.Text ="No hay equipos disponibles para este torneo";
         }
 
         async private void ClickBTTNDelete(object sender, RoutedEventArgs e)
