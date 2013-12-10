@@ -38,7 +38,18 @@ namespace FootballManagement.Client.Views.Match_Pages
         {
             matches = await _footballService.GetListMatchAsync();
             matches = matches.Where(x => x.Tournament.Id == tournament.Id).ToList();
-            GridTournaments.ItemsSource = matches;
+            foreach (var m in matches)
+            {
+                Button b = new Button();
+                b.Background = new SolidColorBrush(Color.FromArgb(242, 242, 242, 242));
+                b.Foreground = new SolidColorBrush(Colors.Black);
+                b.Opacity = 60;
+                b.Width = 170;
+                b.Height = 170;
+                b.Content = m.Team + " VS " + m.Team1;
+                b.Tag = m.Id;
+                GridTournaments.Items.Add(b);
+            }
 
         }
         /// <summary>
@@ -95,7 +106,8 @@ namespace FootballManagement.Client.Views.Match_Pages
             if (GridTournaments.SelectedItem != null)
             {
                 Notifications.Text = "";
-                Match m = matches.FirstOrDefault(x => x == GridTournaments.SelectedItem);
+                Button button = (Button)GridTournaments.SelectedItem;
+                Match m = matches.FirstOrDefault(x => x.Id == (int)button.Tag);
                 bool response = await _footballService.DeleteMatchAsync(m);
                 if (response == true)
                     this.Frame.Navigate(typeof(MatchGridPage), tournament);
@@ -111,7 +123,8 @@ namespace FootballManagement.Client.Views.Match_Pages
             if (GridTournaments.SelectedItem != null)
             {
                 Notifications.Text = "";
-                Match m = matches.FirstOrDefault(x => x == GridTournaments.SelectedItem);
+                Button button = (Button)GridTournaments.SelectedItem;
+                Match m = matches.FirstOrDefault(x => x.Id == (int)button.Tag);
                 this.Frame.Navigate(typeof(EditMatchPage), m);
             }
             else

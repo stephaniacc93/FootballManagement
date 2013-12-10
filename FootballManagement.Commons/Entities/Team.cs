@@ -60,24 +60,6 @@ namespace FootballManagement.Commons.Entities
         private List<Match> _matches;
     
     	[DataMember]
-        public virtual List<Match> Matches1
-        {
-            get
-            {
-                if (_matches1 == null)
-                {
-                    _matches1 = new List<Match>();
-                }
-                return _matches1;
-            }
-            set
-            {
-                _matches1 = value;
-            }
-        }
-        private List<Match> _matches1;
-    
-    	[DataMember]
         public virtual List<Player> Players
         {
             get

@@ -70,6 +70,7 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Referee_Pages
                 b.Width = 170;
                 b.Height = 170;
                 b.Content = r.Name;
+                b.Tag = r.Id;
                 GridReferees.Items.Add(b);
             }
         }
@@ -135,7 +136,7 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Referee_Pages
             {
                 Notifications.Text = "";
                 Button button = (Button)GridReferees.SelectedItem;
-                Referee r = referees.FirstOrDefault(x => x.Name == (string)button.Content);
+                Referee r = referees.FirstOrDefault(x => x.Id == (int)button.Tag);
                 List<Referee> inUse = referees;
                 referees = referees.Where(x => x.Tournaments.Count != 0).ToList();
                 if (referees.Count() == 0)
@@ -161,7 +162,7 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Referee_Pages
             {
                 Notifications.Text = "";
                 Button button = (Button)GridReferees.SelectedItem;
-                Referee r = referees.FirstOrDefault(x => x.Name == (string)button.Content);
+                Referee r = referees.FirstOrDefault(x => x.Id == (int)button.Tag);
                 this.Frame.Navigate(typeof(EditRefereePage), r);
             }
             else

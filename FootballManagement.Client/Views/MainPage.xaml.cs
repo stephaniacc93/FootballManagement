@@ -55,5 +55,10 @@ namespace FootballManagement.Client
         {
             this.Frame.Navigate(typeof(MenuPageRP));
         }
+
+        private void BTTNAbout_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AboutPage));
+        }
     }
 }

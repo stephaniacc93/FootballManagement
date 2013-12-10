@@ -68,7 +68,7 @@
             <TextBlock x:Name="LBLbirthday" Grid.Row="7" Grid.Column="1" Text="Fecha de Nacimiento" TextAlignment="Right" FontSize="27"/>
             <DatePicker x:Name="DatePickerBirthday" Grid.Row="7" Grid.Column="3" HorizontalAlignment="Center"/>
             <TextBlock x:Name="LBLteam" Grid.Row="9" Grid.Column="1" Text="Equipo" TextAlignment="Right" FontSize="27"/>
-            <ComboBox x:Name="CBteam" Grid.Row="9" Grid.Column="3" ItemsSource="{Binding}" Tag="{Binding Id}" SelectionChanged="CBteam_SelectionChanged">
+            <ComboBox x:Name="CBteam" Grid.Row="9" Grid.Column="3" ItemsSource="{Binding}" Tag="{Binding Id}" SelectedItem="{Binding}" SelectionChanged="CBteam_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" Margin="2" Tag="{Binding Id}"/>

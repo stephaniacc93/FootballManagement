@@ -88,10 +88,9 @@ namespace FootballManagement.Commons.Entities
     	[DataMember]
         public virtual Team Team1
         {
-            get { return _team1; }
-            set { _team1 = value; }
+            get;
+            set;
         }
-        private Team _team1;
     
     	[DataMember]
         public virtual Tournament Tournament

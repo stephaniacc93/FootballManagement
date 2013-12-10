@@ -25,6 +25,7 @@ namespace FootballManagement.Client.Views.Team_Pages
     public sealed partial class EditTeamPage : Page
     {
         FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
+        List<Tournament> tournaments = new List<Tournament>();
         Team team = new Team();
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -50,11 +51,17 @@ namespace FootballManagement.Client.Views.Team_Pages
         public EditTeamPage()
         {
             this.InitializeComponent();
+            onLoad();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
         }
 
+        async public void onLoad()
+        {
+            tournaments = await _footballService.GetListTournamentAsync();
+            CBtournaments.ItemsSource = tournaments;
+        }
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -82,11 +89,20 @@ namespace FootballManagement.Client.Views.Team_Pages
         {
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        async protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             team = e.Parameter as Team;
             TXTteamName.Text = team.Name;
+            tournaments = await _footballService.GetListTournamentAsync();
+            for (int i = 0; i < tournaments.Count(); i++)
+            {
+                if (tournaments.ElementAt(i).Id == team.Tournament.Id)
+                {
+                    CBtournaments.SelectedIndex = i;
+                    break;
+                }
+            }
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -96,24 +112,25 @@ namespace FootballManagement.Client.Views.Team_Pages
 
         async private void BTTNeditTeam_Click(object sender, RoutedEventArgs e)
         {
-            if (TXTteamName.Text.Length >= 1)
+            if (TXTteamName.Text.Length >= 1 && CBtournaments.SelectedItem != null)
             {
-                Team t = new Team();
-                t.Name = TXTteamName.Text;
-                t.Id = team.Id;
-                Team response = await _footballService.UpdateTeamAsync(t);
+                Team newTeam = new Team();
+                newTeam.Id = team.Id;
+                newTeam.Name = TXTteamName.Text;
+                newTeam.Tournament = (Tournament)CBtournaments.SelectedItem;
+                Team response = await _footballService.UpdateTeamAsync(newTeam);
                 if (response.Id != 0)
                 {
                     this.Frame.Navigate(typeof(TeamGridPage));
                 }
                 else
                 {
-                    LBLnotifications.Text = "Su equipo no ha sido modificado";
+                    LBLnotifications.Text = "Su equipo no ha sido editado";
                 }
             }
             else
             {
-                LBLnotifications.Text = "Revise la informacion que ha modificado";
+                LBLnotifications.Text = "Revise la informacion que ha ingresado";
             }
         }
 

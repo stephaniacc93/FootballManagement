@@ -17,7 +17,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    team.Players = footballmanagementEntities.People.OfType<Player>().ToList();
+                    team.Players = footballmanagementEntities.People.OfType<Player>().AsEnumerable().Where(x => team.Players.Any(y => x.Id == y.Id)).ToList();
                     team.Tournament = footballmanagementEntities.Tournaments.First(x => x.Id == team.Tournament.Id);
                     footballmanagementEntities.Teams.AddObject(team);
                     footballmanagementEntities.SaveChanges();
@@ -55,11 +55,12 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    var d = new Team { Id = team.Id };
+                    Team d = footballmanagementEntities.Teams.Include("Tournament").FirstOrDefault(x => x.Id == team.Id);
+                    d.Tournament = footballmanagementEntities.Tournaments.First(x => x.Id == team.Tournament.Id);
                     footballmanagementEntities.Teams.Attach(d);
                     footballmanagementEntities.Teams.ApplyCurrentValues(team);
                     footballmanagementEntities.SaveChanges();
-                    return team;
+                    return d;
                 }
             }
             catch (Exception e)

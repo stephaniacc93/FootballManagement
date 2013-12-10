@@ -70,6 +70,7 @@ namespace FootballManagement.Client.Views.Team_Pages
                 b.Width = 170;
                 b.Height = 170;
                 b.Content = t.Name;
+                b.Tag = t.Id;
                 GridTeams.Items.Add(b);
             }
         }
@@ -129,7 +130,7 @@ namespace FootballManagement.Client.Views.Team_Pages
             {
                 Notifications.Text = "";
                 Button button = (Button)GridTeams.SelectedItem;
-                Team t = teams.FirstOrDefault(x => x.Name == (string)button.Content);
+                Team t = teams.FirstOrDefault(x => x.Id == (int)button.Tag);
                 this.Frame.Navigate(typeof(EditTeamPage), t);
             }
             else
@@ -142,7 +143,7 @@ namespace FootballManagement.Client.Views.Team_Pages
             {
                 Notifications.Text = "";
                 Button button = (Button)GridTeams.SelectedItem;
-                Team t = teams.FirstOrDefault(x => x.Name == (string)button.Content);
+                Team t = teams.FirstOrDefault(x => x.Id == (int)button.Tag);
                 List<Match> matches = await _footballService.GetListMatchAsync();
                 matches = matches.Where(x => x.Team.Id== t.Id || x.Team1.Id == t.Id).ToList();
                 if (matches.Count() == 0)
@@ -186,9 +187,13 @@ namespace FootballManagement.Client.Views.Team_Pages
             this.Frame.Navigate(typeof(MainPage));
         }
 
-        private void ClickBTTNAdd(object sender, RoutedEventArgs e)
+        async private void ClickBTTNAdd(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AddTeamPage));
+            List<Tournament> tournaments = await _footballService.GetListTournamentAsync();
+            if (tournaments.Count() != 0)
+                this.Frame.Navigate(typeof(AddTeamPage));
+            else
+                Notifications.Text = "No hay torneos existentes";
         }
     }
 }

@@ -69,6 +69,7 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
                 b.Width = 170;
                 b.Height = 170;
                 b.Content = p.Name;
+                b.Tag = p.Id;
                 GridPlayers.Items.Add(b);
             }
         }
@@ -130,7 +131,7 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
             {
                 Notifications.Text = "";
                 Button button = (Button)GridPlayers.SelectedItem;
-                Player p = players.FirstOrDefault(x => x.Name == (string)button.Content);
+                Player p = players.FirstOrDefault(x => x.Id == (int)button.Tag);
                 if (p.Team == null)
                 {
                     bool response = await _footballService.DeletePlayerAsync(p);
@@ -154,7 +155,7 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
             {
                 Notifications.Text = "";
                 Button button = (Button)GridPlayers.SelectedItem;
-                Player p = players.FirstOrDefault(x => x.Name == (string)button.Content);
+                Player p = players.FirstOrDefault(x => x.Id == (int)button.Tag);
                 this.Frame.Navigate(typeof(EditPlayerPage), p);
             }
             else

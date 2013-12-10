@@ -505,7 +505,6 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Matches" Relationship="FootballManagementModel.FK_Match_Team" FromRole="Team" ToRole="Match" />
-          <NavigationProperty Name="Matches1" Relationship="FootballManagementModel.FK_Match_Team1" FromRole="Team" ToRole="Match" />
           <NavigationProperty Name="Players" Relationship="FootballManagementModel.FK_Player_Team" FromRole="Team" ToRole="Player" />
           <NavigationProperty Name="Tournament" Relationship="FootballManagementModel.FK_Team_Tournament1" FromRole="Team" ToRole="Tournament" />
         </EntityType>

@@ -55,10 +55,6 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Referee_Pages
             this.navigationHelper.SaveState += navigationHelper_SaveState;
         }
 
-        async public void onLoad()
-        {
-
-        }
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also
         /// provided when recreating a page from a prior session.

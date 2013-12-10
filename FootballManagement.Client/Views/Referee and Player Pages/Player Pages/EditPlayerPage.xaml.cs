@@ -73,8 +73,7 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
 
         async public void onLoad()
         {
-            CBteam.DataContext = await _footballService.GetListTeamAsync();
-
+            CBteam.ItemsSource = await _footballService.GetListTeamAsync();
         }
         /// <summary>
         /// Preserves state associated with this page in case the application is suspended or the
@@ -145,26 +144,43 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
         {
             base.OnNavigatedTo(e);
             player = e.Parameter as Player;
+
+            List<Team> teams = await _footballService.GetListTeamAsync();
+            for (int i = 0; i < teams.Count(); i++)
+            {
+                if (teams.ElementAt(i).Id == player.Team.Id)
+                {
+                    CBteam.SelectedIndex = i;
+                    break;
+                }
+            }
+
             TXTplayerName.Text = player.Name;
             DatePickerBirthday.Date = player.Birthday.Date;
             if (player.Gender == "Masculino")
                 CBgender.SelectedItem = Men;
             else
                 CBgender.SelectedItem = Women;
-            List<Team> teams = await _footballService.GetListTeamAsync();
-            for (int i = 0; i <teams.Count(); i++)
-            {
-                if(teams.ElementAt(i).Id == player.Team.Id)
-                {
-                    CBteam.SelectedIndex = i;
-                    break;
-                }
-            }
-            if(player.IsCaptain == true)
+
+            List<Player> players = await _footballService.GetListPlayerAsync();
+            Team t = player.Team;
+            List<Player> capitans = players.Where(x => x.IsCaptain == true).ToList();
+            bool response = capitans.Any(x => x.Team.Id == t.Id);
+
+            if (player.IsCaptain == true)
             {
                 CBcaptain.IsChecked = true;
                 CBcaptain.IsEnabled = true;
             }
+            else if (response == true)
+            {
+                CBcaptain.IsEnabled = false;
+                CBcaptain.IsChecked = false;
+            }
+
+            else
+                CBcaptain.IsEnabled = true;
+
 
         }
 

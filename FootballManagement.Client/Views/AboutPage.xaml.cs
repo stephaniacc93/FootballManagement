@@ -1,5 +1,4 @@
 ﻿using FootballManagement.Client.Common;
-using FootballManagement.Client.FootballManagementServiceReference;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,14 +16,14 @@ using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
-namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
+namespace FootballManagement.Client.Views
 {
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class AddPlayerPage : Page
+    public sealed partial class AboutPage : Page
     {
-        FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
+
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
@@ -46,19 +45,12 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
         }
 
 
-        public AddPlayerPage()
+        public AboutPage()
         {
             this.InitializeComponent();
-            onLoad();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
-        }
-
-        async public void onLoad()
-        {
-            CBteam.DataContext = await _footballService.GetListTeamAsync();
-
         }
 
         /// <summary>
@@ -110,59 +102,5 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
         }
 
         #endregion
-
-        async private void AddPlayer_Click(object sender, RoutedEventArgs e)
-        {
-            if (TXTplayerName.Text.Length >= 1)
-            {
-                List<Player> players = await _footballService.GetListPlayerAsync();
-                Player newPlayer = new Player();
-                ComboBoxItem cbItem = (ComboBoxItem)CBgender.SelectedItem;
-                newPlayer.Name = TXTplayerName.Text;
-                newPlayer.Gender = cbItem.Content.ToString();
-                newPlayer.IsAuthorized = true;
-                if (CBcaptain.IsEnabled == true)
-                    newPlayer.IsCaptain = (bool)CBcaptain.IsChecked;
-                else
-                    newPlayer.IsCaptain = false;
-
-                newPlayer.Birthday = DatePickerBirthday.Date.DateTime;
-                newPlayer.Team = (Team)CBteam.SelectedItem;
-                bool response = await _footballService.CreatePlayerAsync(newPlayer);
-                if (response == true)
-                {
-                    this.Frame.Navigate(typeof(PlayerGridPage));
-                }
-                else
-                {
-                    LBLnotifications.Text = "Su jugador no ha sido registrado";
-                }
-            }
-            else
-            {
-                LBLnotifications.Text = "Revise la informacion que ha ingresado";
-            }
-        }
-
-        async private void CBteam_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            List<Player> players = await _footballService.GetListPlayerAsync();
-            Team t = (Team)CBteam.SelectedItem;
-            List<Player> capitans = players.Where(x => x.IsCaptain == true).ToList();
-            bool response = capitans.Any(x => x.Team.Id == t.Id);
-            if (response == true)
-            {
-                CBcaptain.IsEnabled = false;
-                CBcaptain.IsChecked = false;
-            }
-
-            else
-                CBcaptain.IsEnabled = true;
-        }
-
-        private void Home(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(MainPage));
-        }
     }
 }

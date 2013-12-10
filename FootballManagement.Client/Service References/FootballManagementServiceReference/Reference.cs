@@ -405,8 +405,6 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
         
         private System.Collections.Generic.List<FootballManagement.Client.FootballManagementServiceReference.Match> MatchesField;
         
-        private System.Collections.Generic.List<FootballManagement.Client.FootballManagementServiceReference.Match> Matches1Field;
-        
         private string NameField;
         
         private System.Collections.Generic.List<FootballManagement.Client.FootballManagementServiceReference.Player> PlayersField;
@@ -435,19 +433,6 @@ namespace FootballManagement.Client.FootballManagementServiceReference {
                 if ((object.ReferenceEquals(this.MatchesField, value) != true)) {
                     this.MatchesField = value;
                     this.RaisePropertyChanged("Matches");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<FootballManagement.Client.FootballManagementServiceReference.Match> Matches1 {
-            get {
-                return this.Matches1Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Matches1Field, value) != true)) {
-                    this.Matches1Field = value;
-                    this.RaisePropertyChanged("Matches1");
                 }
             }
         }

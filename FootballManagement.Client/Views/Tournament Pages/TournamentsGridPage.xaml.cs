@@ -48,6 +48,7 @@ namespace FootballManagement.Client.Views.Tournament_Pages
                 b.Width = 170;
                 b.Height = 170;
                 b.Content = t.Name;
+                b.Tag = t.Id;
                 buttons.Add(b);
                 GridTournaments.Items.Add(b);
             }
@@ -118,7 +119,7 @@ namespace FootballManagement.Client.Views.Tournament_Pages
             {
                 Notifications.Text = "";
                 Button button = (Button)GridTournaments.SelectedItem;
-                Tournament t = tournaments.FirstOrDefault(x => x.Name == (string)button.Content);
+                Tournament t = tournaments.FirstOrDefault(x => x.Id == (int)button.Tag);
                 this.Frame.Navigate(typeof(EditTournamentPage), t);
             }
             else
@@ -132,7 +133,7 @@ namespace FootballManagement.Client.Views.Tournament_Pages
             {
                 Notifications.Text = "";
                 Button button = (Button)GridTournaments.SelectedItem;
-                Tournament t = tournaments.FirstOrDefault(x => x.Name == (string)button.Content);
+                Tournament t = tournaments.FirstOrDefault(x => x.Id == (int)button.Tag);
                 List<Match> matches = await _footballService.GetListMatchAsync();
                 matches = matches.Where(x => x.Tournament.Id == t.Id).ToList();
                 if (matches.Count() == 0)
@@ -174,7 +175,7 @@ namespace FootballManagement.Client.Views.Tournament_Pages
             {
                 Notifications.Text = "";
                 Button button = (Button)GridTournaments.SelectedItem;
-                Tournament t = tournaments.FirstOrDefault(x => x.Name == (string)button.Content);
+                Tournament t = tournaments.FirstOrDefault(x => x.Id == (int)button.Tag);
                 this.Frame.Navigate(typeof(MatchGridPage), t);
             }
             else
