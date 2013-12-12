@@ -142,7 +142,7 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
                 }
                 else
                 {
-                    Notifications.Text = "No se puede eliminar jugador, hay torneos dependientes a el";
+                    Notifications.Text = "No se puede eliminar jugador, hay partidos o torneos dependientes a el";
                 }
             }
             else

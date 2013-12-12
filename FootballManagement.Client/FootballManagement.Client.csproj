@@ -127,11 +127,20 @@
     <Compile Include="Views\Match Pages\AddMatchPage.xaml.cs">
       <DependentUpon>AddMatchPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Match Pages\CardFlyout.xaml.cs">
+      <DependentUpon>CardFlyout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Match Pages\EditMatchPage.xaml.cs">
       <DependentUpon>EditMatchPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Match Pages\GoalsFlyout.xaml.cs">
+      <DependentUpon>GoalsFlyout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Match Pages\MatchGridPage.xaml.cs">
       <DependentUpon>MatchGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Match Pages\RefereeFlyout.xaml.cs">
+      <DependentUpon>RefereeFlyout.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Referee and Player Pages\MenuPageRP.xaml.cs">
       <DependentUpon>MenuPageRP.xaml</DependentUpon>
@@ -275,11 +284,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Match Pages\CardFlyout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Match Pages\EditMatchPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Match Pages\GoalsFlyout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Match Pages\MatchGridPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Match Pages\RefereeFlyout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

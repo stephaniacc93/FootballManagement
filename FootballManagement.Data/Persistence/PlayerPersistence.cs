@@ -18,6 +18,7 @@ namespace FootballManagement.Data.Persistence
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
                     player.Team = footballmanagementEntities.Teams.First(x => x.Id == player.Team.Id);
+                    player.Team.Players.Add(player);
                     footballmanagementEntities.People.AddObject(player);
                     footballmanagementEntities.SaveChanges();
                     response = footballmanagementEntities.People.OfType<Player>().Single(x => x.Id == player.Id);

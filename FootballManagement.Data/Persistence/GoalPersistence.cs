@@ -17,6 +17,8 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
+                    goal.Match = footballmanagementEntities.Matches.First(x => x.Id == goal.Match.Id);
+                    goal.Player = footballmanagementEntities.People.OfType<Player>().AsEnumerable().First(x => x.Id == goal.Player.Id);
                     footballmanagementEntities.Goals.AddObject(goal);
                     footballmanagementEntities.SaveChanges();
                     response = footballmanagementEntities.Goals.Single(x => x.Id == goal.Id);
@@ -94,7 +96,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    response = footballmanagementEntities.Goals.ToList();
+                    response = footballmanagementEntities.Goals.Include("Match").Include("Player").ToList();
 
                 }
             }

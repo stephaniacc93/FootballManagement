@@ -97,7 +97,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    response = footballmanagementEntities.Teams.Include("Tournament").ToList();
+                    response = footballmanagementEntities.Teams.Include("Tournament").Include("Players").ToList();
 
                 }
             }

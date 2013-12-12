@@ -74,6 +74,20 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
         async public void onLoad()
         {
             CBteam.ItemsSource = await _footballService.GetListTeamAsync();
+            CBteam.DataContext = await _footballService.GetListTeamAsync();
+            if (player.Team != null)
+            {
+                List<Team> teams = await _footballService.GetListTeamAsync();
+                for (int i = 0; i < teams.Count(); i++)
+                {
+                    if (teams.ElementAt(i).Id == player.Team.Id)
+                    {
+                        CBteam.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
+
         }
         /// <summary>
         /// Preserves state associated with this page in case the application is suspended or the
@@ -95,7 +109,7 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
 
         async private void EditPlayer_Click(object sender, RoutedEventArgs e)
         {
-            if (TXTplayerName.Text.Length >= 1)
+            if (TXTplayerName.Text.Length >= 1 && CBteam.SelectionBoxItem != null && CBgender.SelectionBoxItem != null)
             {
                 Player p = new Player();
                 p.Name = TXTplayerName.Text;
@@ -130,7 +144,7 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
         {
             List<Player> players = await _footballService.GetListPlayerAsync();
             Team t = (Team)CBteam.SelectedItem;
-            List<Player> capitans = players.Where(x => x.IsCaptain == true).ToList();
+            List<Player> capitans = players.Where(x => x.IsCaptain == true && x.Team != null).ToList();
             bool response = capitans.Any(x => x.Team.Id == t.Id);
             if (response == true)
                 CBcaptain.IsEnabled = false;
@@ -145,15 +159,6 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
             base.OnNavigatedTo(e);
             player = e.Parameter as Player;
 
-            List<Team> teams = await _footballService.GetListTeamAsync();
-            for (int i = 0; i < teams.Count(); i++)
-            {
-                if (teams.ElementAt(i).Id == player.Team.Id)
-                {
-                    CBteam.SelectedIndex = i;
-                    break;
-                }
-            }
 
             TXTplayerName.Text = player.Name;
             DatePickerBirthday.Date = player.Birthday.Date;
@@ -164,24 +169,25 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
 
             List<Player> players = await _footballService.GetListPlayerAsync();
             Team t = player.Team;
-            List<Player> capitans = players.Where(x => x.IsCaptain == true).ToList();
-            bool response = capitans.Any(x => x.Team.Id == t.Id);
-
-            if (player.IsCaptain == true)
+            if (player.Team != null)
             {
-                CBcaptain.IsChecked = true;
-                CBcaptain.IsEnabled = true;
+                List<Player> capitans = players.Where(x => x.IsCaptain == true).ToList();
+                bool response = capitans.Any(x => x.Team.Id == t.Id);
+
+                if (player.IsCaptain == true)
+                {
+                    CBcaptain.IsChecked = true;
+                    CBcaptain.IsEnabled = true;
+                }
+                else if (response == true)
+                {
+                    CBcaptain.IsEnabled = false;
+                    CBcaptain.IsChecked = false;
+                }
+
+                else
+                    CBcaptain.IsEnabled = true;
             }
-            else if (response == true)
-            {
-                CBcaptain.IsEnabled = false;
-                CBcaptain.IsChecked = false;
-            }
-
-            else
-                CBcaptain.IsEnabled = true;
-
-
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

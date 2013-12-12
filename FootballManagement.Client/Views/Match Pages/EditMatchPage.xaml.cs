@@ -29,6 +29,10 @@ namespace FootballManagement.Client.Views.Match_Pages
         FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
         Match match = new Match();
         List<Referee> referees = new List<Referee>();
+        RefereeFlyout rf;
+        List<Goal> goals = new List<Goal>();
+        List<Card> cards = new List<Card>();
+        List<Team> teams = new List<Team>();
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -50,7 +54,7 @@ namespace FootballManagement.Client.Views.Match_Pages
             get { return this.navigationHelper; }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        async protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             match = e.Parameter as Match;
@@ -72,36 +76,30 @@ namespace FootballManagement.Client.Views.Match_Pages
 
         async public void load()
         {
-            List<Team> teams = await _footballService.GetListTeamAsync();
+            teams = await _footballService.GetListTeamAsync();
             referees = await _footballService.GetListRefereeAsync();
-            teams = teams.Where(x => x.Tournament == match.Tournament).ToList();  
             referees = referees.Where(x => match.Referees.Any(y => x.Id == y.Id)).ToList();
 
-            CBMatchTeamHome.DataContext = teams;
-            CBMatchTeamVisitor.DataContext = teams;
+            TeamHome.Text = match.Team.Name;
+            TeamVisitor.Text = match.Team1.Name;
             GVReferee.DataContext = referees;
-            int teamHomeIndex = 0;
-            int teamVisitorIndex = 0;
+
+            goals = await _footballService.GetListGoalAsync();
+            goals = goals.Where(x => x.Match.Id == match.Id).ToList();
+            GVGoles.ItemsSource = null;
+            GVGoles.ItemsSource = goals;
+
+            cards = await _footballService.GetListCardAsync();
+            cards = cards.Where(x => x.Match.Id == match.Id).ToList();
+            GVTarjetas.ItemsSource = null;
+            GVTarjetas.ItemsSource = cards;
+
             Team home = await _footballService.ReadTeamAsync(match.Team.Id);
             Team visitor = await _footballService.ReadTeamAsync(match.Team1.Id);
 
-            for (int i = 0; i < teams.Count; i++)
-            {
-                if (teams.ElementAt(i).Id == home.Id)
-                {
-                    teamHomeIndex = i;
-                }
-
-                if (teams.ElementAt(i).Id == visitor.Id)
-                {
-                    teamVisitorIndex = i;
-                }
-            }
-
-            CBMatchTeamHome.SelectedIndex = teamHomeIndex;
-            CBMatchTeamVisitor.SelectedIndex = teamVisitorIndex;
             DatePickerMatch.Date = match.MatchDate.Date;
             TimePickerMatch.Time = match.MatchDate.TimeOfDay;
+
         }
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also
@@ -137,8 +135,8 @@ namespace FootballManagement.Client.Views.Match_Pages
 
         async private void BTTNeditMatch_Click(object sender, RoutedEventArgs e)
         {
-            match.Team = (Team)CBMatchTeamHome.SelectionBoxItem;
-            match.Team1 = (Team)CBMatchTeamVisitor.SelectionBoxItem;
+            match.Team = match.Team;
+            match.Team1 = match.Team1;
             match.MatchDate = (DatePickerMatch.Date + TimePickerMatch.Time).DateTime;
             match.Referees = referees;
 
@@ -158,6 +156,11 @@ namespace FootballManagement.Client.Views.Match_Pages
                 }
             }
 
+            else
+            {
+                LBLnotifications.Text = "Revisa tus datos, estan incompletos";
+            }
+
             #region NavigationHelper registration
 
             /// The methods provided in this section are simply used to allow
@@ -173,34 +176,98 @@ namespace FootballManagement.Client.Views.Match_Pages
             #endregion
         }
 
-        async private void BTTNDeleteReferee(object sender, RoutedEventArgs e)
+
+        private void AddReferee_Click(object sender, RoutedEventArgs e)
         {
-            List<Referee> refereeNumber = (List<Referee>)GVReferee.Tag;
-            Referee x = refereeNumber.First();
-            Referee r = await _footballService.ReadRefereeAsync(x.Id);
-            foreach (var a in referees)
+            rf = new RefereeFlyout(match, referees);
+            rf.Show();
+            rf.LostFocus += rf_LostFocus;
+        }
+
+        void rf_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(rf.getList().Count() != 0)
+                referees = rf.getList();
+            GVReferee.ItemsSource = null;
+            GVReferee.ItemsSource = referees;
+            match.Referees = referees;
+        }
+
+        private void AddGoal_Click(object sender, RoutedEventArgs e)
+        {
+            GoalsFlyout gf = new GoalsFlyout(match);
+            gf.Show();
+            gf.LostFocus += gf_LostFocus;
+        }
+
+        async void gf_LostFocus(object sender, RoutedEventArgs e)
+        {
+            goals = await _footballService.GetListGoalAsync();
+            goals = goals.Where(x => x.Match.Id == match.Id).ToList();
+            GVGoles.ItemsSource = null;
+            GVGoles.ItemsSource = goals;
+        }
+
+        async private void userTapped(object sender, TappedRoutedEventArgs e)
+        {
+            Referee x = (Referee)GVReferee.SelectedItem;
+            Referee refereeToBeDeleted = await _footballService.ReadRefereeAsync(x.Id);
+            foreach (var referee in referees)
             {
-                if(a.Id == r.Id)
+                if (referee.Id == refereeToBeDeleted.Id)
                 {
-                    referees.Remove(a);
-                    if (referees.Count == 0)
-                        break;
+                    referees.Remove(referee);
+                    break;
                 }
             }
             GVReferee.ItemsSource = null;
             GVReferee.ItemsSource = referees;
-            StackPanel s = new StackPanel();
-            TextBlock t = new TextBlock() { TextWrapping = TextWrapping.Wrap };
-            //fill in some lebrowski ipsum
-            t.Text = "This Chinaman who peed on my rug, I can't go give him a bill so what the fuck are you talking about? Please see him, Jeffrey. He's a good man. And thorough. Well sure, look at it! Young trophy wife, I mean, in the parlance of our times, owes money all over town, including to known pornographers— and that's cool, that's cool. DO YOU SEE WHAT HAPPENS, LARRY?\r\rI don't like you sucking around bothering our citizens, Lebowski. Yeah? What do you think happens when you get divorced? You turn in your library card? Get a new driver's license? Stop being Jewish? Do you have any kalhua? If the plan gets too complex something always goes wrong. If there's one thing I learned in Nam—. \"My son can't hold a job, my daughter's married to a fuckin' loser, and I got a rash on my ass so bad I can't hardly siddown. But you know me. I can't complain.\".";
-            t.Margin = new Thickness(4);
-
-            s.Children.Add(new ToggleSwitch() { Header = "useless switch" });
-            s.Children.Add(t);
-
-            //now create the flyout
-            Flyout f = new Flyout();
 
         }
+
+        async private void userTappedGoal(object sender, TappedRoutedEventArgs e)
+        {
+            Goal g = (Goal)GVGoles.SelectedItem;
+            Goal goalToBeDeleted = await _footballService.ReadGoalAsync(g.Id);
+            bool response = await _footballService.DeleteGoalAsync(goalToBeDeleted);
+            if(response == true)
+            {
+                goals = await _footballService.GetListGoalAsync();
+                goals = goals.Where(x => x.Match.Id == match.Id).ToList();
+                GVGoles.ItemsSource = null;
+                GVGoles.ItemsSource = goals;
+            }
+            
+        }
+
+        private void AddCard_Click(object sender, RoutedEventArgs e)
+        {
+            CardFlyout cf = new CardFlyout(match);
+            cf.Show();
+            cf.LostFocus += cf_LostFocus;
+        }
+
+        async void cf_LostFocus(object sender, RoutedEventArgs e)
+        {
+            cards = await _footballService.GetListCardAsync();
+            cards = cards.Where(x => x.Match.Id == match.Id).ToList();
+            GVTarjetas.ItemsSource = null;
+            GVTarjetas.ItemsSource = cards;
+        }
+
+        async private void userTappedCard(object sender, TappedRoutedEventArgs e)
+        {
+            Card c = (Card)GVTarjetas.SelectedItem;
+            Card cardToBeDeleted = await _footballService.ReadCardAsync(c.Id);
+            bool response = await _footballService.DeleteCardAsync(cardToBeDeleted);
+            if (response == true)
+            {
+                cards = await _footballService.GetListCardAsync();
+                cards = cards.Where(x=> x.Match.Id == match.Id).ToList();
+                GVTarjetas.ItemsSource = null;
+                GVTarjetas.ItemsSource = cards;
+            }
+        }
+
     }
 }

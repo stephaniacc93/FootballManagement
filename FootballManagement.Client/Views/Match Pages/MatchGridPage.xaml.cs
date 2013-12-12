@@ -46,7 +46,7 @@ namespace FootballManagement.Client.Views.Match_Pages
                 b.Opacity = 60;
                 b.Width = 170;
                 b.Height = 170;
-                b.Content = m.Team + " VS " + m.Team1;
+                b.Content = m.Team.Name + " VS " + m.Team1.Name;
                 b.Tag = m.Id;
                 GridTournaments.Items.Add(b);
             }

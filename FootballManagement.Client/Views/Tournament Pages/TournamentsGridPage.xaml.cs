@@ -136,7 +136,9 @@ namespace FootballManagement.Client.Views.Tournament_Pages
                 Tournament t = tournaments.FirstOrDefault(x => x.Id == (int)button.Tag);
                 List<Match> matches = await _footballService.GetListMatchAsync();
                 matches = matches.Where(x => x.Tournament.Id == t.Id).ToList();
-                if (matches.Count() == 0)
+                List<Team> teams = await _footballService.GetListTeamAsync();
+                teams = teams.Where(x => x.Tournament.Id == t.Id).ToList();
+                if (matches.Count() == 0 && teams.Count() == 0)
                 {
                     bool response = await _footballService.DeleteTournamentAsync(t);
                     if (response == true)
@@ -146,7 +148,7 @@ namespace FootballManagement.Client.Views.Tournament_Pages
                 }
                 else
                 {
-                    Notifications.Text = "No se puede eliminar torneo, hay partidos en el";
+                    Notifications.Text = "No se puede eliminar torneo, hay partidos o equipos dependientes en el";
                 }
             }
             else

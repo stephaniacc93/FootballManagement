@@ -1,0 +1,26 @@
+﻿<SettingsFlyout
+    x:Class="FootballManagement.Client.Views.Match_Pages.RefereeFlyout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FootballManagement.Client.Views.Match_Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    IconSource="Assets/SmallLogo.png"
+    Title="Agregar Arbitros"
+    d:DesignWidth="346">
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+        <!-- This StackPanel acts as a root panel for vertical layout of the content sections -->
+        <ListBox x:Name="LBReferees" SelectionMode="Multiple" Background="White" Width="250" Height="400" ItemsSource="{Binding}" Tag="{Binding}" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel x:Name="Stack" Orientation="Horizontal" FlowDirection="LeftToRight">
+                        <TextBlock Tag="{Binding Id}" Text="{Binding Name}" HorizontalAlignment="Left" Foreground="Black" Width="265" />
+                        <Image x:Name ="Checked" Source="/Assets/Yes.png" Stretch="Fill" Width="15" Height="15" Visibility="Visible"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:Name="addReferees" HorizontalAlignment="Center" Width="200" Height="50" Content="Agregar Arbitros" Foreground="White" Background="DarkRed" Click="AddReferees"/>
+    </StackPanel>
+</SettingsFlyout>

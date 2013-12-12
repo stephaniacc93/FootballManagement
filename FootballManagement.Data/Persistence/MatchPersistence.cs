@@ -101,8 +101,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    response = footballmanagementEntities.Matches.Include("Players").Include("Referees").Include("Team").Include("Team1").Include("Tournament").ToList();
-
+                    response = footballmanagementEntities.Matches.Include("Team.Players").Include("Team1.Players").Include("Referees").Include("Team.Matches").Include("Team1.Matches").Include("Team").Include("Team1").Include("Tournament").ToList();
                 }
             }
             catch (Exception e)

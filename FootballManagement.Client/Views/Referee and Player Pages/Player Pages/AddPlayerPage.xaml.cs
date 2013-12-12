@@ -113,7 +113,7 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
 
         async private void AddPlayer_Click(object sender, RoutedEventArgs e)
         {
-            if (TXTplayerName.Text.Length >= 1)
+            if (TXTplayerName.Text.Length >= 1 && CBteam.SelectionBoxItem != null && CBgender.SelectionBoxItem != null)
             {
                 List<Player> players = await _footballService.GetListPlayerAsync();
                 Player newPlayer = new Player();

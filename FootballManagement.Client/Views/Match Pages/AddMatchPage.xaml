@@ -32,16 +32,15 @@
                 <RowDefinition Height="140"/>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="10"/>
-                <RowDefinition Height="10"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="10"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="10"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="200"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
                 <RowDefinition Height="10"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
@@ -51,41 +50,50 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="400"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
             <TextBlock x:Name="LBLnotifications" Grid.Row="1" Grid.Column="1" TextAlignment="Left" FontSize="15" Foreground="Red"/>
-            <TextBlock x:Name="LBLTeamHome" Grid.Row="4" Grid.Column="1" Text="Equipo 1" TextAlignment="Right" FontSize="27"/>
-            <ComboBox x:Name="CBMatchTeamHome" Grid.Row="4" Grid.Column="3" FontSize="27" ItemsSource="{Binding}">
+            <TextBlock x:Name="LBLTeamHome" Grid.Row="3" Grid.Column="1" Text="Equipo 1" TextAlignment="Right" FontSize="27"/>
+            <ComboBox x:Name="CBMatchTeamHome" Grid.Row="3" Grid.Column="3" FontSize="27" ItemsSource="{Binding}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" Margin="2" Tag="{Binding Id}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBlock x:Name="LBLTeamVisitor" IsTextSelectionEnabled ="False" Grid.Row="6" Grid.Column="1" Text="Equipo 2" TextAlignment="Right" FontSize="27"/>
-            <ComboBox x:Name="CBMatchTeamVisitor" Grid.Row="6" Grid.Column="3" FontSize="27" ItemsSource="{Binding}">
+            <TextBlock x:Name="LBLTeamVisitor" IsTextSelectionEnabled ="False" Grid.Row="5" Grid.Column="1" Text="Equipo 2" TextAlignment="Right" FontSize="27"/>
+            <ComboBox x:Name="CBMatchTeamVisitor" Grid.Row="5" Grid.Column="3" FontSize="27" ItemsSource="{Binding}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" Margin="2" Tag="{Binding Id}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBlock x:Name="LBLMatchDate" Grid.Row="8" Grid.Column="1" Text="Dia del Partido" TextAlignment="Right" FontSize="27"/>
-            <DatePicker x:Name="DatePickerMatch" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="8"/>
-            <TimePicker x:Name="TimePickerMatch" Grid.Column="5" Grid.Row="8" Width="300"/>
-            <TextBlock x:Name="LBLReferee" Grid.Row="10" Grid.Column="1" Text="Referees" TextAlignment="Right" FontSize="27"/>
-            <ListBox x:Name="GVReferee" Background="#f2f2f2" Grid.Column="3" Grid.Row="10" SelectionMode="Multiple" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch">
+            <TextBlock x:Name="LBLMatchDate" Grid.Row="7" Grid.Column="1" Text="Dia del Partido" TextAlignment="Right" FontSize="27"/>
+            <DatePicker x:Name="DatePickerMatch" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="7"/>
+            <TextBlock x:Name="LBLTimeDate" Grid.Row="9" Grid.Column="1" Text="Hora del Partido" TextAlignment="Right" VerticalAlignment="Center" FontSize="27"/>
+            <TimePicker x:Name="TimePickerMatch" Grid.Column="3" Grid.Row="9" Width="300" HorizontalAlignment="Center"/>
+            <StackPanel Grid.Row="10" Grid.Column="3" Orientation="Horizontal" Width="320">
+                <TextBlock x:Name="referee" Text=" Arbitros" TextAlignment="Left" VerticalAlignment="Bottom" FontSize="27" Width="230"/>
+                <Button x:Name="AddReferee" Content="Agregar" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="DarkRed" BorderBrush="Transparent" Click="AddReferee_Click"/>
+            </StackPanel>
+            <ListBox x:Name="GVReferee" Background="#f2f2f2" Width="320" Grid.Column="3" Grid.Row="11" ItemsSource="{Binding}" Tag="{Binding Id}" HorizontalContentAlignment="Stretch" SelectionMode="Single">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                            <TextBlock Tag="{Binding Id}" Text="{Binding Name}" Foreground="Black"/>
+                        <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Tag="{Binding}" Tapped="userTapped">
+                            <TextBlock Tag="{Binding Id}" Text="{Binding Name}" HorizontalAlignment="Left" Foreground="Black" Width="265" />
+                            <Image Source="/Assets/TinyX.png" Stretch="Fill" Width="15" Height="15"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button x:Name="BTTNaddMatch" Grid.Row="12" Grid.Column="3" BorderBrush="Transparent" Content="Agregar Partido" Height="70" Foreground="Black" Width="200" FontSize="18" Background="#f2f2f2" Click="BTTNaddMatch_Click"/>
+            <Button x:Name="BTTNaddMatch" Grid.Row="13" Grid.Column="3" BorderBrush="Transparent" HorizontalAlignment="Center" Content="Agregar Partido" Height="70" Foreground="Black" Width="200" FontSize="18" Background="#f2f2f2" Click="BTTNaddMatch_Click"/>
         </Grid>
 
         <VisualStateManager.VisualStateGroups>

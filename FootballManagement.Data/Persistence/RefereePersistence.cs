@@ -73,8 +73,9 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    footballmanagementEntities.People.Attach(referee);
-                    footballmanagementEntities.People.DeleteObject(referee);
+                    var delete = footballmanagementEntities.People.OfType<Referee>().Include("Matches").Include("Tournaments").Single(x => x.Id == referee.Id);
+                    footballmanagementEntities.People.Attach(delete);
+                    footballmanagementEntities.People.DeleteObject(delete);
                     footballmanagementEntities.SaveChanges();
                     response = true;
                 }
