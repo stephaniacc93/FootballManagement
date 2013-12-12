@@ -101,9 +101,39 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Referee_Pages
             base.OnNavigatedFrom(e);
         }
 
-        private void BTTNeditReferee_Click(object sender, RoutedEventArgs e)
+        async private void BTTNeditReferee_Click(object sender, RoutedEventArgs e)
         {
-
+            if (TXTrefereeName.Text.Length >= 1 && CBgender.SelectedItem != null && TXTdegree.Text.Length >= 1)
+            {
+                List<Referee> referees = await _footballService.GetListRefereeAsync();
+                if (referees.Exists(x => x.Name == TXTrefereeName.Text) != true)
+                {
+                    Referee newReferee = new Referee();
+                    ComboBoxItem cbItem = (ComboBoxItem)CBgender.SelectedItem;
+                    newReferee.Name = TXTrefereeName.Text;
+                    newReferee.Id = referee.Id;
+                    newReferee.Gender = cbItem.Content.ToString();
+                    newReferee.Degree = TXTdegree.Text;
+                    newReferee.Birthday = DatePickerBirthday.Date.DateTime;
+                    Referee response = await _footballService.UpdateRefereeAsync(newReferee);
+                    if (response.Id != 0)
+                    {
+                        this.Frame.Navigate(typeof(RefereeGridPage));
+                    }
+                    else
+                    {
+                        LBLnotifications.Text = "Su arbitro no ha sido registrado";
+                    }
+                }
+                else
+                {
+                    LBLnotifications.Text = "El nombre de este arbitro ya es existente";
+                }
+            }
+            else
+            {
+                LBLnotifications.Text = "Revise la informacion que ha ingresado";
+            }
         }
     }
 }

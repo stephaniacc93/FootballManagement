@@ -72,9 +72,9 @@
             </Border>
             <TextBlock x:Name="LBLTeamVisitor" IsTextSelectionEnabled ="False" Grid.Row="5" Grid.Column="1" Text="Equipo 2" TextAlignment="Right" FontSize="27"/>
             <TextBlock x:Name="LBLMatchDate" Grid.Row="7" Grid.Column="1" Text="Dia del Partido" TextAlignment="Right" VerticalAlignment="Center" FontSize="27"/>
-            <DatePicker x:Name="DatePickerMatch" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="7"/>
+            <DatePicker x:Name="DatePickerMatch" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="7" DateChanged="DatePickerMatch_DateChanged"/>
             <TextBlock x:Name="LBLTimeDate" Grid.Row="9" Grid.Column="1" Text="Hora del Partido" TextAlignment="Right" VerticalAlignment="Center" FontSize="27"/>
-            <TimePicker x:Name="TimePickerMatch" Grid.Column="3" Grid.Row="9" Width="300" HorizontalAlignment="Center"/>
+            <TimePicker x:Name="TimePickerMatch" Grid.Column="3" Grid.Row="9" Width="300" HorizontalAlignment="Center" TimeChanged="TimeChanged"/>
             <StackPanel Grid.Row="10" Grid.Column="1" Orientation="Horizontal" Width="320">
                 <TextBlock x:Name="LBLReferee" Text=" Arbitros" TextAlignment="Left" VerticalAlignment="Bottom" FontSize="27" Width="230"/>
                 <Button x:Name="AddReferee" Content="Agregar" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="DarkRed" BorderBrush="Transparent" Click="AddReferee_Click"/>

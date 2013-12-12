@@ -35,11 +35,13 @@ namespace FootballManagement.Client.Views.Match_Pages
         {
             foreach (var p in match.Team.Players)
             {
-                players.Add(p);
+                if (p.IsAuthorized == true)
+                    players.Add(p);
             }
             foreach (var p in match.Team1.Players)
             {
-                players.Add(p);
+                if (p.IsAuthorized == true)
+                    players.Add(p);
             }
             CBPlayers.ItemsSource = players;
         }
@@ -57,13 +59,37 @@ namespace FootballManagement.Client.Views.Match_Pages
                 if (cbItem.Content.ToString() == "Tarjeta Roja")
                 {
                     card.isRedCard = true;
+                    card.Player.IsAuthorized = false;
+                    Player p = await _footballService.UpdatePlayerAsync(card.Player);
                 }
                 else
+                {
                     card.isRedCard = false;
+                    List<Card> yellowCards = await _footballService.GetListCardAsync();
+                    yellowCards = yellowCards.Where(x => x.Player.Id == card.Player.Id).ToList(); ;
+                    foreach (var c in yellowCards)
+                    {
+                        if (c.Match.Id == card.Match.Id)
+                        {
+                            card.Player.IsAuthorized = false;
+                            Player p = await _footballService.UpdatePlayerAsync(card.Player);
+                            break;
+                        }
+                    }
+                }
 
                 bool response = await _footballService.CreateCardAsync(card);
+                List<Player> AllPlayers = await _footballService.GetListPlayerAsync();
                 if (response == true)
                 {
+                    foreach (var p in AllPlayers.Where(x => x.IsAuthorized == false))
+                    {
+                        if (p.Id != card.Player.Id)
+                        {
+                            p.IsAuthorized = true;
+                            Player player = await _footballService.UpdatePlayerAsync(p);
+                        }
+                    }
                     this.Hide();
                 }
                 else

@@ -41,7 +41,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    response = footballmanagementEntities.Matches.Single(x => x.Id == ID);
+                    response = footballmanagementEntities.Matches.Include("Players").Include("Team.Players").Include("Team1.Players").Include("Referees").Include("Team.Matches").Include("Team1.Matches").Include("Team").Include("Team1").Include("Tournament").Single(x => x.Id == ID);
                 }
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    var delete = footballmanagementEntities.Matches.Include("Players").Include("Referees").Include("Tournament").Include("Team").Include("Team1").Single(x => x.Id == match.Id);
+                    var delete = footballmanagementEntities.Matches.Include("Team.Players").Include("Team1.Players").Include("Referees").Include("Team.Matches").Include("Team1.Matches").Include("Team").Include("Team1").Include("Tournament").Single(x => x.Id == match.Id);
                     footballmanagementEntities.Matches.Attach(delete);
                     footballmanagementEntities.Matches.DeleteObject(delete);
                     footballmanagementEntities.SaveChanges();

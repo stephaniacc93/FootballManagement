@@ -23,6 +23,7 @@ namespace FootballManagement.Client.Views.Match_Pages
         FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
         Match match = new Match();
         List<Player> players = new List<Player>();
+        List<Goal> goalsAdded = new List<Goal>();
 
         public GoalsFlyout(Match m)
         {
@@ -35,11 +36,13 @@ namespace FootballManagement.Client.Views.Match_Pages
         {
             foreach (var p in match.Team.Players)
             {
-                players.Add(p);
+                if (p.IsAuthorized == true)
+                    players.Add(p);
             }
             foreach (var p in match.Team1.Players)
             {
-                players.Add(p);
+                if (p.IsAuthorized == true)
+                    players.Add(p);
             }
             CBPlayers.ItemsSource = players;
         }
@@ -56,6 +59,7 @@ namespace FootballManagement.Client.Views.Match_Pages
                 bool response = await _footballService.CreateGoalAsync(goal);
                 if (response == true)
                 {
+                    goalsAdded.Add(goal);
                     this.Hide();
                 }
                 else
@@ -66,5 +70,11 @@ namespace FootballManagement.Client.Views.Match_Pages
                 Notifications.Text = "Revisa los datos por ingresar";
             }
         }
+
+        public List<Goal> getList()
+        {
+            return goalsAdded;
+        }
+
     }
 }

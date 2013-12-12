@@ -39,7 +39,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    response = footballmanagementEntities.People.OfType<Player>().Single(x => x.Id == ID);
+                    response = footballmanagementEntities.People.OfType<Player>().Include("Team").Include("Matches").Include("Goals").Include("Cards").Single(x => x.Id == ID);
                 }
             }
             catch (Exception e)
@@ -55,11 +55,13 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    Player d = new Player { Id = player.Id };
-                    footballmanagementEntities.People.Attach(d);
-                    footballmanagementEntities.People.ApplyCurrentValues(player);
+                    var d = footballmanagementEntities.People.OfType<Player>().Include("Cards").Include("Goals").Include("Team").Include("Matches").FirstOrDefault(x => x.Id == player.Id);
+                    d.IsAuthorized = player.IsAuthorized;
+                    d.Team = footballmanagementEntities.Teams.First(x => x.Id == player.Team.Id);
+                    d.Goals = footballmanagementEntities.Goals.Where(x => player.Goals.Any(y => y.Id == x.Id)).ToList();
+                    d.Matches = footballmanagementEntities.Matches.Where(x => player.Matches.Any(y => y.Id == x.Id)).ToList();
                     footballmanagementEntities.SaveChanges();
-                    return player;
+                    return d;
                 }
             }
             catch (Exception e)
@@ -95,7 +97,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    response = footballmanagementEntities.People.Include("Team").OfType<Player>().ToList();
+                    response = footballmanagementEntities.People.Include("Team").Include("Matches").Include("Goals").Include("Cards").OfType<Player>().ToList();
 
                 }
             }

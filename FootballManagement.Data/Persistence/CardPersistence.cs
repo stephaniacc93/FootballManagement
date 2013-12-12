@@ -40,7 +40,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    response = footballmanagementEntities.Cards.Single(x => x.Id == ID);
+                    response = footballmanagementEntities.Cards.Include("Player.Team").Include("Player").Include("Player.Cards").Include("Match").Include("Player.Matches").Include("Player.Goals").Single(x => x.Id == ID);
                 }
             }
             catch (Exception e)
@@ -97,7 +97,7 @@ namespace FootballManagement.Data.Persistence
             {
                 using (var footballmanagementEntities = new FootballManagementEntities())
                 {
-                    response = footballmanagementEntities.Cards.Include("Player").Include("Match").ToList();
+                    response = footballmanagementEntities.Cards.Include("Player").Include("Player.Cards").Include("Match").Include("Player.Matches").Include("Player.Goals").ToList();
 
                 }
             }

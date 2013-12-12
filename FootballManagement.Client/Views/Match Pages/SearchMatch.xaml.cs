@@ -1,8 +1,10 @@
-﻿using FootballManagement.Client.FootballManagementServiceReference;
+﻿using FootballManagement.Client.Common;
+using FootballManagement.Client.FootballManagementServiceReference;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -21,23 +23,42 @@ namespace FootballManagement.Client.Views.Match_Pages
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class MatchGridPage : FootballManagement.Client.Common.LayoutAwarePage
+    public sealed partial class SearchMatch : Page
     {
-        Tournament tournament = new Tournament();
-        List<Match> matches = new List<Match>();
-        List<Team> teams = new List<Team>();
         FootballManagementServiceClient _footballService = new FootballManagementServiceClient();
+        List<Match> matches = new List<Match>();
+        Tournament tournament = new Tournament();
+        private NavigationHelper navigationHelper;
+        private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public MatchGridPage()
+        /// <summary>
+        /// This can be changed to a strongly typed view model.
+        /// </summary>
+        public ObservableDictionary DefaultViewModel
         {
-            this.InitializeComponent();
-            AddMatches();
+            get { return this.defaultViewModel; }
         }
 
-        async public void AddMatches()
+        /// <summary>
+        /// NavigationHelper is used on each page to aid in navigation and 
+        /// process lifetime management
+        /// </summary>
+        public NavigationHelper NavigationHelper
         {
-            matches = await _footballService.GetListMatchAsync();
-            matches = matches.Where(x => x.Tournament.Id == tournament.Id).ToList();
+            get { return this.navigationHelper; }
+        }
+
+
+        public SearchMatch()
+        {
+            this.InitializeComponent();
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += navigationHelper_LoadState;
+            this.navigationHelper.SaveState += navigationHelper_SaveState;
+        }
+
+        void onLoad()
+        {
             foreach (var m in matches)
             {
                 Button b = new Button();
@@ -65,18 +86,19 @@ namespace FootballManagement.Client.Views.Match_Pages
                 b.Tag = m.Id;
                 GridTournaments.Items.Add(b);
             }
-
         }
         /// <summary>
-        /// Populates the page with content passed during navigation.  Any saved state is also
+        /// Populates the page with content passed during navigation. Any saved state is also
         /// provided when recreating a page from a prior session.
         /// </summary>
-        /// <param name="navigationParameter">The parameter value passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested.
+        /// <param name="sender">
+        /// The source of the event; typically <see cref="NavigationHelper"/>
         /// </param>
-        /// <param name="pageState">A dictionary of state preserved by this page during an earlier
-        /// session.  This will be null the first time a page is visited.</param>
-        protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
+        /// <param name="e">Event data that provides both the navigation parameter passed to
+        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
+        /// a dictionary of state preserved by this page during an earlier
+        /// session. The state will be null the first time a page is visited.</param>
+        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
         }
 
@@ -85,35 +107,30 @@ namespace FootballManagement.Client.Views.Match_Pages
         /// page is discarded from the navigation cache.  Values must conform to the serialization
         /// requirements of <see cref="SuspensionManager.SessionState"/>.
         /// </summary>
-        /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
-        protected override void SaveState(Dictionary<String, Object> pageState)
+        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/></param>
+        /// <param name="e">Event data that provides an empty dictionary to be populated with
+        /// serializable state.</param>
+        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
         }
+
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            tournament = e.Parameter as Tournament;
+            matches = e.Parameter as List<Match>;
+            foreach (var m in matches)
+            {
+                tournament = m.Tournament;
+                break;
+            }
+            onLoad();
+
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-        }
-
-        private void ClickBTTNHome(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(MainPage));
-        }
-
-        async private void ClickBTTNAdd(object sender, RoutedEventArgs e)
-        {
-            teams = await _footballService.GetListTeamAsync();
-            teams = teams.Where(x => x.Tournament.Id == tournament.Id).ToList();
-            if (teams.Count != 0)
-                this.Frame.Navigate(typeof(AddMatchPage), tournament);
-            else
-                Notifications.Text = "No hay equipos disponibles para este torneo";
         }
 
         async private void ClickBTTNDelete(object sender, RoutedEventArgs e)
@@ -141,18 +158,6 @@ namespace FootballManagement.Client.Views.Match_Pages
                     }
                 }
 
-                foreach (var p in m.Team.Players)
-                {
-                    p.IsAuthorized = true;
-                    await _footballService.UpdatePlayerAsync(p);
-                }
-
-                foreach (var p in m.Team1.Players)
-                {
-                    p.IsAuthorized = true;
-                    await _footballService.UpdatePlayerAsync(p);
-                }
-
                 bool response = await _footballService.DeleteMatchAsync(m);
                 if (response == true)
                     this.Frame.Navigate(typeof(MatchGridPage), tournament);
@@ -163,7 +168,7 @@ namespace FootballManagement.Client.Views.Match_Pages
                 Notifications.Text = "No hay partido por eliminar";
         }
 
-        private void ClickBTTNEdit(object sender, RoutedEventArgs e)
+        async private void ClickBTTNEdit(object sender, RoutedEventArgs e)
         {
             if (GridTournaments.SelectedItem != null)
             {
@@ -196,21 +201,9 @@ namespace FootballManagement.Client.Views.Match_Pages
             }
         }
 
-        private void doSearch_Click(object sender, RoutedEventArgs e)
+        private void ClickBTTNHome(object sender, RoutedEventArgs e)
         {
-            if (Search.Text != "")
-            {
-                string text = Search.Text;
-                List<Match> matchesSearch1 = matches.Where(x => x.Team.Name.ToLower().StartsWith(text)).ToList();
-                List<Match> matchesSearch2 = matches.Where(x => x.Team1.Name.ToLower().StartsWith(text)).ToList();
-
-                foreach (var m in matchesSearch2)
-                {
-                    if (matchesSearch1.Any(x => x.Id == m.Id) == false)
-                        matchesSearch1.Add(m);
-                }
-                this.Frame.Navigate(typeof(SearchMatch), matchesSearch1);
-            }
+            this.Frame.Navigate(typeof(MainPage));
         }
 
     }

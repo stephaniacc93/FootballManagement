@@ -30,9 +30,12 @@ namespace FootballManagement.Client.Views.Match_Pages
         Match match = new Match();
         List<Referee> referees = new List<Referee>();
         RefereeFlyout rf;
+        GoalsFlyout gf;
         List<Goal> goals = new List<Goal>();
         List<Card> cards = new List<Card>();
         List<Team> teams = new List<Team>();
+        List<Goal> goalsAdded = new List<Goal>();
+        List<Card> cardsAdded = new List<Card>();
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -54,7 +57,7 @@ namespace FootballManagement.Client.Views.Match_Pages
             get { return this.navigationHelper; }
         }
 
-        async protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             match = e.Parameter as Match;
@@ -128,7 +131,7 @@ namespace FootballManagement.Client.Views.Match_Pages
         {
         }
 
-        private void GoBack(object sender, RoutedEventArgs e)
+        async private void GoBack(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MatchGridPage), match.Tournament);
         }
@@ -195,7 +198,7 @@ namespace FootballManagement.Client.Views.Match_Pages
 
         private void AddGoal_Click(object sender, RoutedEventArgs e)
         {
-            GoalsFlyout gf = new GoalsFlyout(match);
+            gf = new GoalsFlyout(match);
             gf.Show();
             gf.LostFocus += gf_LostFocus;
         }
@@ -206,6 +209,11 @@ namespace FootballManagement.Client.Views.Match_Pages
             goals = goals.Where(x => x.Match.Id == match.Id).ToList();
             GVGoles.ItemsSource = null;
             GVGoles.ItemsSource = goals;
+            foreach (var g in gf.getList())
+            {
+                goalsAdded.Add(g);
+            }
+
         }
 
         async private void userTapped(object sender, TappedRoutedEventArgs e)
@@ -240,8 +248,9 @@ namespace FootballManagement.Client.Views.Match_Pages
             
         }
 
-        private void AddCard_Click(object sender, RoutedEventArgs e)
+        async private void AddCard_Click(object sender, RoutedEventArgs e)
         {
+            match = await _footballService.ReadMatchAsync(match.Id);
             CardFlyout cf = new CardFlyout(match);
             cf.Show();
             cf.LostFocus += cf_LostFocus;
@@ -259,6 +268,10 @@ namespace FootballManagement.Client.Views.Match_Pages
         {
             Card c = (Card)GVTarjetas.SelectedItem;
             Card cardToBeDeleted = await _footballService.ReadCardAsync(c.Id);
+
+            cardToBeDeleted.Player.IsAuthorized = true;
+            await _footballService.UpdatePlayerAsync(cardToBeDeleted.Player);
+
             bool response = await _footballService.DeleteCardAsync(cardToBeDeleted);
             if (response == true)
             {
@@ -267,6 +280,16 @@ namespace FootballManagement.Client.Views.Match_Pages
                 GVTarjetas.ItemsSource = null;
                 GVTarjetas.ItemsSource = cards;
             }
+        }
+
+        private void DatePickerMatch_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            match.MatchDate = (DatePickerMatch.Date + match.MatchDate.TimeOfDay).DateTime;
+        }
+
+        private void TimeChanged(object sender, TimePickerValueChangedEventArgs e)
+        {
+            match.MatchDate = (match.MatchDate.Date + TimePickerMatch.Time);
         }
 
     }

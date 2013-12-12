@@ -60,7 +60,7 @@
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
             <TextBlock x:Name="LBLnotifications" Grid.Row="1" Grid.Column="1" TextAlignment="Left" FontSize="15" Foreground="Red"/>
             <TextBlock x:Name="LBLTeamHome" Grid.Row="3" Grid.Column="1" Text="Equipo 1" TextAlignment="Right" FontSize="27"/>
-            <ComboBox x:Name="CBMatchTeamHome" Grid.Row="3" Grid.Column="3" FontSize="27" ItemsSource="{Binding}">
+            <ComboBox x:Name="CBMatchTeamHome" Grid.Row="3" Grid.Column="3" FontSize="27" ItemsSource="{Binding}" SelectionChanged="CBMatchTeamHome_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" Margin="2" Tag="{Binding Id}"/>
@@ -68,7 +68,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBlock x:Name="LBLTeamVisitor" IsTextSelectionEnabled ="False" Grid.Row="5" Grid.Column="1" Text="Equipo 2" TextAlignment="Right" FontSize="27"/>
-            <ComboBox x:Name="CBMatchTeamVisitor" Grid.Row="5" Grid.Column="3" FontSize="27" ItemsSource="{Binding}">
+            <ComboBox x:Name="CBMatchTeamVisitor" Grid.Row="5" Grid.Column="3" FontSize="27" ItemsSource="{Binding}" SelectionChanged="TeamVisitorSelection">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" Margin="2" Tag="{Binding Id}"/>

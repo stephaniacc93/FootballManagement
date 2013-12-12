@@ -150,7 +150,7 @@ namespace FootballManagement.Client.Views.Referee_and_Player_Pages.Player_Pages
                 CBcaptain.IsEnabled = false;
             if (player.IsCaptain == true)
                 CBcaptain.IsEnabled = true;
-            else
+            else if(response == false)
                 CBcaptain.IsEnabled = true;
         }
 
